@@ -5,9 +5,6 @@ def get_initialize_page():
     if 'page' not in st.session_state:
         st.session_state.page = 'login_signup_page'  # Default starting page
 
-# Function to handle the login/signup page view
-import streamlit as st
-
 def get_login_signup_page():
     # Title and description at the top of the page
     st.title("Better Together")
