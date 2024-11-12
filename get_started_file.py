@@ -1,42 +1,51 @@
 import streamlit as st
 
+# Function to initialize the page state if not already set
+def initialize_page_state():
+    if 'page' not in st.session_state:
+        st.session_state.page = 'login_signup'  # Default starting page
+
+# Function to handle the login/signup page view
+def login_signup_page():
+    st.title("Better Together")
+    st.write("Building an interconnected community")
+
+    # Buttons for navigating to the next pages
+    if st.button('Create account'):
+        st.session_state.page = "create_account"
+    
+    if st.button('Sign in'):
+        st.session_state.page = "sign_in"
+
+# Function to handle the create account page
+def create_account_page():
+    st.title("Create Your Account")
+    st.write("Enter your school email and password to sign up")
+    email = st.text_input("Email")
+    password = st.text_input("Password", type="password")
+    if st.button("Submit"):
+        st.session_state.page = "login_signup"
+        st.success("Account created successfully!")
+
+# Function to handle the sign-in page
+def sign_in_page():
+    st.title("Sign In")
+    st.write("Enter your email and password to sign in")
+    email = st.text_input("Email")
+    password = st.text_input("Password", type="password")
+    if st.button("Sign In"):
+        st.session_state.page = "login_signup"
+        st.success("You are signed in successfully!")
+
+# Main function to control the flow of the app
 def get_started_page():
+    initialize_page_state()  # Initialize session state if necessary
+
     if st.session_state.page == 'login_signup':
-        # Login/Signup Page
-        st.title("Better Together")
-        st.write("Building an interconnected community")
-
-        # Buttons for navigating to the next pages
-        if st.button('Create account'):
-            st.session_state.page = "create_account"
-        
-        if st.button('Sign in'):
-            st.session_state.page = "sign_in"
-
+        login_signup_page()  # Show the login/signup page
     elif st.session_state.page == 'create_account':
-        # Create Account Page
-        st.title("Create Your Account")
-        st.write("Enter your email and choose a password")
-
-        # Example of form input for account creation
-        email = st.text_input("Email")
-        password = st.text_input("Password", type="password")
-        if st.button("Submit"):
-            # You can add logic to create an account here
-            st.session_state.page = "login_signup"  # Redirect back to the login/signup page
-            st.success("Account created successfully!")
-
+        create_account_page()  # Show the create account page
     elif st.session_state.page == 'sign_in':
-        # Sign In Page
-        st.title("Sign In")
-        st.write("Enter your email and password to sign in")
-
-        # Example of form input for sign-in
-        email = st.text_input("Email")
-        password = st.text_input("Password", type="password")
-        if st.button("Sign In"):
-            # You can add logic to authenticate the user here
-            st.session_state.page = "login_signup"  # Redirect back to the login/signup page
-            st.success("You are signed in successfully!")
+        sign_in_page()  # Show the sign-in page
 
 
