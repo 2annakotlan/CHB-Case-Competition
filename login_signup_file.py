@@ -5,7 +5,7 @@ def get_login_signup_page():
     st.markdown("<h1 style='text-align: center;'>Better Together</h1>", unsafe_allow_html=True)
     st.markdown("<p style='text-align: center;'>building an interconnected community</p>", unsafe_allow_html=True)
 
-    # Centered Button Layout
+    # Center the buttons using HTML and CSS
     st.markdown("""
         <style>
             .center-buttons {
@@ -34,40 +34,16 @@ def get_login_signup_page():
         </style>
     """, unsafe_allow_html=True)
 
-    # Check if account_creation flag exists, if not, set it to False
-    if 'account_creation' not in st.session_state:
-        st.session_state.account_creation = False
+    # Create the buttons using Streamlit's built-in functionality
+    col1, col2 = st.columns(2)  # Create two columns for layout
 
-    # Show the main page with buttons for Create Account or Sign In
-    if not st.session_state.account_creation:
-        # Center buttons
-        st.markdown('<div class="center-buttons">', unsafe_allow_html=True)
+    with col1:
+        if st.button("Create Account"):
+            # Action for "Create Account" button
+            st.write("Redirecting to create account page...")
 
-        # "Create Account" Button
-        if st.button('Create Account'):
-            st.session_state.account_creation = True
-        
-        # "Sign In" Button
-        if st.button('Sign In'):
-            st.write("Redirect to Sign In page...")
-        
-        st.markdown('</div>', unsafe_allow_html=True)
+    with col2:
+        if st.button("Sign In"):
+            # Action for "Sign In" button
+            st.write("Redirecting to sign-in page...")
 
-    # If Create Account is clicked, show the email input page
-    if st.session_state.account_creation:
-        st.markdown("<h2 style='text-align: center;'>Enter your Bentley University Email:</h2>", unsafe_allow_html=True)
-
-        # Email input field (user only types the part before @falcon.bentley.edu)
-        email_prefix = st.text_input("Your Bentley Email", value="", max_chars=50)
-
-        # Append the domain automatically if it's not already present
-        if email_prefix and not email_prefix.endswith("@falcon.bentley.edu"):
-            email_prefix += "@falcon.bentley.edu"
-        
-        # Display the full email (disabled to prevent editing)
-        st.text_input("Full Email Address", value=email_prefix, disabled=True)
-
-        # Next button
-        if st.button("Next"):
-            st.write(f"Email entered: {email_prefix}")
-            # Additional logic for next steps can be added here
