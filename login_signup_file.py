@@ -1,7 +1,7 @@
 import streamlit as st
 
 def get_login_signup_page():
-    # Add custom CSS for background and text styling
+    # Add custom CSS for background styling
     st.markdown(
         """
         <style>
@@ -14,7 +14,7 @@ def get_login_signup_page():
         /* Center and style title and subtitle */
         h1 {
             text-align: center;
-            color: #1E88E5;  /* Blue color for the title */
+            color: #4CAF50;
             font-family: 'Arial', sans-serif;
             font-weight: bold;
             margin-top: 20px;
@@ -23,15 +23,15 @@ def get_login_signup_page():
         p {
             text-align: center;
             font-size: 18px;
-            color: #1565C0;  /* Darker blue for the subtitle */
+            color: #6c757d;
             margin-bottom: 30px;
         }
 
         /* Customize button appearance */
         .stButton button {
             width: 100%;
-            background-color: #1E88E5;  /* Blue button color */
-            color: white;  /* White button text */
+            background-color: #4CAF50;
+            color: white;
             font-size: 16px;
             padding: 10px 20px;
             border-radius: 10px;
@@ -40,7 +40,7 @@ def get_login_signup_page():
         }
         
         .stButton button:hover {
-            background-color: #1565C0;  /* Darker blue on hover */
+            background-color: #45A049;
         }
 
         </style>
@@ -48,7 +48,7 @@ def get_login_signup_page():
         unsafe_allow_html=True
     )
 
-    # Center the title and subtitle with updated colors
+    # Center the title and subtitle
     st.markdown("<h1>Better Together</h1>", unsafe_allow_html=True)
     st.markdown("<p>Building an interconnected community</p>", unsafe_allow_html=True)
 
