@@ -1,7 +1,10 @@
 import streamlit as st
+from custom_css_file import get_custom_css_page
 
 # Function to handle the student landing page view
 def get_student_landing_page():
+    get_custom_css_page(alignment="centered")
+    
     st.title("Student Dashboard")
     st.write("Welcome, student! This is your personal dashboard.")
     st.write("Explore resources, courses, and more.")
