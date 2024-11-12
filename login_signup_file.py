@@ -1,37 +1,33 @@
 import streamlit as st
 
 def get_login_signup_page():
-    # Add custom CSS for background styling
+    # Add custom CSS for background styling with an overlay pattern
     st.markdown(
         """
         <style>
-        /* Animated background with gradient */
-        @keyframes gradientAnimation {
-            0% {background-position: 0% 50%;}
-            50% {background-position: 100% 50%;}
-            100% {background-position: 0% 50%;}
-        }
-        
+        /* Background with gradient and shape overlay */
         .stApp {
-            background: linear-gradient(135deg, #E0F7FA, #FFEBEE, #FFCDD2, #E1F5FE);
-            background-size: 200% 200%;
-            animation: gradientAnimation 10s ease infinite;
+            background: linear-gradient(135deg, #E0F7FA, #FFEBEE);
+            background-size: cover;
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Optional overlay pattern for subtle texture */
+        /* Adding translucent circles as overlay */
         .stApp::before {
-            content: "";
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
-            opacity: 0.1;
-            z-index: -1;
+            background: radial-gradient(circle at 10% 20%, rgba(255, 182, 193, 0.2), transparent),
+                        radial-gradient(circle at 80% 80%, rgba(144, 224, 239, 0.2), transparent),
+                        radial-gradient(circle at 50% 50%, rgba(255, 234, 167, 0.15), transparent);
+            z-index: -1; /* Places overlay behind all content */
         }
 
-        /* Center and style title and subtitle */
+        /* Center and style title with shadow */
         h1 {
             text-align: center;
             color: #4CAF50;
@@ -40,15 +36,16 @@ def get_login_signup_page():
             margin-top: 20px;
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
         }
-        
+
         p {
             text-align: center;
             font-size: 18px;
             color: #6c757d;
             margin-bottom: 30px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
         }
 
-        /* Customize button appearance */
+        /* Customize button appearance with shadow and hover effect */
         .stButton button {
             width: 100%;
             background-color: #4CAF50;
@@ -57,12 +54,13 @@ def get_login_signup_page():
             padding: 10px 20px;
             border-radius: 10px;
             border: none;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
         
         .stButton button:hover {
             background-color: #45A049;
-            transform: scale(1.05);
+            box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15);
         }
 
         </style>
