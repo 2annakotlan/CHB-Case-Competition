@@ -3,7 +3,7 @@ from custom_css_file import get_custom_css_page
 
 # Function to handle the student landing page view
 def get_student_landing_page():
-    get_custom_css_page(alignment="centered")
+    get_custom_css_page(alignment="center")
     
     st.title("Student Dashboard")
     st.write("Welcome, student! This is your personal dashboard.")
