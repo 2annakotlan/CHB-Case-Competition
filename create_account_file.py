@@ -10,6 +10,9 @@ def get_create_account_page():
     email = st.text_input("Email")
     password = st.text_input("Password", type="password")
     
+    # Add checkbox for agreeing to the Terms and Conditions
+    agree_terms = st.checkbox("I agree to the Terms and Conditions")
+
     if st.button("Submit"):
         # Check if the email ends with @falcon.bentley.edu 
         if not email.endswith("@falcon.bentley.edu") or email.count('@') != 1:
@@ -20,5 +23,9 @@ def get_create_account_page():
         else:
             st.session_state.page = "student_landing_page"  # Go to student landing page
             st.success("Account created successfully!")
-
-    # write code for a checkbox that says I agree to the Terms and Conditions
+        
+    # Display checkbox status (this part is just for visual feedback)
+    if agree_terms:
+        st.write("You have agreed to the Terms and Conditions.")
+    else:
+        st.write("Please agree to the Terms and Conditions to continue.")
