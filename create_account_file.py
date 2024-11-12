@@ -10,22 +10,28 @@ def get_create_account_page():
     email = st.text_input("Email")
     password = st.text_input("Password", type="password")
     
-    # Add checkbox for agreeing to the Terms and Conditions
-    agree_terms = st.checkbox("I agree to the Terms and Conditions")
+    # Variable to determine if user is admin or student
+    is_admin = email == "admin@falcon.bentley.edu"
+    
+    # Add checkbox for agreeing to the Terms and Conditions only for students
+    agree_terms = False
+    if not is_admin:  # Show checkbox only for students
+        agree_terms = st.checkbox("I agree to the Terms and Conditions")
+    
+    # Disable the submit button if terms are not agreed to for students
+    if not is_admin and not agree_terms:
+        st.warning("You must agree to the Terms and Conditions to continue.")
 
     if st.button("Submit"):
+        # If the user is a student, check if they have agreed to the terms
+        if not is_admin and not agree_terms:
+            st.error("Please agree to the Terms and Conditions before submitting.")
         # Check if the email ends with @falcon.bentley.edu 
-        if not email.endswith("@falcon.bentley.edu") or email.count('@') != 1:
-            st.error("Please enter a valid Bentley University email address")
-        elif email == "admin@falcon.bentley.edu":  # Check if the email is admin
-            st.session_state.page = "admin_landing_page"  # Go to admin landing page
+        elif not email.endswith("@falcon.bentley.edu") or email.count('@') != 1:
+            st.error("Please enter a valid Bentley University email address.")
+        elif is_admin:  # If admin, navigate to admin landing page
+            st.session_state.page = "admin_landing_page"
             st.success("Account created successfully!")
-        else:
-            st.session_state.page = "student_landing_page"  # Go to student landing page
+        else:  # If student, navigate to student landing page
+            st.session_state.page = "student_landing_page"
             st.success("Account created successfully!")
-        
-    # Display checkbox status (this part is just for visual feedback)
-    if agree_terms:
-        st.write("You have agreed to the Terms and Conditions.")
-    else:
-        st.write("Please agree to the Terms and Conditions to continue.")
