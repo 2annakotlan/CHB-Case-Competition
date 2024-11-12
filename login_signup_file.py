@@ -1,7 +1,7 @@
 import streamlit as st
 
 def get_login_signup_page(image_url_1, image_url_2):
-    # Define CSS for full-screen background with one-time fade transition
+    # Define CSS for full-screen background with simultaneous fade transition
     st.markdown(
         f"""
         <style>
@@ -25,7 +25,7 @@ def get_login_signup_page(image_url_1, image_url_2):
             transition: opacity 2s ease-in-out;
         }}
 
-        /* Image 1 starts visible */
+        /* Image 1 starts visible and fades out */
         .image1 {{
             background-image: url("{image_url_1}");
             opacity: 1;
@@ -39,7 +39,7 @@ def get_login_signup_page(image_url_1, image_url_2):
             opacity: 0;
             z-index: 2;
             animation: fadeIn 10s forwards;
-            animation-delay: 5s; /* Image 2 starts fading after image 1 fades out */
+            animation-delay: 0s; /* Image 2 fades in immediately */
         }}
 
         /* Keyframes for fading out image 1 */
@@ -88,5 +88,4 @@ def get_login_signup_page(image_url_1, image_url_2):
         """,
         unsafe_allow_html=True
     )
-
 
