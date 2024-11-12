@@ -1,13 +1,22 @@
 import streamlit as st
 
 def get_login_signup_page():
-    st.title("Better Together")
-    st.write("Building an interconnected community")
+    # Center the title with a custom header style
+    st.markdown("<h1 style='text-align: center; color: #4CAF50;'>Better Together</h1>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align: center; font-size: 18px; color: #6c757d;'>Building an interconnected community</p>", unsafe_allow_html=True)
 
-    # Buttons for navigating to the next pages
-    if st.button('Create account'):
-        st.session_state.page = "create_account_page"
+    # Add some space before the buttons
+    st.markdown("<br><br>", unsafe_allow_html=True)
 
-    if st.button('Sign in'):
-        st.session_state.page = "sign_in_page"
+    # Center the buttons in a two-column layout
+    col1, col2 = st.columns(2)
+
+    with col1:
+        if st.button('Create Account', use_container_width=True):
+            st.session_state.page = "create_account_page"
+    
+    with col2:
+        if st.button('Sign In', use_container_width=True):
+            st.session_state.page = "sign_in_page"
+
 
