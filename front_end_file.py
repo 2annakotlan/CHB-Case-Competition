@@ -3,21 +3,14 @@ from data_file import friend_swiping_df
 from friend_swiping_file import get_friend_swiping_page
 from login_signup_file import get_login_signup_page
 
-
-
-
 import streamlit as st
 
 # Set the page layout and title
 st.set_page_config(page_title="Image Fade Transition Example")
 
 # Example usage with two image URLs
-image_1 = "https://github.com/2annakotlan/CHB-Case-Competition/raw/main/Better Together 1.png"
-image_2 = "https://github.com/2annakotlan/CHB-Case-Competition/raw/main/Better Together 2.png"
-
-# Preload images by displaying them in the app (to avoid delay)
-st.image(image_1, use_column_width=True)
-st.image(image_2, use_column_width=True)
+image_1 = "https://github.com/2annakotlan/CHB-Case-Competition/raw/main/Better%20Together%201.png"
+image_2 = "https://github.com/2annakotlan/CHB-Case-Competition/raw/main/Better%20Together%202.png"
 
 # Inject custom CSS for the fade-in fade-out effect
 st.markdown(
@@ -86,6 +79,5 @@ st.markdown(
 # Add content to Streamlit
 st.title("Image Fade Transition Example")
 st.write("In this example, Image 1 fades out while Image 2 fades in.")
-
-
-
+st.markdown("<div class='image1'></div>", unsafe_allow_html=True)
+st.markdown("<div class='image2'></div>", unsafe_allow_html=True)
