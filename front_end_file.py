@@ -9,8 +9,8 @@ import streamlit as st
 st.set_page_config(page_title="Image Fade Transition Example")
 
 # Example usage with two image URLs
-image_1 = "https://github.com/2annakotlan/CHB-Case-Competition/raw/main/Better%20Together%201.png"
-image_2 = "https://github.com/2annakotlan/CHB-Case-Competition/raw/main/Better%20Together%202.png"
+image_1 = "https://github.com/2annakotlan/CHB-Case-Competition/raw/main/Better Together 1.png"
+image_2 = "https://github.com/2annakotlan/CHB-Case-Competition/raw/main/Better Together 2.png"
 
 # Inject custom CSS for the fade-in fade-out effect
 st.markdown(
