@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 
 # GET FRIEND SWIPING VISUAL FUNCTION
-def get_friend_swiping_visual(df):
+def get_friend_swiping_page(df):
     # Initialize session state variables
     if 'liked_profiles' not in st.session_state:
         st.session_state.liked_profiles = []
