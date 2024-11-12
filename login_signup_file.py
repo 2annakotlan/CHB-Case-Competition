@@ -5,9 +5,14 @@ def get_login_signup_page():
     st.markdown("<h1 style='text-align: center;'>Welcome to My App</h1>", unsafe_allow_html=True)
     st.markdown("<p style='text-align: center;'>Your ultimate solution for productivity</p>", unsafe_allow_html=True)
 
-    # Center the buttons using HTML and CSS with rounded shapes and no borders
+    # Apply background color to the entire page and style buttons
     st.markdown("""
         <style>
+            body {
+                background-color: #007BFF; /* Blue background */
+                color: white; /* White text for the entire page */
+                font-family: 'Arial', sans-serif; /* Clean font */
+            }
             .center-buttons {
                 display: flex;
                 flex-direction: column;
