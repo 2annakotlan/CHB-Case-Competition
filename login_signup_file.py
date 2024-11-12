@@ -3,7 +3,7 @@ import streamlit as st
 
 # Function for the login/signup page content
 def get_login_signup_page():
-    get_custom_css_page()
+    get_custom_css_page(alignment="center")
 
     # Center the title and subtitle
     st.markdown("<h1>Better Together</h1>", unsafe_allow_html=True)
