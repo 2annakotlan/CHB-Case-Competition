@@ -5,3 +5,5 @@ from get_started_file import get_started_page
 
 get_started_page()
 
+elif st.session_state.page == 'friend_swiping':
+    friend_swiping_page()
