@@ -2,12 +2,7 @@ import streamlit as st
 
 # In custom_css_file.py, rename the function to get_custom_css_page
 def get_custom_css_page(alignment="center"):
-    """
-    Applies custom CSS to style the Streamlit page.
 
-    Parameters:
-    - alignment (str): Align both text and buttons to "center" or "left".
-    """
     # Define alignment for both text and buttons
     align = "center" if alignment == "center" else "left"
 
