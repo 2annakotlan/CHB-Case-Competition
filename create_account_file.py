@@ -19,46 +19,20 @@ def get_create_account_page():
     # Initialize checkbox for terms acceptance as None
     agree_terms = None
     
-    # Add checkbox for agreeing to the Terms and Conditions only for students
-    if valid_student_email:  # Show checkbox only if the email is valid and not admin
-        # Tooltip HTML with custom styling
-        st.markdown("""
-        <style>
-        .tooltip {
-            position: relative;
-            display: inline-block;
-            cursor: pointer;
-        }
+    # Add a download link for Terms and Conditions
+    if valid_student_email:  # Show download link only if the email is valid and not admin
+        # Provide a download button for the Terms and Conditions document
+        with open("terms_and_conditions.pdf", "rb") as file:
+            st.download_button(
+                label="Download Terms and Conditions",
+                data=file,
+                file_name="terms_and_conditions.pdf",
+                mime="application/pdf"
+            )
 
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 220px;
-            background-color: #6c757d;
-            color: #fff;
-            text-align: center;
-            border-radius: 5px;
-            padding: 5px 0;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%; /* Position the tooltip above the text */
-            left: 50%;
-            margin-left: -110px; /* Offset to center the tooltip */
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
+        # Checkbox for accepting terms
+        agree_terms = st.checkbox("I agree to the Terms and Conditions")
 
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
-        }
-        </style>
-        <div class="tooltip">I agree to the Terms and Conditions
-            <span class="tooltiptext">By agreeing, you accept the terms that govern your use of our platform, including our privacy policy and data usage rules.</span>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        agree_terms = st.checkbox(" ", key="terms_checkbox")  # Using a basic checkbox
-    
     submit_clicked = st.button("Submit")
     
     if submit_clicked:
