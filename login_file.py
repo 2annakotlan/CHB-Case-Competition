@@ -13,21 +13,37 @@ def get_login_signup_page():
     st.title("Better Together")
     st.write("Building an interconnected community")
 
-    # First row with 3 columns
-    row1_col1, row1_col2, row1_col3 = st.columns(3)
-    
-    # Place "Create account" button in the second column of the first row
-    with row1_col2:
-        if st.button('Create account'):
-            st.session_state.page = "create_account_page"
+    # Custom CSS for centering buttons one on top of the other
+    st.markdown(
+        """
+        <style>
+        .centered-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px; /* Optional margin from the top */
+        }
 
-    # Second row with 3 columns
-    row2_col1, row2_col2, row2_col3 = st.columns(3)
-    
-    # Place "Sign in" button in the second column of the second row
-    with row2_col2:
-        if st.button('Sign in'):
-            st.session_state.page = "sign_in_page"
+        .centered-container .stButton {
+            width: 200px; /* Set a fixed width for consistent centering */
+            margin: 10px 0; /* Space between buttons */
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # HTML div to contain centered, stacked buttons
+    st.markdown('<div class="centered-container">', unsafe_allow_html=True)
+
+    if st.button('Create account'):
+        st.session_state.page = "create_account_page"
+
+    if st.button('Sign in'):
+        st.session_state.page = "sign_in_page"
+
+    st.markdown('</div>', unsafe_allow_html=True)
+
 
 
 # Function to handle the create account page
