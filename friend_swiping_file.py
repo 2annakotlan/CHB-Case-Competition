@@ -41,3 +41,7 @@ def get_friend_swiping_page(df):
             st.write(f"{liked['name']}, {liked['age']} - {liked['bio']}")
     else:
         st.write("You haven't liked anyone yet!")
+
+    # DONT REMOVE BELOW
+    if st.button('Back to Dashboard'):
+        st.session_state.page = "student_landing_page"
