@@ -20,7 +20,7 @@ def get_login_signup_page():
                 flex-direction: column;
             }
             .stButton {
-                margin: 15px;
+                margin: 10px 0;  /* Space between buttons */
                 width: 200px;
                 height: 50px;
                 border-radius: 25px;
@@ -36,6 +36,8 @@ def get_login_signup_page():
                 background-color: #45a049;
             }
         </style>
-        <button class="stButton">Create Account</button>
-        <button class="stButton">Sign In</button>
+        <div>
+            <button class="stButton">Create Account</button>
+            <button class="stButton">Sign In</button>
+        </div>
     """, unsafe_allow_html=True)
