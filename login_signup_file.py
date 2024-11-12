@@ -22,7 +22,7 @@ def get_login_signup_page(image_url_1, image_url_2):
             left: 0;
             width: 100%;
             height: 100%;
-            background-size: cover; /* Ensure the images cover the full viewport */
+            background-size: 100% 100%; /* Stretch images to fill the entire viewport */
             background-position: center;
             transition: opacity 2s ease-in-out;
         }}
@@ -95,4 +95,3 @@ def get_login_signup_page(image_url_1, image_url_2):
     with col2:
         if st.button('Sign Up'):
             st.write('Sign Up clicked')
-
