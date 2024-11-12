@@ -7,20 +7,20 @@ def get_initialize_page():
 
 # Function to handle the login/signup page view
 def get_login_signup_page():
-    st.title("Better Together")
-    st.write("Building an interconnected community")
-
-    # Custom CSS for styled, centered buttons in a vertical layout
     st.markdown(
         """
         <style>
-        .button-container {
+        /* Full-page centered container */
+        .full-page {
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
-            margin-top: 20px;
+            min-height: 100vh; /* Full viewport height */
+            text-align: center;
         }
 
+        /* Styling for the buttons */
         .stButton button {
             background-color: #4CAF50; /* Green background */
             color: white; /* White text */
@@ -30,10 +30,11 @@ def get_login_signup_page():
             border-radius: 8px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            width: 200px; /* Fixed width to center the buttons */
+            width: 200px; /* Fixed width for alignment */
             margin-top: 10px; /* Space between buttons */
         }
 
+        /* Hover effect for the buttons */
         .stButton button:hover {
             background-color: #45a049; /* Darker green on hover */
         }
@@ -42,9 +43,14 @@ def get_login_signup_page():
         unsafe_allow_html=True
     )
 
-    # Centered, stacked buttons
-    st.markdown('<div class="button-container">', unsafe_allow_html=True)
+    # Full-page centered container
+    st.markdown('<div class="full-page">', unsafe_allow_html=True)
     
+    # Title and description
+    st.title("Better Together")
+    st.write("Building an interconnected community")
+
+    # Buttons for navigating to the next pages
     if st.button('Create account'):
         st.session_state.page = "create_account_page"
     
@@ -52,6 +58,7 @@ def get_login_signup_page():
         st.session_state.page = "sign_in_page"
 
     st.markdown('</div>', unsafe_allow_html=True)
+
 
 
 # Function to handle the create account page
