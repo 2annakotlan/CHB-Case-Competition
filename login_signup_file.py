@@ -11,6 +11,8 @@ def get_login_signup_page(image_url_1, image_url_2):
             width: 100vw;
             height: 100vh;
             overflow: hidden;
+            margin: 0; /* No margin */
+            padding: 0; /* No padding */
         }}
         
         /* Full-screen background image layers */
@@ -20,7 +22,7 @@ def get_login_signup_page(image_url_1, image_url_2):
             left: 0;
             width: 100%;
             height: 100%;
-            background-size: cover;
+            background-size: cover; /* Ensure the images cover the full viewport */
             background-position: center;
             transition: opacity 2s ease-in-out;
         }}
@@ -93,5 +95,4 @@ def get_login_signup_page(image_url_1, image_url_2):
     with col2:
         if st.button('Sign Up'):
             st.write('Sign Up clicked')
-
 
