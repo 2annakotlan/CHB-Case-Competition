@@ -23,7 +23,7 @@ def get_login_signup_page():
         p {
             text-align: center;
             font-size: 18px;
-            color: white;  /* White subtitle text */
+            color: #1565C0;  /* Darker blue for the subtitle */
             margin-bottom: 30px;
         }
 
