@@ -70,18 +70,6 @@ def student_landing_page():
     if st.button('Log out'):
         st.session_state.page = "login_signup"
 
-# Function to control the flow of the app
-def get_started_page():
-    initialize_page_state()  # Initialize session state if necessary
-    if st.session_state.page == 'login_signup':
-        login_signup_page()  # Show the login/signup page
-    elif st.session_state.page == 'create_account':
-        create_account_page()  # Show the create account page
-    elif st.session_state.page == 'sign_in':
-        sign_in_page()  # Show the sign-in page
-    elif st.session_state.page == 'admin_landing_page':
-        admin_landing_page()  # Show the admin landing page
-    elif st.session_state.page == 'student_landing_page':
-        student_landing_page()  # Show the student landing page
+
 
 
