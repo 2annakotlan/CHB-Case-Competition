@@ -29,9 +29,9 @@ def get_sign_in_page():
         # 2. Handle Admin Role Navigation
         elif valid_admin_email:  # If admin, navigate to admin landing page
             st.session_state.page = "admin_landing_page"
-            st.success("Admin login successfully!")
+            st.success("Admin login successful!")
 
         # 3. Handle Student Role Navigation 
         elif valid_student_email:  # If student, navigate to student landing page
             st.session_state.page = "student_landing_page"
-            st.success("Student login successfully!")
+            st.success("Student login successful!")
