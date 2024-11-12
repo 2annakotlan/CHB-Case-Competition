@@ -35,10 +35,12 @@ def get_create_account_page():
             if not agree_terms:
                 st.error("You must agree to the Terms and Conditions to continue.")
         
-        # 3. Handle Admin or Student Role and Navigate
+        # 3. Handle Admin Role Navigation
         elif valid_admin_email:  # If admin, navigate to admin landing page
             st.session_state.page = "admin_landing_page"
             st.success("Account created successfully!")
-        else:  # If student, navigate to student landing page
+
+        # 4. Handle Student Role Navigation (this part was modified)
+        elif valid_student_email:  # If student, navigate to student landing page
             st.session_state.page = "student_landing_page"
             st.success("Account created successfully!")
