@@ -8,10 +8,12 @@ def get_login_signup_page():
     # Apply background color to the entire page and style buttons
     st.markdown("""
         <style>
-            body {
+            html, body {
                 background-color: #007BFF; /* Blue background */
                 color: white; /* White text for the entire page */
                 font-family: 'Arial', sans-serif; /* Clean font */
+                height: 100%; /* Ensure full page height */
+                margin: 0; /* Remove default margin */
             }
             .center-buttons {
                 display: flex;
