@@ -15,31 +15,25 @@ def get_create_account_page():
     valid_student_email = valid_email and email != "admin@falcon.bentley.edu"
     valid_admin_email = email == "admin@falcon.bentley.edu"
 
-    # Initialize checkbox for terms acceptance as None
-    agree_terms = None
-    
-    # Add checkbox for agreeing to the Terms and Conditions only for students
-    if valid_student_email:  # Show checkbox only if the email is valid and not admin
-        agree_terms = st.checkbox("I agree to the Terms and Conditions")
+    # Initialize checkbox only for students with valid email
+    agree_terms = st.checkbox("I agree to the Terms and Conditions") if valid_student_email else None
     
     submit_clicked = st.button("Submit")
     
     if submit_clicked:
-        # 1. Validate the Bentley University email
+        # 1. Validate Bentley University email
         if not valid_email:
             st.error("Please enter a valid Bentley University email address.")
         
-        # 2. If it’s a valid student email, check the Terms and Conditions
-        elif valid_student_email:
+        # 2. Handle admin account creation
+        elif valid_admin_email: 
+            st.session_state.page = "admin_landing_page"
+            st.success("Admin account sucessfully created!")
+        
+        # 3. Handle student account creation and terms agreement
+        elif valid_student_email: 
             if not agree_terms:
                 st.error("You must agree to the Terms and Conditions to continue.")
-        
-        # 3. Handle Admin Role Navigation
-        elif valid_admin_email:  # If admin, navigate to admin landing page
-            st.session_state.page = "admin_landing_page"
-            st.success("Account created successfully!")
-
-        # 4. Handle Student Role Navigation (Only need to check for student email)
-        elif valid_student_email:  # If student, navigate to student landing page
-            st.session_state.page = "student_landing_page"
-            st.success("Account created successfully!")
+            else:
+                st.session_state.page = "student_landing_page"
+                st.success("Student account successfully created!")
