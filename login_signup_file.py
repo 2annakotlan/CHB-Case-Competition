@@ -2,10 +2,10 @@ import streamlit as st
 
 def get_login_signup_page():
     # Title and Slogan
-    st.markdown("<h1 style='text-align: center;'>Better Together</h1>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align: center;'>building an interconnected community</p>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center;'>Welcome to My App</h1>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align: center;'>Your ultimate solution for productivity</p>", unsafe_allow_html=True)
 
-    # Center the buttons using HTML and CSS
+    # Center the buttons using HTML and CSS with rounded shapes and no borders
     st.markdown("""
         <style>
             .center-buttons {
@@ -16,11 +16,24 @@ def get_login_signup_page():
                 height: 100vh;
             }
             .stButton {
-                margin: 10px;
+                margin: 15px;
+                width: 200px;
+                height: 50px;
+                border-radius: 25px; /* Rounded corners */
+                border: none;  /* No borders */
+                background-color: #4CAF50; /* Green background */
+                color: white;  /* White text */
+                font-size: 16px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: background-color 0.3s ease;  /* Smooth background change on hover */
+            }
+            .stButton:hover {
+                background-color: #45a049; /* Darker green on hover */
             }
         </style>
         <div class="center-buttons">
-            <button class="stButton" style="width: 200px;">Create Account</button>
-            <button class="stButton" style="width: 200px;">Sign In</button>
+            <button class="stButton">Create Account</button>
+            <button class="stButton">Sign In</button>
         </div>
     """, unsafe_allow_html=True)
