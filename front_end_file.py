@@ -3,7 +3,7 @@ from data_file import friend_swiping_df
 from friend_swiping_file import get_friend_swiping_page
 from initialize_file import get_initialize_page
 from login_signup_file import get_login_signup_page
-from create_account_file import get_create_account_age
+from create_account_file import get_create_account_page
 from sign_in_file import get_sign_in_page
 from admin_landing_file import get_admin_landing_page
 from student_landing_file import get_student_landing_page
