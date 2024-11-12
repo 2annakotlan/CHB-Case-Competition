@@ -37,9 +37,10 @@ def sign_in_page():
         st.session_state.page = "login_signup"
         st.success("You are signed in successfully!")
 
-# Main function to control the flow of the app
+# function to control the flow of the app
 def get_started_page():
-    initialize_page_state()  # Initialize session state if necessary
+    # Initialize session state if necessary
+    initialize_page_state()
 
     if st.session_state.page == 'login_signup':
         login_signup_page()  # Show the login/signup page
