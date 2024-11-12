@@ -21,16 +21,19 @@ def get_create_account_page():
     submit_clicked = st.button("Submit")
     
     if submit_clicked:
-        # If the user is a student and hasn't agreed to the terms
-        if not is_admin and not agree_terms:
-            st.error("You must agree to the Terms and Conditions to continue.")
-        # Check if the email ends with @falcon.bentley.edu 
-        elif not email.endswith("@falcon.bentley.edu") or email.count('@') != 1:
+        # 1. Validate the Bentley University email
+        if not email.endswith("@falcon.bentley.edu") or email.count('@') != 1:
             st.error("Please enter a valid Bentley University email address.")
+        
+        # 2. If it’s a valid email and not an admin, check the Terms and Conditions
+        elif not is_admin:
+            if not agree_terms:
+                st.error("You must agree to the Terms and Conditions to continue.")
+        
+        # 3. Handle Admin or Student Role and Navigate
         elif is_admin:  # If admin, navigate to admin landing page
             st.session_state.page = "admin_landing_page"
             st.success("Account created successfully!")
         else:  # If student, navigate to student landing page
             st.session_state.page = "student_landing_page"
             st.success("Account created successfully!")
-
