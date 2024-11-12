@@ -1,6 +1,7 @@
 import streamlit as st
 
-def apply_custom_css(alignment="center"):
+# In custom_css_file.py, rename the function to get_custom_css_page
+def get_custom_css_page(alignment="center"):
     """
     Applies custom CSS to style the Streamlit page.
 
