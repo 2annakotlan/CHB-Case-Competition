@@ -2,7 +2,7 @@ import streamlit as st
 import random
 from data.information import df
 
-st.write(df)
+#st.write(df)
 
 # Fake data for profiles
 profiles = [
