@@ -7,59 +7,21 @@ def get_initialize_page():
 
 # Function to handle the login/signup page view
 def get_login_signup_page():
-    st.markdown(
-        """
-        <style>
-        /* Full-page centered container */
-        .full-page {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh; /* Full viewport height */
-            text-align: center;
-        }
-
-        /* Styling for the buttons */
-        .stButton button {
-            background-color: #4CAF50; /* Green background */
-            color: white; /* White text */
-            padding: 12px 24px;
-            font-size: 16px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            width: 200px; /* Fixed width for alignment */
-            margin-top: 10px; /* Space between buttons */
-        }
-
-        /* Hover effect for the buttons */
-        .stButton button:hover {
-            background-color: #45a049; /* Darker green on hover */
-        }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
-
-    # Full-page centered container
-    st.markdown('<div class="full-page">', unsafe_allow_html=True)
-    
-    # Title and description
     st.title("Better Together")
     st.write("Building an interconnected community")
 
-    # Buttons for navigating to the next pages
-    if st.button('Create account'):
-        st.session_state.page = "create_account_page"
-    
-    if st.button('Sign in'):
-        st.session_state.page = "sign_in_page"
+    # Create a 6-column layout
+    cols = st.columns(6)  # Creates six equal-width columns
 
-    st.markdown('</div>', unsafe_allow_html=True)
+    # Place the first button in column 2
+    with cols[1]:  # Index 1 refers to column 2 (0-based index)
+        if st.button('Create account'):
+            st.session_state.page = "create_account_page"
 
-
+    # Place the second button in column 5
+    with cols[4]:  # Index 4 refers to column 5 (0-based index)
+        if st.button('Sign in'):
+            st.session_state.page = "sign_in_page"
 
 # Function to handle the create account page
 def get_create_account_page():
