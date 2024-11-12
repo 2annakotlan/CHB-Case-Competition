@@ -17,3 +17,10 @@ def student_landing_page():
     # Optionally, add a button to go back to the login/signup page
     if st.button('Log out'):
         st.session_state.page = "login_signup"
+
+# Function to control the flow of the app
+def get_landing_page():
+    if st.session_state.page == 'admin_landing_page':
+        admin_landing_page()  # Show the admin landing page
+    elif st.session_state.page == 'student_landing_page':
+        student_landing_page()  # Show the student landing page
