@@ -40,7 +40,7 @@ def get_create_account_page():
             st.session_state.page = "admin_landing_page"
             st.success("Account created successfully!")
 
-        # 4. Handle Student Role Navigation (this part was modified)
+        # 4. Handle Student Role Navigation (Only need to check for student email)
         elif valid_student_email:  # If student, navigate to student landing page
             st.session_state.page = "student_landing_page"
             st.success("Account created successfully!")
