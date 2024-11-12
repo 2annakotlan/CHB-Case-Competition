@@ -3,7 +3,7 @@ import streamlit as st
 # Function to initialize the page state if not already set
 def get_initialize_page():
     if 'page' not in st.session_state:
-        st.session_state.page = 'login_signup'  # Default starting page
+        st.session_state.page = 'login_signup_page'  # Default starting page
 
 # Function to handle the login/signup page view
 def get_login_signup_page():
@@ -12,10 +12,10 @@ def get_login_signup_page():
 
     # Buttons for navigating to the next pages
     if st.button('Create account'):
-        st.session_state.page = "create_account"
+        st.session_state.page = "create_account_page"
     
     if st.button('Sign in'):
-        st.session_state.page = "sign_in"
+        st.session_state.page = "sign_in_page"
 
 # Function to handle the create account page
 def get_create_account_page():
