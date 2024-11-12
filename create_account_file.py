@@ -21,14 +21,43 @@ def get_create_account_page():
     
     # Add checkbox for agreeing to the Terms and Conditions only for students
     if valid_student_email:  # Show checkbox only if the email is valid and not admin
-        tooltip = """
-        <span class="tooltip">
-            I agree to the Terms and Conditions
+        # Tooltip HTML with custom styling
+        st.markdown("""
+        <style>
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 220px;
+            background-color: #6c757d;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%; /* Position the tooltip above the text */
+            left: 50%;
+            margin-left: -110px; /* Offset to center the tooltip */
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        </style>
+        <div class="tooltip">I agree to the Terms and Conditions
             <span class="tooltiptext">By agreeing, you accept the terms that govern your use of our platform, including our privacy policy and data usage rules.</span>
-        </span>
-        """
-        # Render the checkbox with a tooltip
-        agree_terms = st.checkbox(tooltip, unsafe_allow_html=True)
+        </div>
+        """, unsafe_allow_html=True)
+        
+        agree_terms = st.checkbox(" ", key="terms_checkbox")  # Using a basic checkbox
     
     submit_clicked = st.button("Submit")
     
