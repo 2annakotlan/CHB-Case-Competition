@@ -1,3 +1,5 @@
+import streamlit as st
+
 def get_login_signup_page():
     # Adding custom CSS to set the background color
     st.markdown(
