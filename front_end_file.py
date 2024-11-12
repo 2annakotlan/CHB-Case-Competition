@@ -4,80 +4,37 @@ from friend_swiping_file import get_friend_swiping_page
 from login_signup_file import get_login_signup_page
 
 import streamlit as st
+import numpy as np
+from PIL import Image
+import requests
+from io import BytesIO
 
-# Set the page layout and title
-st.set_page_config(page_title="Image Fade Transition Example")
+def load_image_from_url(url):
+    response = requests.get(url)
+    img = Image.open(BytesIO(response.content))
+    return img
 
-# Example usage with two image URLs
-image_1 = "https://github.com/2annakotlan/CHB-Case-Competition/raw/main/better_together_1.png"
-image_2 = "https://github.com/2annakotlan/CHB-Case-Competition/raw/main/better_together_2.png"
-
-# Inject custom CSS for the fade-in fade-out effect
-st.markdown(
-    f"""
-    <style>
-    /* Full page background setup */
-    .stApp {{
-        height: 100vh;
-        overflow: hidden;
-        position: relative;
-    }}
+def blend_images(img1, img2, alpha):
+    # Convert images to arrays and ensure they have the same size
+    arr1 = np.array(img1)
+    arr2 = np.array(img2)
     
-    /* Image 1 (starting image) */
-    .image1 {{
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: url("{image_1}");
-        background-size: cover;
-        background-position: center;
-        opacity: 1;
-        animation: fadeOut 5s forwards;
-    }}
-    
-    /* Image 2 (new image) */
-    .image2 {{
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: url("{image_2}");
-        background-size: cover;
-        background-position: center;
-        opacity: 0;
-        animation: fadeIn 5s forwards;
-        animation-delay: 5s;  /* Delay to start after the first image fades */
-    }}
-    
-    /* Fade-out animation */
-    @keyframes fadeOut {{
-        from {{
-            opacity: 1;
-        }}
-        to {{
-            opacity: 0;
-        }}
-    }}
+    # Blend the images
+    blended = (1 - alpha) * arr1 + alpha * arr2
+    return blended.astype(np.uint8)
 
-    /* Fade-in animation */
-    @keyframes fadeIn {{
-        from {{
-            opacity: 0;
-        }}
-        to {{
-            opacity: 1;
-        }}
-    }}
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+# App title
+st.title("Image Fade Effect")
 
-# Add content to Streamlit
-st.title("Image Fade Transition Example")
-st.write("In this example, Image 1 fades out while Image 2 fades in.")
-st.markdown("<div class='image1'></div>", unsafe_allow_html=True)
-st.markdown("<div class='image2'></div>", unsafe_allow_html=True)
+# Load images
+image_1 = load_image_from_url("https://github.com/2annakotlan/CHB-Case-Competition/raw/main/better_together_1.png")
+image_2 = load_image_from_url("https://github.com/2annakotlan/CHB-Case-Competition/raw/main/better_together_2.png")
+
+# Create a slider for controlling the fade effect
+alpha = st.slider("Fade Control", 0.0, 1.0, 0.0, 0.01)
+
+# Blend the images based on the slider value
+blended_image = blend_images(image_1, image_2, alpha)
+
+# Display the blended image
+st.image(blended_image, use_column_width=True)
