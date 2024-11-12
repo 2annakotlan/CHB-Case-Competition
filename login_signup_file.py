@@ -1,7 +1,7 @@
 import streamlit as st
 
 def get_login_signup_page(image_url_1, image_url_2):
-    # Define CSS for full-screen background with automatic fade transitions
+    # Define CSS for full-screen background with one-time fade transition
     st.markdown(
         f"""
         <style>
@@ -25,25 +25,32 @@ def get_login_signup_page(image_url_1, image_url_2):
             transition: opacity 2s ease-in-out;
         }}
 
-        /* Animation keyframes for cross-fading images */
+        /* Image 1 starts visible */
         .image1 {{
             background-image: url("{image_url_1}");
-            animation: fadeInOut 10s ease-in-out infinite alternate;
             opacity: 1;
             z-index: 1;
-        }}
-        .image2 {{
-            background-image: url("{image_url_2}");
-            animation: fadeInOut 10s ease-in-out infinite alternate;
-            animation-delay: 5s; /* Staggered delay for smooth transition */
-            opacity: 0;
-            z-index: 2;
+            animation: fadeOut 10s forwards; /* Fade out image 1 over time */
         }}
 
-        /* Keyframes for alternating fade effect */
-        @keyframes fadeInOut {{
+        /* Image 2 starts invisible and fades in */
+        .image2 {{
+            background-image: url("{image_url_2}");
+            opacity: 0;
+            z-index: 2;
+            animation: fadeIn 10s forwards;
+            animation-delay: 5s; /* Image 2 starts fading after image 1 fades out */
+        }}
+
+        /* Keyframes for fading out image 1 */
+        @keyframes fadeOut {{
             0%   {{ opacity: 1; }}
-            50%  {{ opacity: 0; }}
+            100% {{ opacity: 0; }}
+        }}
+
+        /* Keyframes for fading in image 2 */
+        @keyframes fadeIn {{
+            0%   {{ opacity: 0; }}
             100% {{ opacity: 1; }}
         }}
 
