@@ -1,11 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-def get_friend_swiping(df):
-    """
-    A Streamlit app that allows users to swipe through profiles, indicating a like or dislike.
-    Accepts a DataFrame as input with columns: ['name', 'age', 'bio', 'img'].
-    """
+def get_friend_swiping_visual(df):
     # Initialize session state variables
     if 'liked_profiles' not in st.session_state:
         st.session_state.liked_profiles = []
