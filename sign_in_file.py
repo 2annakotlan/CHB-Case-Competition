@@ -1,7 +1,9 @@
 import streamlit as st
+from custom_css_file import get_custom_css_page
 
 # Function to handle the sign-in page
 def get_sign_in_page():
+    get_custom_css_page(alignment="left")
     st.title("Sign In")
     st.write("Enter your email and password to sign in")
     email = st.text_input("Email")
