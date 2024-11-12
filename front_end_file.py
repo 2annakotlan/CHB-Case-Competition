@@ -1,6 +1,8 @@
 # IMPORT PACKAGES AND OBJECTS 
 from data_file import friend_swiping_df
 from friend_swiping_file import get_friend_swiping_page
+from login_file import get_initialize_page, get_login_signup_page, get_create_account_page, get_signin_page
+from landing_file import get_admin_landing_page, get_student_landing_page
 import streamlit as st
 
 # Function to initialize the page state if not already set
@@ -45,33 +47,6 @@ def get_sign_in_page():
         else:
             st.session_state.page = "student_landing_page"  # Go to student landing page
         st.success("You are signed in successfully!")
-
-# Function to handle the admin landing page view
-def get_admin_landing_page():
-    st.title("Admin Dashboard")
-    st.write("Welcome to the admin panel!")
-    st.write("Here you can manage users, monitor activity, etc.")
-    
-    # Optionally, add a button to go back to the login/signup page
-    if st.button('Log out'):
-        st.session_state.page = "login_signup_page"
-
-# Function to handle the student landing page view
-def get_student_landing_page():
-    st.title("Student Dashboard")
-    st.write("Welcome, student! This is your personal dashboard.")
-    st.write("Explore resources, courses, and more.")
-    
-    # Add buttons for "Friend Swiping" and "Activity Suggestions"
-    if st.button("Friend Swiping"):
-        st.session_state.page = "friend_swiping_page"  # Navigate to the friend-swiping page
-
-    if st.button("Activity Suggestions"):
-        st.session_state.page = "activity_suggestions_page"  # Navigate to the activity suggestions page
-    
-    # Optionally, add a button to go back to the login/signup page
-    if st.button('Log out'):
-        st.session_state.page = "login_signup_page"
 
 get_initialize_page()  
 if st.session_state.page == 'login_signup_page':
