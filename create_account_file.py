@@ -13,7 +13,7 @@ def get_create_account_page():
     if st.button("Submit"):
         # Check if the email ends with @falcon.bentley.edu and contains only one @ symbol
         if not email.endswith("@falcon.bentley.edu") or email.count('@') != 1:
-            st.error("Please enter your Bentley University email address (ending with @falcon.bentley.edu) and ensure there are no extra @ symbols.")
+            st.error("Please enter a valid Bentley University email address")
         elif email == "admin@falcon.bentley.edu":  # Check if the email is admin
             st.session_state.page = "admin_landing_page"  # Go to admin landing page
             st.success("Account created successfully!")
