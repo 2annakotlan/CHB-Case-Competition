@@ -19,20 +19,10 @@ def get_create_account_page():
     # Initialize checkbox for terms acceptance as None
     agree_terms = None
     
-    # Add a download link for Terms and Conditions
-    if valid_student_email:  # Show download link only if the email is valid and not admin
-        # Provide a download button for the Terms and Conditions document
-        with open("terms_and_conditions.pdf", "rb") as file:
-            st.download_button(
-                label="Download Terms and Conditions",
-                data=file,
-                file_name="terms_and_conditions.pdf",
-                mime="application/pdf"
-            )
-
-        # Checkbox for accepting terms
+    # Add checkbox for agreeing to the Terms and Conditions only for students
+    if valid_student_email:  # Show checkbox only if the email is valid and not admin
         agree_terms = st.checkbox("I agree to the Terms and Conditions")
-
+    
     submit_clicked = st.button("Submit")
     
     if submit_clicked:
