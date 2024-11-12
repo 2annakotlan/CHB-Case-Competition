@@ -9,7 +9,7 @@ def get_student_landing_page():
     st.write("Welcome, student! This is your personal dashboard.")
     st.write("Explore resources, courses, and more.")
     
-    # Add buttons for "Friend Swiping" and "Activity Suggestions"
+    # Add buttons 
     if st.button("Friend Swiping"):
         st.session_state.page = "friend_swiping_page"  # Navigate to the friend-swiping page
 
@@ -19,3 +19,6 @@ def get_student_landing_page():
     # Optionally, add a button to go back to the login/signup page
     if st.button('Log out'):
         st.session_state.page = "login_signup_page"
+
+    if st.button('Edit Profile'):
+        st.session_state.page = "profile_info_page"
