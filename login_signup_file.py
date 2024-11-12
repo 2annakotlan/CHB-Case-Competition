@@ -1,3 +1,5 @@
+import streamlit as st
+
 def get_login_signup_page():
     # Add custom CSS for background styling
     st.markdown(
@@ -60,3 +62,4 @@ def get_login_signup_page():
     with col2:
         if st.button('Sign In', use_container_width=True):
             st.session_state.page = "sign_in_page"
+
