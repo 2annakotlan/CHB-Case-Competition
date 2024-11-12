@@ -11,7 +11,7 @@ def get_login_signup_page():
         """
         <style>
         .main {
-            background-image: url('https://github.com/2annakotlan/CHB-Case-Competition/raw/main/blue.jpg');
+            background-image: url('https://raw.githubusercontent.com/2annakotlan/CHB-Case-Competition/main/blue.jpg');
             background-size: cover;
             background-position: center;
             height: 100vh; /* Full viewport height */
@@ -47,6 +47,7 @@ def get_login_signup_page():
 
     if st.button('Sign in'):
         st.session_state.page = "sign_in_page"
+
 
 
 # Function to handle the create account page
