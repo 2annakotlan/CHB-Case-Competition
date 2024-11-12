@@ -1,6 +1,8 @@
+# PACKAGES
 import streamlit as st
 import pandas as pd
 
+# GET FRIEND SWIPING VISUAL FUNCTION
 def get_friend_swiping_visual(df):
     # Initialize session state variables
     if 'liked_profiles' not in st.session_state:
@@ -9,7 +11,6 @@ def get_friend_swiping_visual(df):
         st.session_state.profile_index = 0
 
     def show_profile(profile):
-        """Display the current profile."""
         st.image(profile['img'], width=300)
         st.write(f"**{profile['name']}, {profile['age']}**")
         st.write(f"_{profile['bio']}_")
@@ -40,5 +41,3 @@ def get_friend_swiping_visual(df):
             st.write(f"{liked['name']}, {liked['age']} - {liked['bio']}")
     else:
         st.write("You haven't liked anyone yet!")
-})
-
