@@ -24,7 +24,7 @@ def create_account_page():
     email = st.text_input("Email")
     password = st.text_input("Password", type="password")
     if st.button("Submit"):
-        st.session_state.page = "login_signup"
+        st.session_state.page = "landing_page"  # Go to landing page after account creation
         st.success("Account created successfully!")
 
 # Function to handle the sign-in page
@@ -34,10 +34,20 @@ def sign_in_page():
     email = st.text_input("Email")
     password = st.text_input("Password", type="password")
     if st.button("Sign In"):
-        st.session_state.page = "login_signup"
+        st.session_state.page = "landing_page"  # Go to landing page after sign-in
         st.success("You are signed in successfully!")
 
-# function to control the flow of the app
+# Function to handle the landing page view
+def landing_page():
+    st.title("Welcome to the Landing Page!")
+    st.write("You have successfully signed in or created your account.")
+    st.write("Explore our community and get started with your journey.")
+    
+    # Optionally, add a button to go back to the login/signup page
+    if st.button('Log out'):
+        st.session_state.page = "login_signup"
+
+# Function to control the flow of the app
 def get_started_page():
     # Initialize session state if necessary
     initialize_page_state()
@@ -48,5 +58,7 @@ def get_started_page():
         create_account_page()  # Show the create account page
     elif st.session_state.page == 'sign_in':
         sign_in_page()  # Show the sign-in page
+    elif st.session_state.page == 'landing_page':
+        landing_page()  # Show the landing page after successful login/signup
 
 
