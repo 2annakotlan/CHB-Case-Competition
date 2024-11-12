@@ -18,14 +18,12 @@ def get_create_account_page():
     if not is_admin:  # Show checkbox only for students
         agree_terms = st.checkbox("I agree to the Terms and Conditions")
     
-    # Disable the submit button if terms are not agreed to for students
-    if not is_admin and not agree_terms:
-        st.warning("You must agree to the Terms and Conditions to continue.")
-
-    if st.button("Submit"):
-        # If the user is a student, check if they have agreed to the terms
+    submit_clicked = st.button("Submit")
+    
+    if submit_clicked:
+        # If the user is a student and hasn't agreed to the terms
         if not is_admin and not agree_terms:
-            st.error("Please agree to the Terms and Conditions before submitting.")
+            st.error("You must agree to the Terms and Conditions to continue.")
         # Check if the email ends with @falcon.bentley.edu 
         elif not email.endswith("@falcon.bentley.edu") or email.count('@') != 1:
             st.error("Please enter a valid Bentley University email address.")
@@ -35,3 +33,4 @@ def get_create_account_page():
         else:  # If student, navigate to student landing page
             st.session_state.page = "student_landing_page"
             st.success("Account created successfully!")
+
