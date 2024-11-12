@@ -1,11 +1,11 @@
 # IMPORT PACKAGES AND OBJECTS 
 from data_file import friend_swiping_df
 from friend_swiping_file import get_friend_swiping_page
-from login_file import get_login_signup_page, get_create_account_page, get_sign_in_page
+from login_file import get_initialize_page, get_login_signup_page, get_create_account_page, get_sign_in_page
 from landing_file import get_admin_landing_page, get_student_landing_page
 import streamlit as st
 
-initialize_page_state()  
+get_initialize_page()  
 if st.session_state.page == 'login_signup':
     get_login_signup_page()  
 elif st.session_state.page == 'create_account':
