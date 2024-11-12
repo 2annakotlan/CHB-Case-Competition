@@ -1,3 +1,5 @@
+import streamlit as st
+
 # Function to apply custom CSS for background and styling
 def get_custom_css_page():
     st.markdown(
