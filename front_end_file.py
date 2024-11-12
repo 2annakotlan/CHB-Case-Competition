@@ -7,4 +7,4 @@ import streamlit as st
 get_started_page()
 
 if st.session_state.page == 'friend_swiping':
-    friend_swiping_page()
+    get_friend_swiping_page()
