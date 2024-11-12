@@ -1,6 +1,6 @@
 import streamlit as st
 
-def login_signup_page(background_image_url):
+def get_login_signup_page(background_image_url):
     # Set the background image from the URL
     st.markdown(
         f"""
