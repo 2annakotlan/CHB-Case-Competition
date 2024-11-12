@@ -1,8 +1,6 @@
 import streamlit as st
 import random
-from data.information import df
-
-#st.write(df)
+from data.information import df  # Ensure this path is correct or adjust as needed
 
 # Fake data for profiles
 profiles = [
@@ -28,34 +26,34 @@ if 'liked_profiles' not in st.session_state:
 if 'disliked_profiles' not in st.session_state:
     st.session_state.disliked_profiles = []
 
-# Get the current profile to show
-current_profile = profiles[st.session_state.current_index]
+# Check if there are profiles left to display
+if st.session_state.current_index < len(profiles):
+    current_profile = profiles[st.session_state.current_index]
 
-# Display the profile
-st.subheader("Swipe Right or Left")
-display_profile(current_profile)
+    # Display the profile
+    st.subheader("Swipe Right or Left")
+    display_profile(current_profile)
 
-# Buttons for swipe actions
-col1, col2 = st.columns([1, 1])
-with col1:
-    if st.button('❤️ Like'):
-        st.session_state.liked_profiles.append(current_profile)
-        # Move to next profile
-        st.session_state.current_index = (st.session_state.current_index + 1) % len(profiles)
+    # Buttons for swipe actions
+    col1, col2 = st.columns([1, 1])
+    with col1:
+        if st.button('❤️ Like'):
+            st.session_state.liked_profiles.append(current_profile)
+            # Move to next profile
+            st.session_state.current_index += 1
         
-with col2:
-    if st.button('❌ Dislike'):
-        st.session_state.disliked_profiles.append(current_profile)
-        # Move to next profile
-        st.session_state.current_index = (st.session_state.current_index + 1) % len(profiles)
-
-# Show liked and disliked profiles at the bottom
-if st.session_state.liked_profiles:
+    with col2:
+        if st.button('❌ Dislike'):
+            st.session_state.disliked_profiles.append(current_profile)
+            # Move to next profile
+            st.session_state.current_index += 1
+else:
+    st.write("No more profiles to show.")
     st.write("### Liked Profiles")
-    for liked in st.session_state.liked_profiles:
-        st.write(f"- {liked['name']} ({liked['age']}): {liked['bio']}")
+    for profile in st.session_state.liked_profiles:
+        st.write(f"{profile['name']}, {profile['age']}")
 
-if st.session_state.disliked_profiles:
     st.write("### Disliked Profiles")
-    for disliked in st.session_state.disliked_profiles:
-        st.write(f"- {disliked['name']} ({disliked['age']}): {disliked['bio']}")
+    for profile in st.session_state.disliked_profiles:
+        st.write(f"{profile['name']}, {profile['age']}")
+
