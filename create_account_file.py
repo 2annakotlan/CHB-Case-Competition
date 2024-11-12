@@ -21,7 +21,14 @@ def get_create_account_page():
     
     # Add checkbox for agreeing to the Terms and Conditions only for students
     if valid_student_email:  # Show checkbox only if the email is valid and not admin
-        agree_terms = st.checkbox("I agree to the Terms and Conditions")
+        tooltip = """
+        <span class="tooltip">
+            I agree to the Terms and Conditions
+            <span class="tooltiptext">By agreeing, you accept the terms that govern your use of our platform, including our privacy policy and data usage rules.</span>
+        </span>
+        """
+        # Render the checkbox with a tooltip
+        agree_terms = st.checkbox(tooltip, unsafe_allow_html=True)
     
     submit_clicked = st.button("Submit")
     
