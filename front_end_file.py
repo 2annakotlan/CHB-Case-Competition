@@ -8,6 +8,7 @@ import numpy as np
 from PIL import Image
 import requests
 from io import BytesIO
+import time
 
 def load_image_from_url(url):
     response = requests.get(url)
@@ -23,18 +24,36 @@ def blend_images(img1, img2, alpha):
     blended = (1 - alpha) * arr1 + alpha * arr2
     return blended.astype(np.uint8)
 
+# Initialize session state
+if 'alpha' not in st.session_state:
+    st.session_state.alpha = 0.0
+    st.session_state.direction = 1  # 1 for increasing, -1 for decreasing
+
 # App title
-st.title("Image Fade Effect")
+st.title("Automatic Image Fade Effect")
 
 # Load images
 image_1 = load_image_from_url("https://github.com/2annakotlan/CHB-Case-Competition/raw/main/better_together_1.png")
 image_2 = load_image_from_url("https://github.com/2annakotlan/CHB-Case-Competition/raw/main/better_together_2.png")
 
-# Create a slider for controlling the fade effect
-alpha = st.slider("Fade Control", 0.0, 1.0, 0.0, 0.01)
+# Update alpha value
+fade_speed = 0.02  # Adjust this value to control fade speed (smaller = slower)
+st.session_state.alpha += fade_speed * st.session_state.direction
 
-# Blend the images based on the slider value
-blended_image = blend_images(image_1, image_2, alpha)
+# Reverse direction if we reach the bounds
+if st.session_state.alpha >= 1.0:
+    st.session_state.alpha = 1.0
+    st.session_state.direction = -1
+elif st.session_state.alpha <= 0.0:
+    st.session_state.alpha = 0.0
+    st.session_state.direction = 1
+
+# Blend the images based on current alpha
+blended_image = blend_images(image_1, image_2, st.session_state.alpha)
 
 # Display the blended image
 st.image(blended_image, use_column_width=True)
+
+# Add a small delay and rerun
+time.sleep(0.1)  # Adjust this value to control animation smoothness
+st.experimental_rerun()
