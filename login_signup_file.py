@@ -1,7 +1,7 @@
 import streamlit as st
 
 def get_login_signup_page():
-    # Title centered using HTML and CSS
+    # Add custom CSS for centering
     st.markdown("""
         <style>
             .centered {
@@ -22,21 +22,26 @@ def get_login_signup_page():
             .button-container {
                 display: flex;
                 gap: 20px;
+                justify-content: center;
             }
         </style>
-        <div class="centered">
-            <div class="title">Better Together</div>
-            <div class="subtitle">Building an interconnected community</div>
-            <div class="button-container">
-                <button onclick="window.location.href='/button1'">Button 1</button>
-                <button onclick="window.location.href='/button2'">Button 2</button>
-            </div>
-        </div>
     """, unsafe_allow_html=True)
 
-    # Action when buttons are clicked
-    if st.button('Button 1'):
+    # Title and subtitle
+    st.markdown('<div class="centered">', unsafe_allow_html=True)
+    st.markdown('<div class="title">Better Together</div>', unsafe_allow_html=True)
+    st.markdown('<div class="subtitle">Building an interconnected community</div>', unsafe_allow_html=True)
+
+    # Create two buttons, and place them in the center
+    button1_clicked = st.button('Button 1')
+    button2_clicked = st.button('Button 2')
+
+    # Display corresponding message when buttons are clicked
+    if button1_clicked:
         st.write('You clicked Button 1!')
     
-    if st.button('Button 2'):
+    if button2_clicked:
         st.write('You clicked Button 2!')
+
+    st.markdown('</div>', unsafe_allow_html=True)
+
