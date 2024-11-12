@@ -1,3 +1,5 @@
+import streamlit as st
+
 # Function to handle the admin landing page view
 def get_admin_landing_page():
     st.title("Admin Dashboard")
