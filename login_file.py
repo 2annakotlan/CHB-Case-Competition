@@ -6,22 +6,29 @@ def get_initialize_page():
         st.session_state.page = 'login_signup_page'  # Default starting page
 
 # Function to handle the login/signup page view
+import streamlit as st
+
 def get_login_signup_page():
+    # Title and description at the top of the page
     st.title("Better Together")
     st.write("Building an interconnected community")
 
-    # Create a 6-column layout
-    cols = st.columns(6)  # Creates six equal-width columns
-
-    # Place the first button in column 2
-    with cols[1]:  # Index 1 refers to column 2 (0-based index)
+    # First row with 3 columns
+    row1_col1, row1_col2, row1_col3 = st.columns(3)
+    
+    # Place "Create account" button in the second column of the first row
+    with row1_col2:
         if st.button('Create account'):
             st.session_state.page = "create_account_page"
 
-    # Place the second button in column 5
-    with cols[4]:  # Index 4 refers to column 5 (0-based index)
+    # Second row with 3 columns
+    row2_col1, row2_col2, row2_col3 = st.columns(3)
+    
+    # Place "Sign in" button in the second column of the second row
+    with row2_col2:
         if st.button('Sign in'):
             st.session_state.page = "sign_in_page"
+
 
 # Function to handle the create account page
 def get_create_account_page():
