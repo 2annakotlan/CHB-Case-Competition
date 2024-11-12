@@ -1,6 +1,6 @@
 import streamlit as st
 from custom_css_file import get_custom_css_page
-        
+
 # Function to handle the create account page
 def get_create_account_page():
     get_custom_css_page(alignment="left")
@@ -11,8 +11,9 @@ def get_create_account_page():
     password = st.text_input("Password", type="password")
     
     if st.button("Submit"):
-        if not email.endswith("@falcon.bentley.edu"):
-            st.error("Please enter your Bentley University email address (ending with @falcon.bentley.edu).")
+        # Check if the email ends with @falcon.bentley.edu and contains only one @ symbol
+        if not email.endswith("@falcon.bentley.edu") or email.count('@') != 1:
+            st.error("Please enter your Bentley University email address (ending with @falcon.bentley.edu) and ensure there are no extra @ symbols.")
         elif email == "admin@falcon.bentley.edu":  # Check if the email is admin
             st.session_state.page = "admin_landing_page"  # Go to admin landing page
             st.success("Account created successfully!")
