@@ -1,12 +1,12 @@
 import streamlit as st
 
 # Function to initialize the page state if not already set
-def initialize_page_state():
+def get_initialize_page_state():
     if 'page' not in st.session_state:
         st.session_state.page = 'login_signup'  # Default starting page
 
 # Function to handle the login/signup page view
-def login_signup_page():
+def get_login_signup_page():
     st.title("Better Together")
     st.write("Building an interconnected community")
 
@@ -18,7 +18,7 @@ def login_signup_page():
         st.session_state.page = "sign_in"
 
 # Function to handle the create account page
-def create_account_page():
+def get_create_account_page():
     st.title("Create Your Account")
     st.write("Enter your school email and password to sign up")
     email = st.text_input("Email")
@@ -31,7 +31,7 @@ def create_account_page():
         st.success("Account created successfully!")
 
 # Function to handle the sign-in page
-def sign_in_page():
+def get_sign_in_page():
     st.title("Sign In")
     st.write("Enter your email and password to sign in")
     email = st.text_input("Email")
@@ -44,7 +44,7 @@ def sign_in_page():
         st.success("You are signed in successfully!")
 
 # Function to handle the admin landing page view
-def admin_landing_page():
+def get_admin_landing_page():
     st.title("Admin Dashboard")
     st.write("Welcome to the admin panel!")
     st.write("Here you can manage users, monitor activity, etc.")
@@ -54,7 +54,7 @@ def admin_landing_page():
         st.session_state.page = "login_signup"
 
 # Function to handle the student landing page view
-def student_landing_page():
+def get_student_landing_page():
     st.title("Student Dashboard")
     st.write("Welcome, student! This is your personal dashboard.")
     st.write("Explore resources, courses, and more.")
