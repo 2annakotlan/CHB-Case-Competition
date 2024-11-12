@@ -5,42 +5,37 @@ def get_login_signup_page():
     st.markdown("<h1 style='text-align: center;'>Welcome to My App</h1>", unsafe_allow_html=True)
     st.markdown("<p style='text-align: center;'>Your ultimate solution for productivity</p>", unsafe_allow_html=True)
 
-    # Apply background color to the entire page and style buttons
+    # Apply background color to the page and style buttons
     st.markdown("""
         <style>
             html, body {
-                background-color: #007BFF; /* Blue background */
-                color: white; /* White text for the entire page */
-                font-family: 'Arial', sans-serif; /* Clean font */
-                height: 100%; /* Ensure full page height */
-                margin: 0; /* Remove default margin */
-            }
-            .center-buttons {
+                background-color: #007BFF;
+                color: white;
+                font-family: 'Arial', sans-serif;
+                height: 100%;
+                margin: 0;
                 display: flex;
-                flex-direction: column;
-                align-items: center;
                 justify-content: center;
-                height: 100vh;
+                align-items: center;
+                flex-direction: column;
             }
             .stButton {
                 margin: 15px;
                 width: 200px;
                 height: 50px;
-                border-radius: 25px; /* Rounded corners */
-                border: none;  /* No borders */
-                background-color: #4CAF50; /* Green background */
-                color: white;  /* White text */
+                border-radius: 25px;
+                border: none;
+                background-color: #4CAF50;
+                color: white;
                 font-size: 16px;
                 font-weight: bold;
                 cursor: pointer;
-                transition: background-color 0.3s ease;  /* Smooth background change on hover */
+                transition: background-color 0.3s ease;
             }
             .stButton:hover {
-                background-color: #45a049; /* Darker green on hover */
+                background-color: #45a049;
             }
         </style>
-        <div class="center-buttons">
-            <button class="stButton">Create Account</button>
-            <button class="stButton">Sign In</button>
-        </div>
+        <button class="stButton">Create Account</button>
+        <button class="stButton">Sign In</button>
     """, unsafe_allow_html=True)
