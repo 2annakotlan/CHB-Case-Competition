@@ -56,4 +56,4 @@ st.image(blended_image, use_column_width=True)
 
 # Add a small delay and rerun
 time.sleep(0.1)  # Adjust this value to control animation smoothness
-st.experimental_rerun()
+st.rerun()
