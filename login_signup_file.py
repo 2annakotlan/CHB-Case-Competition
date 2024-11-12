@@ -1,47 +1,42 @@
 import streamlit as st
 
-def get_login_signup_page():
-    # Add custom CSS for centering
-    st.markdown("""
-        <style>
-            .centered {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                height: 100vh;
-            }
-            .title {
-                font-size: 32px;
-                font-weight: bold;
-            }
-            .subtitle {
-                font-size: 18px;
-                margin-bottom: 30px;
-            }
-            .button-container {
-                display: flex;
-                gap: 20px;
-                justify-content: center;
-            }
-        </style>
-    """, unsafe_allow_html=True)
+def get_started_page():
+    if st.session_state.page == 'login_signup':
+        # Login/Signup Page
+        st.title("Better Together")
+        st.write("Building an interconnected community")
 
-    # Title and subtitle
-    st.markdown('<div class="centered">', unsafe_allow_html=True)
-    st.markdown('<div class="title">Better Together</div>', unsafe_allow_html=True)
-    st.markdown('<div class="subtitle">Building an interconnected community</div>', unsafe_allow_html=True)
+        # Buttons for navigating to the next pages
+        if st.button('Create account'):
+            st.session_state.page = "create_account"
+        
+        if st.button('Sign in'):
+            st.session_state.page = "sign_in"
 
-    # Create two buttons, and place them in the center
-    button1_clicked = st.button('Button 1')
-    button2_clicked = st.button('Button 2')
+    elif st.session_state.page == 'create_account':
+        # Create Account Page
+        st.title("Create Your Account")
+        st.write("Enter your email and choose a password")
 
-    # Display corresponding message when buttons are clicked
-    if button1_clicked:
-        st.write('You clicked Button 1!')
-    
-    if button2_clicked:
-        st.write('You clicked Button 2!')
+        # Example of form input for account creation
+        email = st.text_input("Email")
+        password = st.text_input("Password", type="password")
+        if st.button("Submit"):
+            # You can add logic to create an account here
+            st.session_state.page = "login_signup"  # Redirect back to the login/signup page
+            st.success("Account created successfully!")
 
-    st.markdown('</div>', unsafe_allow_html=True)
+    elif st.session_state.page == 'sign_in':
+        # Sign In Page
+        st.title("Sign In")
+        st.write("Enter your email and password to sign in")
+
+        # Example of form input for sign-in
+        email = st.text_input("Email")
+        password = st.text_input("Password", type="password")
+        if st.button("Sign In"):
+            # You can add logic to authenticate the user here
+            st.session_state.page = "login_signup"  # Redirect back to the login/signup page
+            st.success("You are signed in successfully!")
+
 
