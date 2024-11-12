@@ -1,5 +1,29 @@
+# PACKAGES
 import pandas as pd
 
+# FRIEND SWIPING DATA
+friend_swiping_data = {
+    'name': ['Alex', 'Taylor', 'Jordan', 'Morgan', 'Chris'],
+    'age': [25, 22, 28, 24, 30],
+    'bio': [
+        "Loves hiking and the outdoors.",
+        "Avid reader and aspiring writer.",
+        "Tech enthusiast and gamer.",
+        "Foodie and world traveler.",
+        "Music producer and DJ."
+    ],
+    'img': [
+        "https://randomuser.me/api/portraits/men/10.jpg",
+        "https://randomuser.me/api/portraits/women/21.jpg",
+        "https://randomuser.me/api/portraits/men/33.jpg",
+        "https://randomuser.me/api/portraits/women/45.jpg",
+        "https://randomuser.me/api/portraits/men/67.jpg"
+    ]
+}
+
+friend_swiping_df = pd.DataFrame(friend_swiping_data)
+
+# OTHER DATA
 data = {
     '0_degree': [
         'Alice', 'Bob', 'Charlie', 'Diana',
