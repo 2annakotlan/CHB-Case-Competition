@@ -35,5 +35,5 @@ def get_create_account_page():
             if not agree_terms:
                 st.error("You must agree to the Terms and Conditions to continue.")
             else:
-                st.session_state.page = "student_landing_page"
+                st.session_state.page = "profile_info_page"
                 st.success("Student account successfully created!")
