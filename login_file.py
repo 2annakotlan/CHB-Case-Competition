@@ -5,15 +5,15 @@ def get_initialize_page():
     if 'page' not in st.session_state:
         st.session_state.page = 'login_signup_page'  # Default starting page
 
+import streamlit as st
+
 def get_login_signup_page():
-    # Adding custom CSS to set the background image
+    # Adding custom CSS to set the background color
     st.markdown(
         """
         <style>
         .main {
-            background-image: url('https://raw.githubusercontent.com/2annakotlan/CHB-Case-Competition/main/blue.jpg');
-            background-size: cover;
-            background-position: center;
+            background-color: #1E3A8A;  /* Dark blue color */
             height: 100vh; /* Full viewport height */
             padding: 20px;
         }
