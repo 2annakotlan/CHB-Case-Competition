@@ -1,59 +1,51 @@
 import streamlit as st
 import random
-from data.information import df  # Ensure this path is correct or adjust as needed
 
-# Fake data for profiles
+# Sample data for profiles (in a real app, this would be fetched from a database)
 profiles = [
-    {'name': 'Alice', 'age': 23, 'bio': 'Love to hike and travel!', 'image': 'https://randomuser.me/api/portraits/women/1.jpg'},
-    {'name': 'Bob', 'age': 25, 'bio': 'Movie lover and pizza enthusiast.', 'image': 'https://randomuser.me/api/portraits/men/1.jpg'},
-    {'name': 'Charlie', 'age': 28, 'bio': 'Tech geek and gamer.', 'image': 'https://randomuser.me/api/portraits/men/2.jpg'},
-    {'name': 'Diana', 'age': 22, 'bio': 'Art lover and fashionista.', 'image': 'https://randomuser.me/api/portraits/women/2.jpg'},
-    {'name': 'Eva', 'age': 27, 'bio': 'Foodie and fitness addict.', 'image': 'https://randomuser.me/api/portraits/women/3.jpg'},
-    {'name': 'Frank', 'age': 30, 'bio': 'Traveler and photography enthusiast.', 'image': 'https://randomuser.me/api/portraits/men/3.jpg'},
+    {"name": "Alex", "age": 25, "bio": "Loves hiking and the outdoors.", "img": "https://randomuser.me/api/portraits/men/10.jpg"},
+    {"name": "Taylor", "age": 22, "bio": "Avid reader and aspiring writer.", "img": "https://randomuser.me/api/portraits/women/21.jpg"},
+    {"name": "Jordan", "age": 28, "bio": "Tech enthusiast and gamer.", "img": "https://randomuser.me/api/portraits/men/33.jpg"},
+    {"name": "Morgan", "age": 24, "bio": "Foodie and world traveler.", "img": "https://randomuser.me/api/portraits/women/45.jpg"},
+    {"name": "Chris", "age": 30, "bio": "Music producer and DJ.", "img": "https://randomuser.me/api/portraits/men/67.jpg"}
 ]
 
-# Function to display the profile
-def display_profile(profile):
-    st.image(profile['image'], width=200)
-    st.write(f"**{profile['name']}, {profile['age']}**")
-    st.write(profile['bio'])
-
-# Set session state for keeping track of swipes
-if 'current_index' not in st.session_state:
-    st.session_state.current_index = 0
+# Initialize session state to keep track of likes and current profile index
 if 'liked_profiles' not in st.session_state:
     st.session_state.liked_profiles = []
-if 'disliked_profiles' not in st.session_state:
-    st.session_state.disliked_profiles = []
+if 'profile_index' not in st.session_state:
+    st.session_state.profile_index = 0
 
-# Check if there are profiles left to display
-if st.session_state.current_index < len(profiles):
-    current_profile = profiles[st.session_state.current_index]
+def show_profile(profile):
+    """Display the current profile."""
+    st.image(profile["img"], width=300)
+    st.write(f"**{profile['name']}, {profile['age']}**")
+    st.write(f"_{profile['bio']}_")
 
-    # Display the profile
-    st.subheader("Swipe Right or Left")
-    display_profile(current_profile)
+# Main app interface
+st.title("Tinder-Like App in Streamlit")
 
-    # Buttons for swipe actions
-    col1, col2 = st.columns([1, 1])
+# Check if there are more profiles to show
+if st.session_state.profile_index < len(profiles):
+    current_profile = profiles[st.session_state.profile_index]
+    show_profile(current_profile)
+    
+    # Buttons for Like and Dislike
+    col1, col2 = st.columns(2)
     with col1:
-        if st.button('❤️ Like'):
+        if st.button("❤️ Like"):
             st.session_state.liked_profiles.append(current_profile)
-            # Move to next profile
-            st.session_state.current_index += 1
-        
+            st.session_state.profile_index += 1
     with col2:
-        if st.button('❌ Dislike'):
-            st.session_state.disliked_profiles.append(current_profile)
-            # Move to next profile
-            st.session_state.current_index += 1
+        if st.button("❌ Dislike"):
+            st.session_state.profile_index += 1
 else:
-    st.write("No more profiles to show.")
-    st.write("### Liked Profiles")
-    for profile in st.session_state.liked_profiles:
-        st.write(f"{profile['name']}, {profile['age']}")
+    st.write("No more profiles to show!")
 
-    st.write("### Disliked Profiles")
-    for profile in st.session_state.disliked_profiles:
-        st.write(f"{profile['name']}, {profile['age']}")
-
+# Show the list of liked profiles
+st.subheader("Liked Profiles")
+if st.session_state.liked_profiles:
+    for liked in st.session_state.liked_profiles:
+        st.write(f"{liked['name']}, {liked['age']} - {liked['bio']}")
+else:
+    st.write("You haven't liked anyone yet!")
