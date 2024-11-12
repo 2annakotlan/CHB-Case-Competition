@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-from dataframe import friend_swiping_dat 
 
 def get_friend_swiping(df):
     """
