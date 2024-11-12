@@ -1,7 +1,10 @@
 import streamlit as st
+from custom_css_file import get_custom_css_page
         
 # Function to handle the create account page
 def get_create_account_page():
+    get_custom_css_page(alignment="left")
+
     st.title("Create Your Account")
     st.write("Enter your school email and password to sign up")
     email = st.text_input("Email")
