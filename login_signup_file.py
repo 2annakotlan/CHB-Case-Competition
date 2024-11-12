@@ -5,12 +5,32 @@ def get_login_signup_page():
     st.markdown(
         """
         <style>
-        /* Background with gradient */
-        .stApp {
-            background: linear-gradient(135deg, #E0F7FA, #FFEBEE);
-            background-size: cover;
+        /* Animated background with gradient */
+        @keyframes gradientAnimation {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
         }
         
+        .stApp {
+            background: linear-gradient(135deg, #E0F7FA, #FFEBEE, #FFCDD2, #E1F5FE);
+            background-size: 200% 200%;
+            animation: gradientAnimation 10s ease infinite;
+        }
+
+        /* Optional overlay pattern for subtle texture */
+        .stApp::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+            opacity: 0.1;
+            z-index: -1;
+        }
+
         /* Center and style title and subtitle */
         h1 {
             text-align: center;
@@ -18,6 +38,7 @@ def get_login_signup_page():
             font-family: 'Arial', sans-serif;
             font-weight: bold;
             margin-top: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
         }
         
         p {
@@ -36,11 +57,12 @@ def get_login_signup_page():
             padding: 10px 20px;
             border-radius: 10px;
             border: none;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
         
         .stButton button:hover {
             background-color: #45A049;
+            transform: scale(1.05);
         }
 
         </style>
@@ -62,4 +84,5 @@ def get_login_signup_page():
     with col2:
         if st.button('Sign In', use_container_width=True):
             st.session_state.page = "sign_in_page"
+
 
