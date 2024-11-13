@@ -8,7 +8,7 @@ def get_profile_info_page():
     st.title(f"{formatted_prefix}'s Profile") 
     
     # Collect user's 1st-degree connections (still a text input)
-    connections = st.text_input("Enter your friends (formatted as email prefixes - e.g., AKotlan, RMiller, SLogan - seperated by commas)?", )
+    connections = st.text_input("Enter your friends (ie. AKotlan, RMiller, SLogan, etc.))", )
     
     # Predefined options for interests and activities
     interest_options = ["Coding", "Music", "Hiking", "Reading", "Sports", "Traveling"]
