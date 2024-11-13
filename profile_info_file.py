@@ -8,7 +8,7 @@ def get_profile_info_page():
     st.title(f"{formatted_prefix}'s Profile") 
     
     # Collect user's 1st-degree connections (still a text input)
-    connections = st.text_input("Who are your friends (enter email prefix, e.g., akotlan, smiller?)", "John, Sarah, Mike")
+    connections = st.text_input("Who are your friends (enter email prefix, e.g., AKotlan, RMiller)?", )
     
     # Predefined options for interests and activities
     interest_options = ["Coding", "Music", "Hiking", "Reading", "Sports", "Traveling"]
@@ -20,7 +20,3 @@ def get_profile_info_page():
     # Collect user's activities using a multi-select option without a default value
     activities = st.multiselect("Select your activities", activity_options)
     
-    # Displaying the collected information
-    st.write("Friends:", connections)
-    st.write("Interests:", interests)
-    st.write("Activities:", activities)
