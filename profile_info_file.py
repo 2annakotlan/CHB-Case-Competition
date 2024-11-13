@@ -6,6 +6,7 @@ from data_file import interests, activities
 
 def get_profile_info_page():
     get_custom_css_page(alignment="left", button_span="auto")
+    st.write(interests)
     
     email_prefix = st.session_state.user_email.split('@')[0]
     formatted_prefix = f"{email_prefix[0].upper()}. {email_prefix[1:].capitalize()}"
