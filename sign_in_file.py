@@ -1,4 +1,6 @@
 from custom_css_file import get_custom_css_page
+from population_data_file import population_df
+import streamlit as st
 
 # Function to handle the sign-in page
 def get_sign_in_page():
@@ -14,7 +16,11 @@ def get_sign_in_page():
     valid_email = email.endswith("@falcon.bentley.edu") and email.count('@') == 1
     valid_student_email = valid_email and email != "admin@falcon.bentley.edu"
     valid_admin_email = email == "admin@falcon.bentley.edu"
-
+    
+    # Check if the email exists in the population_df['0_degree'] column (assuming population_df['0_degree'] contains the username part without '@falcon.bentley.edu')
+    email_base = email.split('@')[0]  # Get the username part of the email
+    not_existing_email = email_base not in population_df['0_degree'].values
+    
     # Initialize checkbox for terms acceptance as None
     agree_terms = None
     
@@ -29,7 +35,11 @@ def get_sign_in_page():
         elif valid_admin_email:  # If admin, navigate to admin landing page
             st.session_state.page = "admin_landing_page"
 
-        # 3. Handle Student Role Navigation 
+        # 3. Handle Non-Existing Account
+        elif not_existing_email:
+            st.error("This account does not exist")
+
+        # 4. Handle Student Role Navigation 
         elif valid_student_email:  # If student, navigate to student landing page
             st.session_state.user_email = email
             st.session_state.page = "student_landing_page"
