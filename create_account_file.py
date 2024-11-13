@@ -28,12 +28,11 @@ def get_create_account_page():
         # 2. Handle admin account creation
         elif valid_admin_email: 
             st.session_state.page = "admin_landing_page"
-            st.success("Admin account sucessfully created!")
         
         # 3. Handle student account creation and terms agreement
         elif valid_student_email: 
             if not agree_terms:
                 st.error("You must agree to the Terms and Conditions to continue.")
             else:
+                st.session_state.user_email = email
                 st.session_state.page = "profile_info_page"
-                st.success("Student account successfully created!")
