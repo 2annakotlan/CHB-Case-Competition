@@ -3,8 +3,13 @@ from PIL import Image
 from create_account_file import get_create_account_page
 
 def get_profile_info_page():
-    # Title for the profile page
-    st.title(f"{st.session_state.user_email}'s Profile")  # Fixed string formatting
+    # Ensure user_email exists in session state before using it
+    if 'user_email' not in st.session_state:
+        st.error("User is not logged in. Please create an account first.")
+        return
+
+    email_prefix = st.session_state.user_email.split('@')[0]
+    st.title(f"{email_prefix}'s Profile") 
 
     # Ask for the profile picture
     profile_picture = st.file_uploader("Upload your profile picture", type=["jpg", "png", "jpeg"])
@@ -14,20 +19,20 @@ def get_profile_info_page():
         img = Image.open(profile_picture)
         st.image(img, width=200)
 
-    # Collect the user's name
-    name = st.text_input("What's your name?", "John Doe")
-
-    # Collect the user's age
-    age = st.number_input("How old are you?", 18, 100, 25)
-
-    # Collect the user's bio
-    bio = st.text_area("Tell us a little about yourself:", "I love to code and build cool projects!")
+    # Collect user's 1st-degree connections
+    one_degree_connections = st.text_input("What are your 1st-degree connections?", "John, Sarah, Mike")
 
     # Collect user's interests
     interests = st.text_input("What are your interests?", "Coding, Music, Hiking")
 
-    # Option for a short tagline or quote
-    tagline = st.text_input("Your personal tagline or quote:", "Dream big, work hard!")
+    # Collect user's activities
+    activities = st.text_input("What are your activities?", "Coding, Music, Hiking")
+
+    # Collect user's name, age, bio, and tagline
+    name = st.text_input("What is your name?")
+    age = st.number_input("What is your age?", min_value=0, max_value=120, value=25)
+    bio = st.text_area("Write a short bio about yourself")
+    tagline = st.text_input("What is your tagline?")
 
     # Show the collected information
     st.subheader("Profile Information")
@@ -39,6 +44,7 @@ def get_profile_info_page():
     st.write(f"**Bio:** {bio}")
     st.write(f"**Interests:** {interests}")
     st.write(f"**Tagline:** {tagline}")
+    st.write(f"**1st-degree connections:** {one_degree_connections}")
 
     # Add a button to submit and view the profile
     if st.button('Submit'):
