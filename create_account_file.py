@@ -2,7 +2,7 @@ import streamlit as st
 from custom_css_file import get_custom_css_page
 
 def get_create_account_page():
-    get_custom_css_page(alignment="left", button_span="full")
+    get_custom_css_page(alignment="left", button_span="auto")
 
     st.title("Create Your Account")
     st.write("Enter your Bentley University email and password to sign up")
