@@ -7,5 +7,5 @@ def get_friend_swiping_page(df):
    st.write("this is the friend swiping page!")
 
     # DONT REMOVE BELOW
-    if st.button('Back to Dashboard'):
-        st.session_state.page = "student_landing_page"
+   if st.button('Back to Dashboard'):
+      st.session_state.page = "student_landing_page"
