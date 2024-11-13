@@ -9,7 +9,7 @@ data = {
 activities_df = pd.DataFrame(data)
 
 activities_list = activities_df['Activities'].str.split().explode().str.strip().str.lower()
-activities_list = club_words.unique().tolist()
+activities_list = activities_list.unique().tolist()
 
 interests_list = activities_df['Descriptions'].str.split(',').explode().str.strip().str.lower()
-interests_list = words.unique().tolist()
+interests_list = interests_list.unique().tolist()
