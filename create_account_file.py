@@ -35,4 +35,4 @@ def get_create_account_page():
                 st.error("You must agree to the Terms and Conditions to continue.")
             else:
                 st.session_state.user_email = email
-                st.session_state.page = "student_landing_page"
+                st.session_state.page = "profile_info_page"
