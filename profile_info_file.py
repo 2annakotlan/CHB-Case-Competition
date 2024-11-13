@@ -5,6 +5,7 @@ from custom_css_file import get_custom_css_page
 
 def get_profile_info_page():
     get_custom_css_page(alignment="left", button_span="full")
+    
     email_prefix = st.session_state.user_email.split('@')[0]
     formatted_prefix = f"{email_prefix[0].upper()}. {email_prefix[1:].capitalize()}"
     st.title(f"{formatted_prefix}'s Profile") 
