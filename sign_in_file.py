@@ -17,16 +17,23 @@ def get_sign_in_page():
     valid_student_email = valid_email and email != "admin@falcon.bentley.edu"
     valid_admin_email = email == "admin@falcon.bentley.edu"
     
-    # Check if the email exists in the population_df['0_degree'] column (assuming population_df['0_degree'] contains the username part without '@falcon.bentley.edu')
+    # Check if the email exists 
     email_base = email.split('@')[0]  # Get the username part of the email
     not_existing_email = email_base not in population_df['0_degree'].values
     
     # Initialize checkbox for terms acceptance as None
     agree_terms = None
+
+    # Layout the buttons side by side using columns
+    col1, col2 = st.columns([1, 1])
     
-    enter_clicked = st.button("Enter")
+    with col1:
+        back_clicked = st.button("Back")
     
-    if enter_clicked:
+    with col2:
+        next_clicked = st.button("Next")
+
+    if next_clicked:
         # 1. Validate the Bentley University email
         if not valid_email:
             st.error("Please enter a valid Bentley University email address.")
@@ -43,3 +50,6 @@ def get_sign_in_page():
         elif valid_student_email:  # If student, navigate to student landing page
             st.session_state.user_email = email
             st.session_state.page = "student_landing_page"
+    
+    if back_clicked:
+        st.session_state.page = "login_signup_page"  
