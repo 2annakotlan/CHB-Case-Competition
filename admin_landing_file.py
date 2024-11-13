@@ -2,6 +2,8 @@ import streamlit as st
 
 # Function to handle the admin landing page view
 def get_admin_landing_page():
+    get_custom_css_page(alignment="center", button_span="auto")
+    
     st.title("Admin Dashboard")
     st.write("Welcome to the admin panel!")
     st.write("Here you can manage users, monitor activity, etc.")
