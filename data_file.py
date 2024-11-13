@@ -1,6 +1,3 @@
-# activities and interests dataframes
-import pandas as pd
-
 import pandas as pd
 
 activities_interests_data = {
