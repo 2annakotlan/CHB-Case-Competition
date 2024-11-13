@@ -20,5 +20,5 @@ def get_profile_info_page():
     # Collect user's activities using a multi-select option without a default value
     activities = st.multiselect("Select your activities", activity_options)
 
-    if st.button('Enter', use_container_width=True):
+    if st.button('Enter', use_container_width=False):
         st.session_state.page = "student_landing_page"
