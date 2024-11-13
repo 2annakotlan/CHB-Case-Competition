@@ -22,6 +22,6 @@ elif st.session_state.page == 'admin_landing_page':
 elif st.session_state.page == 'student_landing_page':
     get_student_landing_page()  
 elif st.session_state.page == 'friend_swiping_page':  
-    get_friend_swiping_page(friend_swiping_df)
+    get_friend_swiping_page()
 elif st.session_state.page == 'profile_info_page':
     get_profile_info_page()
