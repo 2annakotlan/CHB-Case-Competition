@@ -1,10 +1,15 @@
 import streamlit as st
 
 # In custom_css_file.py, rename the function to get_custom_css_page
-def get_custom_css_page(alignment="center"):
-
+def get_custom_css_page(alignment="center", button_span="full"):
     # Define alignment for both text and buttons
     align = "center" if alignment == "center" else "left"
+    
+    # Define button span style based on the 'button_span' parameter
+    if button_span == "full":
+        button_width = "100%"
+    else:
+        button_width = "auto"  # Default button width, not full span
 
     # Add custom CSS for background and other styles
     st.markdown(
@@ -37,7 +42,7 @@ def get_custom_css_page(alignment="center"):
         
         /* Button style */
         .stButton button {{
-            width: 100%;
+            width: {button_width};
             background-color: #4CAF50;
             color: white;
             font-size: 16px;
