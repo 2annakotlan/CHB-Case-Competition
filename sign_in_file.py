@@ -1,6 +1,4 @@
 from custom_css_file import get_custom_css_page
-from population_data_file import population_df
-import pandas as pd
 
 # Function to handle the sign-in page
 def get_sign_in_page():
