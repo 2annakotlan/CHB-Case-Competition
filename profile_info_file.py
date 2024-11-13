@@ -1,9 +1,10 @@
 import streamlit as st
 from PIL import Image
+from create_account_file import get_create_account_page
 
 def get_profile_info_page():
     # Title for the profile page
-    st.title("My Profile")
+    st.title(f"{st.session_state.user_email}'s Profile")  # Fixed string formatting
 
     # Ask for the profile picture
     profile_picture = st.file_uploader("Upload your profile picture", type=["jpg", "png", "jpeg"])
@@ -31,6 +32,8 @@ def get_profile_info_page():
     # Show the collected information
     st.subheader("Profile Information")
 
+    # Display email from session state
+    st.write(f"**Email:** {st.session_state.user_email}")  # Corrected the email display
     st.write(f"**Name:** {name}")
     st.write(f"**Age:** {age}")
     st.write(f"**Bio:** {bio}")
@@ -40,4 +43,3 @@ def get_profile_info_page():
     # Add a button to submit and view the profile
     if st.button('Submit'):
         st.success("Profile Updated Successfully!")
-
