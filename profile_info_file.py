@@ -2,7 +2,7 @@ import streamlit as st
 from PIL import Image
 from create_account_file import get_create_account_page
 from custom_css_file import get_custom_css_page
-from data_file import interests, activities
+from activities_interests_data_file import interests, activities
 
 def get_profile_info_page():
     get_custom_css_page(alignment="left", button_span="auto")
