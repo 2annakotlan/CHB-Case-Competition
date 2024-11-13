@@ -1,8 +1,10 @@
 import streamlit as st
 from PIL import Image
 from create_account_file import get_create_account_page
+from custom_css_file import get_custom_css_page
 
 def get_profile_info_page():
+    get_custom_css_page()
     email_prefix = st.session_state.user_email.split('@')[0]
     formatted_prefix = f"{email_prefix[0].upper()}. {email_prefix[1:].capitalize()}"
     st.title(f"{formatted_prefix}'s Profile") 
