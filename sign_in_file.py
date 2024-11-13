@@ -44,7 +44,8 @@ def get_sign_in_page():
 
         # 3. Handle Non-Existing Account
         elif not_existing_email:
-            st.error("This account does not exist")
+            st.error("This account does not exist - going to create account page...")
+            st.session_state.page = "create_account_page"
 
         # 4. Handle Student Role Navigation 
         elif valid_student_email:  # If student, navigate to student landing page
