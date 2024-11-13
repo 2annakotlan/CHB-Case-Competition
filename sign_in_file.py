@@ -1,7 +1,7 @@
 import streamlit as st
 from custom_css_file import get_custom_css_page
 
-# Function to handle the sign in page
+# Function to handle the sign-in page
 def get_sign_in_page():
     get_custom_css_page(alignment="left")
 
@@ -29,10 +29,8 @@ def get_sign_in_page():
         # 2. Handle Admin Role Navigation
         elif valid_admin_email:  # If admin, navigate to admin landing page
             st.session_state.page = "admin_landing_page"
-            st.success("Admin login successful!")
 
         # 3. Handle Student Role Navigation 
         elif valid_student_email:  # If student, navigate to student landing page
             st.session_state.user_email = email
             st.session_state.page = "student_landing_page"
-            st.success("Student login successful!")
