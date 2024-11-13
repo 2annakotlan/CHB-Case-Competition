@@ -2,6 +2,7 @@ import streamlit as st
 from PIL import Image
 from create_account_file import get_create_account_page
 from custom_css_file import get_custom_css_page
+from data_file import interests, activities
 
 def get_profile_info_page():
     get_custom_css_page(alignment="left", button_span="auto")
@@ -14,8 +15,8 @@ def get_profile_info_page():
     connections = st.text_input("Enter your friends (ie. AKotlan, RMiller, SLogan, etc.))", )
     
     # Predefined options for interests and activities
-    interest_options = ["Coding", "Music", "Hiking", "Reading", "Sports", "Traveling"]
-    activity_options = ["Gym", "Running", "Yoga", "Painting", "Photography", "Cooking"]
+    interest_options = interests
+    activity_options = activities
     
     # Collect user's interests using a multi-select option without a default value
     interests = st.multiselect("Select your interests", interest_options)
