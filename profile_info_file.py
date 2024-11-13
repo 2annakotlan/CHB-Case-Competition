@@ -7,8 +7,11 @@ from data_file import interests, activities
 def get_profile_info_page():
     get_custom_css_page(alignment="left", button_span="auto")
     
-    # Display the predefined interest options (from the imported variable)
-    st.write(interests)
+    # Ensure that interests is properly imported and available here.
+    if 'interests' in globals():
+        st.write(interests)  # This will show the imported list of interests
+    else:
+        st.error("Interests data is not available.")
     
     # Format user's email prefix
     email_prefix = st.session_state.user_email.split('@')[0]
