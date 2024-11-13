@@ -4,7 +4,8 @@ from create_account_file import get_create_account_page
 
 def get_profile_info_page():
     email_prefix = st.session_state.user_email.split('@')[0]
-    st.title(f"{email_prefix}'s Profile") 
+    formatted_prefix = f"{email_prefix[0].upper()}. {email_prefix[1:].capitalize()}"
+    st.title(f"{formatted_prefix}'s Profile") 
 
     # Collect user's 1st-degree connections
     one_degree_connections = st.text_input("What are your 1st-degree connections?", "John, Sarah, Mike")
