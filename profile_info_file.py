@@ -6,12 +6,21 @@ def get_profile_info_page():
     email_prefix = st.session_state.user_email.split('@')[0]
     formatted_prefix = f"{email_prefix[0].upper()}. {email_prefix[1:].capitalize()}"
     st.title(f"{formatted_prefix}'s Profile") 
-
-    # Collect user's 1st-degree connections
-    one_degree_connections = st.text_input("What are your 1st-degree connections?", "John, Sarah, Mike")
-
-    # Collect user's interests
-    interests = st.text_input("What are your interests?", "Coding, Music, Hiking")
-
-    # Collect user's activities
-    activities = st.text_input("What are your activities?", "Coding, Music, Hiking")
+    
+    # Collect user's 1st-degree connections (still a text input)
+    connections = st.text_input("Who are your friends (enter email prefix, e.g., akotlan, smiller?)", "John, Sarah, Mike")
+    
+    # Predefined options for interests and activities
+    interest_options = ["Coding", "Music", "Hiking", "Reading", "Sports", "Traveling"]
+    activity_options = ["Gym", "Running", "Yoga", "Painting", "Photography", "Cooking"]
+    
+    # Collect user's interests using a multi-select option without a default value
+    interests = st.multiselect("Select your interests", interest_options)
+    
+    # Collect user's activities using a multi-select option without a default value
+    activities = st.multiselect("Select your activities", activity_options)
+    
+    # Displaying the collected information
+    st.write("Friends:", connections)
+    st.write("Interests:", interests)
+    st.write("Activities:", activities)
