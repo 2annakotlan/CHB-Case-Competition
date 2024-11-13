@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 
 # GET FRIEND SWIPING VISUAL FUNCTION
-def get_friend_swiping_page(df):
+def get_friend_swiping_page():
    st.write("this is the friend swiping page!")
 
     # DONT REMOVE BELOW
