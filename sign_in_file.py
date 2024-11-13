@@ -33,5 +33,6 @@ def get_sign_in_page():
 
         # 3. Handle Student Role Navigation 
         elif valid_student_email:  # If student, navigate to student landing page
+            st.session_state.user_email = email
             st.session_state.page = "student_landing_page"
             st.success("Student login successful!")
