@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from population_data_file import get_population_data_page
+from population_data_file import population_df
 
 def get_profile_info_page():
     # Apply custom CSS with specified alignment and button span
@@ -30,25 +30,6 @@ def get_profile_info_page():
         formatted_connections = "{" + selected_connections.replace(" ", ";").replace(",", ";") + "}"
         formatted_activities = "{" + ";".join(selected_activities) + "}"
         formatted_interests = "{" + ";".join(selected_interests) + "}"
-        
-        # Dataframe
-        population_df = get_population_data_page()
-
-        if email_prefix in population_df["0_degree"].values:
-            # Update the existing row
-            population_df.loc[population_df["0_degree"] == email_prefix, ["1_degree", "activities", "interests"]] = [
-                formatted_connections,
-                formatted_activities,
-                formatted_interests]
-        else:
-            # Add a new row for the user
-            new_row = {
-                "0_degree": email_prefix,
-                "1_degree": formatted_connections,
-                "activities": formatted_activities,
-                "interests": formatted_interests
-            }
-            population_df = population_df.append(new_row, ignore_index=True)
         
         # Set the session state to navigate to the student landing page
         st.session_state.page = "student_landing_page"
