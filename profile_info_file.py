@@ -34,10 +34,14 @@ def get_profile_info_page():
         formatted_activities = "{" + ";".join(selected_activities) + "}"
         formatted_interests = "{" + ";".join(selected_interests) + "}"
         
+        # Ensure population_df is stored in session state
+        if 'population_df' not in st.session_state:
+            st.write("not in session")
+
         # Check if the row with the email_prefix exists
-        if email_prefix in population_df["0_degree"].values:
+        if email_prefix in st.session_state.population_df["0_degree"].values:
             # Update the existing row
-            population_df.loc[population_df["0_degree"] == email_prefix, ["1_degree", "activities", "interests"]] = [
+            st.session_state.population_df.loc[st.session_state.population_df["0_degree"] == email_prefix, ["1_degree", "activities", "interests"]] = [
                 formatted_connections,
                 formatted_activities,
                 formatted_interests]
@@ -49,7 +53,7 @@ def get_profile_info_page():
                 "activities": formatted_activities,
                 "interests": formatted_interests
             }
-            population_df = population_df.append(new_row, ignore_index=True)
+            st.session_state.population_df = st.session_state.population_df.append(new_row, ignore_index=True)
         
         # Set the session state to navigate to the student landing page
         st.session_state.page = "student_landing_page"
