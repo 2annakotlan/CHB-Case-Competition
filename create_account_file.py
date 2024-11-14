@@ -3,7 +3,7 @@ from custom_css_file import get_custom_css_page
 from population_data_file import population_df
 
 def get_create_account_page():
-    get_custom_css_page(alignment="left", button_span="auto")
+    get_custom_css_page(alignment="left", button_span="full")
 
     st.title("Create Your Account")
     st.write("Enter your Bentley University email and password to sign up")
@@ -20,10 +20,17 @@ def get_create_account_page():
 
     # Initialize checkbox for terms acceptance only for new students
     agree_terms = st.checkbox("I agree to the Terms and Conditions") if valid_new_student_email else None
+
+    # Layout the buttons side by side using columns
+    col1, col2 = st.columns([1, 1])
     
-    submit_clicked = st.button("Submit")
+    with col1:
+        back_clicked = st.button("Back")
     
-    if submit_clicked:
+    with col2:
+        next_clicked = st.button("Next")
+    
+    if next_clicked:
         # 1. Validate Bentley University email
         if not valid_email:
             st.error("Please enter a valid Bentley University email address.")
@@ -43,3 +50,6 @@ def get_create_account_page():
             else:
                 st.session_state.user_email = email
                 st.session_state.page = "profile_info_page"
+
+    if back_clicked:
+        st.session_state.page = "login_signup_page"  
