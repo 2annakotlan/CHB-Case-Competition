@@ -15,8 +15,8 @@ def get_create_account_page():
     valid_email = email.endswith("@falcon.bentley.edu")
     admin_email = email == "admin@falcon.bentley.edu"
     email_base = email.split('@')[0]  
-    valid_existing_email = email_base in population_df['0_degree'].values and email.endswith("@falcon.bentley.edu")
-    valid_not_existing_email = email_base not in population_df['0_degree'].values and email.endswith("@falcon.bentley.edu")
+    valid_existing_email = email_base in population_df['0_degree'].values and email.endswith("@falcon.bentley.edu") and not admin_email
+    valid_not_existing_email = email_base not in population_df['0_degree'].values and email.endswith("@falcon.bentley.edu") and not admin_email
 
     # Initialize checkbox for terms acceptance only for new students
     agree_terms = st.checkbox("I agree to the Terms and Conditions") if valid_not_existing_email else None
