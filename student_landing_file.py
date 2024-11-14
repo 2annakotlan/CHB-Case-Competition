@@ -9,15 +9,17 @@ def get_student_landing_page():
     st.write("Welcome, student! This is your personal dashboard.")
     st.write("Explore resources, courses, and more.")
     
-    # FontAwesome icons for Friend Swiping and Activity Suggestions
+    # Create two columns for the clickable boxes
     col1, col2 = st.columns(2)
-    
+
+    # First clickable box
     with col1:
-        if st.markdown('<i class="fa fa-users fa-5x"></i>', unsafe_allow_html=True):  # Example: friend swiping icon
+        if st.button("Box 1", key="box1"):
             st.session_state.page = "friend_swiping_page"
     
+    # Second clickable box
     with col2:
-        if st.markdown('<i class="fa fa-calendar-check fa-5x"></i>', unsafe_allow_html=True):  # Example: activity suggestions icon
+        if st.button("Box 2", key="box2"):
             st.session_state.page = "activity_suggestions_page"
     
     # Optionally, add a button to go back to the login/signup page
