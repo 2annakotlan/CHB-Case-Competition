@@ -34,7 +34,7 @@ def get_profile_info_page():
         formatted_interests = "{" + ";".join(selected_interests) + "}"
         
         if email_prefix in population_df["0_degree"].values:
-            # Update the existing row
+            # Update the existing row in population_df (no reassignment needed)
             population_df.loc[population_df["0_degree"] == email_prefix, ["1_degree", "activities", "interests"]] = [
                 formatted_connections,
                 formatted_activities,
@@ -47,6 +47,7 @@ def get_profile_info_page():
                 "activities": formatted_activities,
                 "interests": formatted_interests
             }
+            # Here, we're modifying population_df by appending a new row
             population_df = pd.concat([population_df, pd.DataFrame([new_row])], ignore_index=True)
         
         # Set the session state to navigate to the student landing page
