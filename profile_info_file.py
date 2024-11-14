@@ -40,5 +40,7 @@ def get_profile_info_page():
             formatted_activities,
             formatted_interests]
         
+        st.write(population_df[population_df["0_degree"] == email_prefix])
+
         # Set the session state to navigate to the student landing page
         st.session_state.page = "student_landing_page"
