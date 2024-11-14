@@ -22,12 +22,12 @@ def get_student_landing_page():
     with col1:
         # When image is clicked, set session_state.page to a specific page
         if st.image(image_url_1, width=300, use_column_width='auto'):
-            st.session_state.page = page_1
+            st.session_state.page = "friend_swiping_page"
 
     with col2:
         # When image is clicked, set session_state.page to a specific page
         if st.image(image_url_2, width=300, use_column_width='auto'):
-            st.session_state.page = page_2
+            st.session_state.page = "friend_swiping_page"
     
     # Optionally, add a button to go back to the login/signup page
     if st.button('Log out'):
