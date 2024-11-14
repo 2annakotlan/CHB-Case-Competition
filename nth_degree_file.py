@@ -1,7 +1,7 @@
 from population_data_file import population_df
 df_degree = population_df.copy()
 
-def get_nth_degree(df_degree, n):
+def get_nth_degree_page(df_degree, n):
     df_degree[f'{n}_degree'] = None  # new column for nth degree connections
     for index, row in df_degree.iterrows():  # for every person in the dataframe...
         previous_degree = row[f'{n-1}_degree']  # get list of their previous degree connections
@@ -20,3 +20,4 @@ def get_nth_degree(df_degree, n):
         valid_names = nth_degree_names & set(df_degree['0_degree'])  # names appear in both the nth degree connection names and the records
         df_degree.at[index, f'{n}_degree'] = valid_names  # update nth-degree column with valid names
 
+second_degree = get_nth_degree_page(df_degree,2)
