@@ -24,7 +24,7 @@ def get_student_landing_page():
     with col2:
         # Show image and use a button to set session_state.page on click
         if st.button("Activities Recommender", key="image2_button"):
-            st.session_state.page = 'friend_swiping_page'
+            st.session_state.page = 'activities_recommender_page'
         st.image(image_url_2, width=300)
     
     # Optionally, add a button to go back to the login/signup page
