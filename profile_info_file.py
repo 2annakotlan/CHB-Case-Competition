@@ -27,7 +27,28 @@ def get_profile_info_page(population_df):
 
     # Button to submit the profile information
     if st.button('Enter', use_container_width=False):
-        st.write("for the purposes of the model, does not update the database")
+        # Format the input data
+        formatted_connections = "{" + selected_connections.replace(" ", ";").replace(",", ";") + "}"
+        formatted_activities = "{" + ";".join(selected_activities) + "}"
+        formatted_interests = "{" + ";".join(selected_interests) + "}"
+        
+        if email_prefix in population_df["0_degree"].values:
+            # Update the existing row in population_df (no reassignment needed)
+            population_df.loc[population_df["0_degree"] == email_prefix, ["1_degree", "activities", "interests"]] = [
+                formatted_connections,
+                formatted_activities,
+                formatted_interests]
+        else:
+            # Add a new row for the user (without reassigning population_df)
+            new_row = {
+                "0_degree": email_prefix,
+                "1_degree": formatted_connections,
+                "activities": formatted_activities,
+                "interests": formatted_interests
+            }
+            # Here, we're modifying population_df by appending a new row
+            population_df = pd.concat([population_df, pd.DataFrame([new_row])], ignore_index=True)
         
         # Set the session state to navigate to the student landing page
         st.session_state.page = "student_landing_page"
+        
