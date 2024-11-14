@@ -13,18 +13,18 @@ def get_profile_info_page(population_df):
     st.title(f"{formatted_prefix}'s Profile") 
     
     # Collect user's 1st-degree connections
-    selected_connections = st.text_input("Enter your friends (e.g., AKotlan, RMiller, SLogan, etc.)")
-    
+    selected_connections = st.text_input("Enter your friends (e.g., AKotlan, RMiller, SLogan, etc.)", value="e1, e3, e7, e13, e21, e44", disabled=True)
+
     # Predefined options for interests and activities from imported data files
     interest_options = interests
     activity_options = activities
-    
-    # Collect user's interests using a multi-select option without a default value
-    selected_interests = st.multiselect("Select your interests", interest_options)
-    
-    # Collect user's activities using a multi-select option without a default value
-    selected_activities = st.multiselect("Select your activities", activity_options)
 
+    # Collect user's interests using a multi-select option without a default value
+    selected_interests = st.multiselect("Select your interests", interest_options, default=["STEM", "Games", "Performing Arts"], disabled=True)
+
+    # Collect user's activities using a multi-select option without a default value
+    selected_activities = st.multiselect("Select your activities", activity_options, default=["DECA", "TAMID", "Cheer"], disabled=True)
+    
     # Button to submit the profile information
     if st.button('Enter', use_container_width=False):
         st.session_state.page = "student_landing_page"
