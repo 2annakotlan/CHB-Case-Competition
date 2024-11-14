@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 from population_data_file import population_df
+from custom_css_file import get_custom_css_page
 
 def get_profile_info_page():
     # Apply custom CSS with specified alignment and button span
