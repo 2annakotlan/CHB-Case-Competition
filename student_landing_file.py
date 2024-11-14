@@ -20,14 +20,16 @@ def get_student_landing_page():
     col1, col2 = st.columns(2)
 
     with col1:
-        # When image is clicked, set session_state.page to a specific page
-        if st.image(image_url_1, width=300, use_column_width='auto'):
+        # Show image and use a button to set session_state.page on click
+        if st.button("Go to Page 1", key="image1_button"):
             st.session_state.page = "login_signup_page"
+        st.image(image_url_1, width=300)
 
     with col2:
-        # When image is clicked, set session_state.page to a specific page
-        if st.image(image_url_2, width=300, use_column_width='auto'):
+        # Show image and use a button to set session_state.page on click
+        if st.button("Go to Page 2", key="image2_button"):
             st.session_state.page = "login_signup_page"
+        st.image(image_url_2, width=300)
     
     # Optionally, add a button to go back to the login/signup page
     if st.button('Log out'):
