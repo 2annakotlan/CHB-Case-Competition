@@ -1,21 +1,24 @@
 import streamlit as st
+import pandas as pd
 from PIL import Image
 from create_account_file import get_create_account_page
 from custom_css_file import get_custom_css_page
 from activities_interests_data_file import interests, activities
+from population_data_file import population_df
 
 def get_profile_info_page():
+    # Apply custom CSS with specified alignment and button span
     get_custom_css_page(alignment="left", button_span="auto")
     
-    # Format user's email prefix
+    # Format user's email prefix for the profile title
     email_prefix = st.session_state.user_email.split('@')[0]
     formatted_prefix = f"{email_prefix[0].upper()}. {email_prefix[1:].capitalize()}"
     st.title(f"{formatted_prefix}'s Profile") 
     
     # Collect user's 1st-degree connections
-    connections = st.text_input("Enter your friends (ie. AKotlan, RMiller, SLogan, etc.)")
+    selected_connections = st.text_input("Enter your friends (e.g., AKotlan, RMiller, SLogan, etc.)")
     
-    # Predefined options for interests and activities
+    # Predefined options for interests and activities from imported data files
     interest_options = interests
     activity_options = activities
     
@@ -27,4 +30,15 @@ def get_profile_info_page():
 
     # Button to submit the profile information
     if st.button('Enter', use_container_width=False):
+        formatted_connections = "{" + selected_connections.replace(" ", ";").replace(",", ";") + "}"
+        formatted_activities = "{" + ";".join(selected_activities) + "}"
+        formatted_interests = "{" + ";".join(selected_interests) + "}"
+        
+        # Update the population_df dataframe:
+        population_df.loc[population_df["0_degree"] == email_prefix, ["1_degree", "activities", "interests"]] = [
+            formatted_connections,
+            formatted_activities,
+            formatted_interests]
+        
+        # Set the session state to navigate to the student landing page
         st.session_state.page = "student_landing_page"
