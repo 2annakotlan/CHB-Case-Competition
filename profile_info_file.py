@@ -40,14 +40,14 @@ def get_profile_info_page():
                 formatted_activities,
                 formatted_interests]
         else:
-            # Add a new row for the user
+            # Add a new row for the user (without reassigning population_df)
             new_row = {
                 "0_degree": email_prefix,
                 "1_degree": formatted_connections,
                 "activities": formatted_activities,
                 "interests": formatted_interests
             }
-            population_df = population_df.append(new_row, ignore_index=True)
+            population_df = pd.concat([population_df, pd.DataFrame([new_row])], ignore_index=True)
         
         # Set the session state to navigate to the student landing page
         st.session_state.page = "student_landing_page"
