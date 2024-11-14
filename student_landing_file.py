@@ -8,7 +8,7 @@ def get_student_landing_page():
     email_prefix = st.session_state.user_email.split('@')[0]
     formatted_prefix = f"{email_prefix[0].upper()}. {email_prefix[1:].capitalize()}"
     st.title(f"{formatted_prefix}'s Student Dashboard") 
-    st.write("Welcome, f"{formatted_prefix}! This is your personal dashboard.")
+    st.write(f"Welcome, {formatted_prefix}! This is your personal dashboard.")
     
     image_url_1 = "https://raw.githubusercontent.com/2annakotlan/CHB-Case-Competition/main/swipe.png"
     image_url_2 = "https://raw.githubusercontent.com/2annakotlan/CHB-Case-Competition/main/house.png"
