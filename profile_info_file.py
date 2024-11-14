@@ -1,3 +1,6 @@
+import streamlit as st
+import pandas as pd
+
 def get_profile_info_page():
     # Apply custom CSS with specified alignment and button span
     get_custom_css_page(alignment="left", button_span="auto")
