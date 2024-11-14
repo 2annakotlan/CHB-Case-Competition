@@ -6,7 +6,7 @@ from population_data_file import population_df
 def get_activities_recommender_page(df):
   get_custom_css_page(alignment="center", button_span="full")
 
-  st.dataframe(population_df.head())
+  st.dataframe(population_df)
 
   
 
