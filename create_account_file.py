@@ -12,14 +12,12 @@ def get_create_account_page():
     password = st.text_input("Password", type="password")
     
     # Defining Variables
-    valid_email = email.endswith("@falcon.bentley.edu")
+    valid_email = "akotlan@falcon.bentley.edu"
     admin_email = email == "admin@falcon.bentley.edu"
-    email_base = email.split('@')[0]  
-    valid_existing_email = email_base in population_df['0_degree'].values and email.endswith("@falcon.bentley.edu") and not admin_email
-    valid_not_existing_email = email_base not in population_df['0_degree'].values and email.endswith("@falcon.bentley.edu") and not admin_email
-
+    email_base = "akotlan"  
+    
     # Initialize checkbox for terms acceptance only for new students
-    agree_terms = st.checkbox("I agree to the Terms and Conditions") if valid_not_existing_email else None
+    agree_terms = st.checkbox("I agree to the Terms and Conditions") 
 
     # Layout the buttons side by side using columns
     col1, col2 = st.columns([1, 1])
@@ -31,20 +29,7 @@ def get_create_account_page():
         next_clicked = st.button("Next")
     
     if next_clicked:
-        # 1. Validate Bentley University email
-        if not valid_email:
-            st.error("Please enter a valid Bentley University email address.")
-        
-        # 2. Handle admin account navigation
-        elif admin_email: 
-            st.session_state.page = "admin_landing_page"
-
-        # 3. Handle pre-existing student account
-        elif valid_existing_email:
-            st.error("This account already exists - go back and select sign in.")
-        
-        # 4. Handle new student account creation and terms agreement
-        elif valid_not_existing_email:
+        if valid_email:
             if not agree_terms:
                 st.error("You must agree to the Terms and Conditions to continue.")
             else:
