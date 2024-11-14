@@ -1,10 +1,3 @@
-import streamlit as st
-import pandas as pd
-from create_account_file import get_create_account_page
-from custom_css_file import get_custom_css_page
-from activities_interests_data_file import interests, activities
-from population_data_file import population_df  # Ensure this import is correct
-
 def get_profile_info_page():
     # Apply custom CSS with specified alignment and button span
     get_custom_css_page(alignment="left", button_span="auto")
@@ -34,11 +27,11 @@ def get_profile_info_page():
         formatted_activities = "{" + ";".join(selected_activities) + "}"
         formatted_interests = "{" + ";".join(selected_interests) + "}"
         
-        # Ensure population_df is stored in session state
-        if 'population_df' not in st.session_state:
-            st.write("not in session")
-
-            if email_prefix in st.session_state.my_dataframe["0_degree"].values:
+        # Ensure my_dataframe is stored in session state
+        if 'my_dataframe' not in st.session_state:
+            st.session_state.my_dataframe = population_df  # Initialize if not present
+        
+        if email_prefix in st.session_state.my_dataframe["0_degree"].values:
             # Update the existing row
             st.session_state.my_dataframe.loc[st.session_state.my_dataframe["0_degree"] == email_prefix, ["1_degree", "activities", "interests"]] = [
                 formatted_connections,
