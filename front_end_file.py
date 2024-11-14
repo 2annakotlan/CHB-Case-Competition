@@ -10,7 +10,7 @@ from profile_info_file import get_profile_info_page
 from population_data_file import population_df
 import streamlit as st
 from activities_recommender_file import get_activities_recommender_page
-from nth_degree_file import second_degree
+from nth_degree_file import get_full_df
 
 get_initialize_page()  
 if st.session_state.page == 'login_signup_page':
@@ -28,4 +28,4 @@ elif st.session_state.page == 'friend_swiping_page':
 elif st.session_state.page == 'profile_info_page':
     get_profile_info_page(population_df)
 elif st.session_state.page == 'activities_recommender_page':
-    get_activities_recommender_page(second_degree)
+    get_activities_recommender_page(population_df)
