@@ -9,18 +9,16 @@ def get_student_landing_page():
     st.write("Welcome, student! This is your personal dashboard.")
     st.write("Explore resources, courses, and more.")
     
-    # Create two columns for the clickable boxes
+    image_url_1 = "https://raw.githubusercontent.com/2annakotlan/CHB-Case-Competition/main/swipe.png"
+    image_url_2 = "https://raw.githubusercontent.com/2annakotlan/CHB-Case-Competition/main/house.png"
+
     col1, col2 = st.columns(2)
 
-    # First clickable box
     with col1:
-        if st.button("Box 1", key="box1"):
-            st.session_state.page = "friend_swiping_page"
-    
-    # Second clickable box
+        st.image(image_url_1, use_column_width=True)
+
     with col2:
-        if st.button("Box 2", key="box2"):
-            st.session_state.page = "activity_suggestions_page"
+        st.image(image_url_2, use_column_width=True)
     
     # Optionally, add a button to go back to the login/signup page
     if st.button('Log out'):
