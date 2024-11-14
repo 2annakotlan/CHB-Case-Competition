@@ -16,9 +16,10 @@ def get_create_account_page():
     admin_email = email == "admin@falcon.bentley.edu"
     email_base = email.split('@')[0]  
     existing_email = email_base in population_df['0_degree'].values
+    not_existing_email = email_base in population_df['0_degree'].values
 
     # Initialize checkbox for terms acceptance only for new students
-    agree_terms = st.checkbox("I agree to the Terms and Conditions") if not existing_email else None
+    agree_terms = st.checkbox("I agree to the Terms and Conditions") if not_existing_email else None
 
     # Layout the buttons side by side using columns
     col1, col2 = st.columns([1, 1])
@@ -43,7 +44,7 @@ def get_create_account_page():
             st.error("This account already exists - go back and select sign in.")
         
         # 4. Handle new student account creation and terms agreement
-        elif not existing_email:
+        elif not_existing_email:
             if not agree_terms:
                 st.error("You must agree to the Terms and Conditions to continue.")
             else:
