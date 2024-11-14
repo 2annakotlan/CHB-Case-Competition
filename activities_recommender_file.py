@@ -6,7 +6,7 @@ import pandas as pd
 
 def get_activities_recommender_page():
     get_custom_css_page(alignment="center", button_span="full")
-    st.write("HI)
+    st.write("HI")
 
 
   
