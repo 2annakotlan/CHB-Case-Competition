@@ -28,4 +28,4 @@ elif st.session_state.page == 'friend_swiping_page':
 elif st.session_state.page == 'profile_info_page':
     get_profile_info_page(population_df)
 elif st.session_state.page == 'activities_recommender_page':
-    get_activities_recommender_page()
+    get_activities_recommender_page(population_df)
