@@ -12,14 +12,22 @@ def get_student_landing_page():
     
     image_url_1 = "https://raw.githubusercontent.com/2annakotlan/CHB-Case-Competition/main/swipe.png"
     image_url_2 = "https://raw.githubusercontent.com/2annakotlan/CHB-Case-Competition/main/house.png"
+    
+    # Define page values for session_state
+    page_1 = "page1"
+    page_2 = "page2"
 
     col1, col2 = st.columns(2)
 
     with col1:
-        st.image(image_url_1, width=300)
+        # When image is clicked, set session_state.page to a specific page
+        if st.image(image_url_1, width=300, use_column_width='auto'):
+            st.session_state.page = page_1
 
     with col2:
-        st.image(image_url_2, width=300)
+        # When image is clicked, set session_state.page to a specific page
+        if st.image(image_url_2, width=300, use_column_width='auto'):
+            st.session_state.page = page_2
     
     # Optionally, add a button to go back to the login/signup page
     if st.button('Log out'):
