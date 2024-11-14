@@ -23,7 +23,7 @@ def get_profile_info_page(population_df):
     selected_interests = st.multiselect("Select your interests", interest_options, default=["STEM", "Games", "Performing Arts"], disabled=True)
 
     # Collect user's activities using a multi-select option without a default value
-    selected_activities = st.multiselect("Select your activities", activity_options, default=["DECA", "TAMID", "Cheer"], disabled=True)
+    selected_activities = st.multiselect("Select your activities", activity_options, default=["DECA", "Tamid", "Cheer"], disabled=True)
     
     # Button to submit the profile information
     if st.button('Enter', use_container_width=False):
