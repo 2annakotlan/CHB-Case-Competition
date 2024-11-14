@@ -32,7 +32,7 @@ def get_profile_info_page():
         formatted_interests = "{" + ";".join(selected_interests) + "}"
         
         # Dataframe
-        get_population_data_page()
+        population_df = get_population_data_page()
 
         if email_prefix in population_df["0_degree"].values:
             # Update the existing row
