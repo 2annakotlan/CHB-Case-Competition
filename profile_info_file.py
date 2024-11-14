@@ -5,7 +5,7 @@ from custom_css_file import get_custom_css_page
 
 def get_profile_info_page(population_df):
     # Apply custom CSS with specified alignment and button span
-    get_custom_css_page(alignment="left", button_span="auto")
+    get_custom_css_page(alignment="left", button_span="auto") 
 
     # Format user's email prefix for the profile title
     email_prefix = st.session_state.user_email.split('@')[0]
