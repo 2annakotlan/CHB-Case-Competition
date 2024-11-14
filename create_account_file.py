@@ -8,8 +8,8 @@ def get_create_account_page():
     st.title("Create Your Account")
     st.write("Enter your Bentley University email and password to sign up")
     
-    email = st.text_input("Email", value="akotlan@falcon.bentley.edu", disabled=True)
-    password = st.text_input("Password", type="password")
+    email = st.text_input("Email", value="stest@falcon.bentley.edu", disabled=True)
+    password = st.text_input("Password", type="password", value="123", disabled=True)
     
     # Defining Variables
     valid_email = email.endswith("@falcon.bentley.edu")
