@@ -1,8 +1,3 @@
-import streamlit as st
-import pandas as pd
-from activities_interests_data_file import interests, activities
-from custom_css_file import get_custom_css_page
-
 def get_profile_info_page(population_df):
     # Apply custom CSS with specified alignment and button span
     get_custom_css_page(alignment="left", button_span="auto") 
@@ -49,6 +44,8 @@ def get_profile_info_page(population_df):
             # Here, we're modifying population_df by appending a new row
             population_df = pd.concat([population_df, pd.DataFrame([new_row])], ignore_index=True)
         
+        # Save the updated population_df to session state
+        st.session_state.population_df = population_df
+
         # Set the session state to navigate to the student landing page
         st.session_state.page = "student_landing_page"
-        
