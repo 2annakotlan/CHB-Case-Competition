@@ -23,3 +23,5 @@ def get_nth_degree_page(df_degree, n):
     return df_degree
 
 second_degree = get_nth_degree_page(df_degree,2)
+third_degree = get_nth_degree_page(df_degree,3)
+fourth_degree = get_nth_degree_page(df_degree,4)
