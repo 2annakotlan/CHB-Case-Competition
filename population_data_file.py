@@ -1,3 +1,4 @@
+# ORIGIONAL DATA
 import pandas as pd
 
 population_data = {
@@ -9,8 +10,8 @@ population_data = {
 
 population_df = pd.DataFrame(population_data)
 
+# FULL DATA
 import networkx as nx
-
 def get_nth_degree(df, n):
     df[f'{n}_degree'] = None  # new column for nth-degree connections
     for index, row in df.iterrows():  # for every person in the dataframe...
@@ -75,3 +76,4 @@ def get_full_df(df):
     return df
 
 full_population_df = get_full_df(population_df)
+
