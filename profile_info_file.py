@@ -3,7 +3,7 @@ import streamlit as st
 from activities_interests_data_file import activities, interests
 import pandas as pd
 
-def get_profile_info_page(population_df):
+def get_profile_info_page():
     # Apply custom CSS with specified alignment and button span
     get_custom_css_page(alignment="left", button_span="auto") 
 
