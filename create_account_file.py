@@ -12,13 +12,11 @@ def get_create_account_page():
     password = st.text_input("Password", type="password")
     
     # Defining Variables
-    valid_email = email.endswith("@falcon.bentley.edu") and email.count('@') == 1
-    valid_student_email = valid_email and email != "admin@falcon.bentley.edu"
+    valid_email = email.endswith("@falcon.bentley.edu") 
     valid_admin_email = email == "admin@falcon.bentley.edu"
-
-    # Check if the email exists 
     email_base = email.split('@')[0]  # Get the username part of the email
-    pre_existing_email = email_base in population_df['0_degree'].values
+    valid_existing_email = email_base in population_df['0_degree'].values
+    valid_new_student_email = email != admin_email
 
     # Initialize checkbox only for students with valid email
     agree_terms = st.checkbox("I agree to the Terms and Conditions") if valid_student_email else None
@@ -39,7 +37,7 @@ def get_create_account_page():
             st.error("This account already exists - go back and select sign in.")
         
         # 4. Handle student account creation and terms agreement
-        elif valid_student_email: 
+        elif valid_new_student_email: 
             if not agree_terms:
                 st.error("You must agree to the Terms and Conditions to continue.")
             else:
