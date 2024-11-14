@@ -12,7 +12,7 @@ population_data = {
 
 population_df = pd.DataFrame(population_data)
 
-def get_profile_info_page():
+def get_profile_info_page(population_df):
     # Apply custom CSS with specified alignment and button span
     get_custom_css_page(alignment="left", button_span="auto")
 
