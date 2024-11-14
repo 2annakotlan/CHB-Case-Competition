@@ -12,7 +12,7 @@ def get_create_account_page():
     password = st.text_input("Password", type="password", value="123", disabled=True)
     
     # Defining Variables
-    email_base = "stest"
+    email_base = email.split('@')[0] 
     valid_not_existing_email = stest@falcon.bentley.edu
 
     # Initialize checkbox for terms acceptance only for new students
