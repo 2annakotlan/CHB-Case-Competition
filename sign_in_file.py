@@ -15,9 +15,8 @@ def get_sign_in_page():
     # Defining Variables
     valid_email = email.endswith("@falcon.bentley.edu")
     admin_email = email == "admin@falcon.bentley.edu"
-    email_base = email.split('@')[0]  #
-    not_existing_email = email_base in not population_df['0_degree'].values
-    student_existing_email = not admin_email and not not_existing_email
+    email_base = email.split('@')[0]  
+    existing_email = email_base in population_df['0_degree'].values
 
     # Layout the buttons side by side using columns
     col1, col2 = st.columns([1, 1])
@@ -38,11 +37,11 @@ def get_sign_in_page():
             st.session_state.page = "admin_landing_page"
 
         # 3. Handle Non-Existing Account
-        elif not_existing_email:
+        elif not existing_email:
             st.error("This account does not exist - go back and select create account.")
 
         # 4. Handle Student Role Navigation 
-        elif student_email:  # If student, navigate to student landing page
+        elif existing_email:  # If student, navigate to student landing page
             st.session_state.user_email = email
             st.session_state.page = "student_landing_page"
     
