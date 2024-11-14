@@ -20,4 +20,6 @@ def get_nth_degree_page(df_degree, n):
         valid_names = nth_degree_names & set(df_degree['0_degree'])  # names appear in both the nth degree connection names and the records
         df_degree.at[index, f'{n}_degree'] = valid_names  # update nth-degree column with valid names
 
+    return df_degree
+
 second_degree = get_nth_degree_page(df_degree,2)
