@@ -15,10 +15,10 @@ def get_student_landing_page():
     col1, col2 = st.columns(2)
 
     with col1:
-        st.image(image_url_1, use_column_width=300)
+        st.image(image_url_1, width=300)
 
     with col2:
-        st.image(image_url_2, use_column_width=300)
+        st.image(image_url_2, width=300)
     
     # Optionally, add a button to go back to the login/signup page
     if st.button('Log out'):
