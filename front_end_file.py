@@ -7,6 +7,7 @@ from sign_in_file import get_sign_in_page
 from admin_landing_file import get_admin_landing_page
 from student_landing_file import get_student_landing_page
 from profile_info_file import get_profile_info_page
+from population_data_file import population_df
 import streamlit as st
 
 get_initialize_page()  
@@ -23,4 +24,4 @@ elif st.session_state.page == 'student_landing_page':
 elif st.session_state.page == 'friend_swiping_page':  
     get_friend_swiping_page()
 elif st.session_state.page == 'profile_info_page':
-    get_profile_info_page()
+    get_profile_info_page(population_df)
