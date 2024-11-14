@@ -1,10 +1,9 @@
 import streamlit as st
 import pandas as pd
-from PIL import Image
 from create_account_file import get_create_account_page
 from custom_css_file import get_custom_css_page
 from activities_interests_data_file import interests, activities
-from population_data_file import population_df
+from population_data_file import population_df  # Ensure this import is correct
 
 def get_profile_info_page():
     # Apply custom CSS with specified alignment and button span
@@ -30,17 +29,20 @@ def get_profile_info_page():
 
     # Button to submit the profile information
     if st.button('Enter', use_container_width=False):
+        # Format the input data
         formatted_connections = "{" + selected_connections.replace(" ", ";").replace(",", ";") + "}"
         formatted_activities = "{" + ";".join(selected_activities) + "}"
         formatted_interests = "{" + ";".join(selected_interests) + "}"
         
         # Check if the row with the email_prefix exists
         if email_prefix in population_df["0_degree"].values:
+            # Update the existing row
             population_df.loc[population_df["0_degree"] == email_prefix, ["1_degree", "activities", "interests"]] = [
                 formatted_connections,
                 formatted_activities,
                 formatted_interests]
         else:
+            # Add a new row for the user
             new_row = {
                 "0_degree": email_prefix,
                 "1_degree": formatted_connections,
