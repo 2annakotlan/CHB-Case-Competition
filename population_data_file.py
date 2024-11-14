@@ -8,3 +8,4 @@ population_data = {
 }
 
 population_df = pd.DataFrame(population_data)
+st.session_state.my_dataframe = population_df
