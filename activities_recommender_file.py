@@ -8,11 +8,12 @@ def get_activities_recommender_page():
     get_custom_css_page(alignment="center", button_span="full")
     activities_df = get_activities(full_population_df, 'stest')
     st.dataframe(activities_df)
+    generate_activities_messages(activities_df)
 
     for _, row in activities_df.iterrows():
         degree_columns = [col for col in row.index if col.startswith('count_degree')]
         total_people = row[degree_columns].sum()
-        message = f"Meet {total_people} people in your social circle by joining {row['activities']}: "
+        message = f"{total_people} people in your social circle by joining {row['activities']}: "
         degree_message_parts = []
         
         for degree_col in degree_columns:
@@ -21,7 +22,7 @@ def get_activities_recommender_page():
             
             if count > 0:
                 if count == 1:
-                    degree_message_parts.append(f"one person {degree} degree away")
+                    degree_message_parts.append(f"1 person {degree} degree away")
                 else:
                     degree_message_parts.append(f"{count} people {degree} degrees away")
         
@@ -30,4 +31,5 @@ def get_activities_recommender_page():
         else:
             message += degree_message_parts[0]  # If only one part, just add it
         
-        st.write(message)  # Display the message in Streamlit
+        # Use Markdown for centering the message
+        st.markdown(f"<div style='text-align: center;'>{message}</div>", unsafe_allow_html=True)
