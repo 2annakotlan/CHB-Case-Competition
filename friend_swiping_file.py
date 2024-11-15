@@ -18,83 +18,72 @@ def get_friend_swiping_page():
     # Initialize a list to hold your matches
     matches = []
 
-    # Create a list of all profiles that need to be swiped through
-    profiles = population_df.iterrows()
+    # Create a session state variable to track the current index of profiles
+    if "current_profile" not in st.session_state:
+        st.session_state.current_profile = 0
 
-    # Create an iterator to go through the profiles
-    profile_iterator = iter(profiles)
+    # Get the current profile
+    person = population_df.iloc[st.session_state.current_profile]
 
-    try:
-        # Show the next profile
-        person_index, person = next(profile_iterator)
+    # Extract person details
+    name = person["0_degree"]
+    interests = person["interests"]
+    liked_you = person["match"] == 1  # Check if they liked you (match == 1)
 
-        # Extract person details
-        name = person["0_degree"]
-        interests = person["interests"]
-        liked_you = person["match"] == 1  # Check if they liked you (match == 1)
+    # Format interests as a comma-separated list and sort for readability
+    formatted_interests = ", ".join(sorted(interests))
 
-        # Format interests as a comma-separated list and sort for readability
-        formatted_interests = ", ".join(sorted(interests))
+    # Add custom CSS for centering profile elements
+    st.markdown("""
+        <style>
+            .profile-image {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 300px;
+            }
+            .profile-name {
+                display: block;
+                text-align: center;
+                font-size: 24px;
+                font-weight: bold;
+                margin-top: 10px;
+            }
+        </style>
+    """, unsafe_allow_html=True)
 
-        # Add custom CSS for centering profile elements
-        st.markdown("""
-            <style>
-                .profile-image {
-                    display: block;
-                    margin-left: auto;
-                    margin-right: auto;
-                    width: 300px;
-                }
-                .profile-name {
-                    display: block;
-                    text-align: center;
-                    font-size: 24px;
-                    font-weight: bold;
-                    margin-top: 10px;
-                }
-            </style>
-        """, unsafe_allow_html=True)
+    # Display the profile image and name centered
+    st.markdown(f'<img src="{image_url}" class="profile-image">', unsafe_allow_html=True)
+    st.markdown(f'<div class="profile-name">{name}\'s Profile</div>', unsafe_allow_html=True)
 
-        # Display the profile image and name centered
-        st.markdown(f'<img src="{image_url}" class="profile-image">', unsafe_allow_html=True)
-        st.markdown(f'<div class="profile-name">{name}\'s Profile</div>', unsafe_allow_html=True)
+    # Display the person's interests
+    st.write(f"**Interests:** {formatted_interests}")
 
-        # Display the person's interests
-        st.write(f"**Interests:** {formatted_interests}")
+    # Show whether they liked you or not
+    if liked_you:
+        st.write(f"**{name} liked you!**")
+    else:
+        st.write(f"**{name} has not liked you yet.**")
 
-        # Show whether they liked you or not
-        if liked_you:
-            st.write(f"**{name} liked you!**")
-        else:
-            st.write(f"**{name} has not liked you yet.**")
+    # Create swipe buttons
+    col1, col2 = st.columns(2)
 
-        # Create swipe buttons
-        col1, col2 = st.columns(2)
-
-        with col1:
-            if st.button(f"Swipe Left on {name}", key=f"left_{person_index}"):
-                st.write(f"You swiped left on {name}.")
+    with col1:
+        if st.button(f"Swipe Left on {name}", key=f"left_{st.session_state.current_profile}"):
+            st.write(f"You swiped left on {name}.")
+            # Move to the next profile
+            st.session_state.current_profile += 1
         
-        with col2:
-            if st.button(f"Swipe Right on {name}", key=f"right_{person_index}"):
-                # Register the right swipe and check if it's a match
-                if liked_you:
-                    matches.append(name)
-                    st.write(f"**You swiped right on {name}. It's a match!**")
-                else:
-                    st.write(f"You swiped right on {name}. Waiting for them to like you back.")
-
-        # Button to go to the next profile
-        if st.button("Next Profile"):
-            # Check if there's a next profile
-            try:
-                person_index, person = next(profile_iterator)
-
-            except StopIteration:
-                st.write("No more profiles to swipe.")
-            
-    except StopIteration:
-        st.write("No more profiles to swipe.")
+    with col2:
+        if st.button(f"Swipe Right on {name}", key=f"right_{st.session_state.current_profile}"):
+            # Register the right swipe and check if it's a match
+            if liked_you:
+                matches.append(name)
+                st.write(f"**You swiped right on {name}. It's a match!**")
+            else:
+                st.write(f"You swiped right on {name}. Waiting for them to like you back.")
+            # Move to the next profile
+            st.session_state.current_profile += 1
 
     # Display the list of matches (with email suffix)
     st.subheader("Your Matches:")
