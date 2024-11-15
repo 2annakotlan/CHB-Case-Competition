@@ -50,7 +50,7 @@ data = {
         {'Gender & Sexual Identities', 'Finance & Investment'},
         {'Games', 'Finance & Investment'},
         {'Religious Identities', 'Political, Legal, & Public Affairs'},
-        {'reading', 'Social Impact & Community Development'},
+        {'Games', 'Social Impact & Community Development'},
         {'Finance & Investment', 'Political, Legal, & Public Affairs'},
         {'Social Impact & Community Development', 'Gender & Sexual Identities'},
         {'Social Impact & Community Development', 'Community Engagement & Leadership'},
