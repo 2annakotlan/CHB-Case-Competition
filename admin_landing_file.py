@@ -2,6 +2,10 @@ import streamlit as st
 from custom_css_file import get_custom_css_page
 from algorithm import network_map
 from population_data_file import population_df, full_population_df
+import networkx as nx
+import pandas as pd
+from itertools import combinations
+import numpy as np
 
 # Function to handle the admin landing page view
 def get_admin_landing_page():
@@ -10,11 +14,6 @@ def get_admin_landing_page():
     st.title("Admin Dashboard")
     st.markdown("<h3 style='text-align: center; color: #4A90E2;'>Network Map</h3>", unsafe_allow_html=True)
     network_map(population_df)
-
-    import networkx as nx
-    import pandas as pd
-    from itertools import combinations
-    import numpy as np
 
     # Function to find common interests and interpret connections
     def get_common_interests_table(df):
@@ -52,8 +51,8 @@ def get_admin_landing_page():
         def get_participant_emails(df, interest, groups):
             emails = []
             for component, _ in groups:
-                component_emails = df[
-                    (df['component'] == component) & 
+                component_emails = df[(
+                    df['component'] == component) & 
                     (df['interests'].apply(lambda x: interest in x))
                 ]['0_degree'].apply(lambda x: f"{x}@falcon.bentley.edu")
                 emails.extend(component_emails)
@@ -61,7 +60,7 @@ def get_admin_landing_page():
         
         # Main processing loop
         sentences = []
-        for _, row in interest_count_df.iterrows():
+        for _, row in int_count_df.iterrows():  # changed interest_count_df to int_count_df
             interest = row['interest']
             groups = get_groups_above_threshold(row)
             
@@ -74,17 +73,15 @@ def get_admin_landing_page():
                 st.markdown(f"Emails for {interest.capitalize()} event:")
                 st.text_area("", email_list, height=150)
                 sentences.append("")
-        
+
         return int_count_df, sentences
-   
 
     int_count_df, sentences = get_common_interests_table(full_population_df)
 
-    
     # Display Suggestions
     st.markdown("<h3 style='text-align: left; color: #4A90E2;'>Event Recommendations</h3>", unsafe_allow_html=True)
     st.markdown("<br>".join(sentences), unsafe_allow_html=True)  # Use st.markdown for rendering HTML
     
     # Optionally, add a button to go back to the login/signup page
     if st.button('Log out'):
-        st.session_state.page = "login_signup_page"
+        st.session_state.page = "login_signup_page"  # Ensure this part matches your session management system
