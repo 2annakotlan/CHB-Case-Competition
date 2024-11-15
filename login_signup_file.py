@@ -11,6 +11,7 @@ def get_login_signup_page():
 
     # Add spacing and create two-column layout for buttons
     col1, col2 = st.columns(2)
+    st.write("NO")
     
     with col1:
         if st.button('Student Login', use_container_width=True):
