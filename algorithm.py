@@ -117,8 +117,7 @@ def network_map(df):
     plt.axis('equal')  # components are perfect circles
     plt.show()
 
-# Calling Function
-network_map(df)
+
 
 
 
