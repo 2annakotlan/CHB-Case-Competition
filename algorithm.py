@@ -68,6 +68,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 import plotly.graph_objects as go
 
+import streamlit as st
+import networkx as nx
+import numpy as np
+import matplotlib.pyplot as plt
+
 def network_map(df):
     # CREATE THE NETWORK MAP
     G = nx.Graph()  # initialize an empty undirected graph
@@ -115,7 +120,9 @@ def network_map(df):
         plt.text(center_x, center_y, i, fontsize=8, ha='center', va='center', fontweight='bold', color='black')
 
     plt.axis('equal')  # components are perfect circles
-    plt.show()
+
+    # Use Streamlit's st.pyplot() to display the graph
+    st.pyplot(plt)
 
 
 
