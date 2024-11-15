@@ -4,13 +4,32 @@ from population_data_file import full_population_df
 from activities_recommender_alg_file import get_activities
 import pandas as pd
 
-from custom_css_file import get_custom_css_page
-import streamlit as st
-from activities_recommender_alg_file import get_activities
-
 def get_activities_recommender_page():
     get_custom_css_page(alignment="center", button_span="full")
     activities_df = get_activities(full_population_df, 'stest')
+
+    st.markdown("""
+    <style>
+        .streamlit-table {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .streamlit-table th {
+            background-color: #FF1493;
+            color: white;
+            font-weight: bold;
+        }
+        .streamlit-table td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+    """, unsafe_allow_html=True)
+
+    # Display DataFrame with styling
+    st.dataframe(activities_df.style.set_table_attributes('class="streamlit-table"'))
     
     # Filter and sort by 2nd-degree connections
     activities_df = activities_df[activities_df['count_degree_2'] > 0]
