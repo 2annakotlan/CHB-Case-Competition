@@ -60,12 +60,6 @@ def get_friend_swiping_page():
     # Display the person's interests
     st.write(f"**Interests:** {formatted_interests}")
 
-    # Show whether they liked you or not
-    if liked_you:
-        st.write(f"**{name} liked you!**")
-    else:
-        st.write(f"**{name} has not liked you yet.**")
-
     # Create swipe buttons
     col1, col2 = st.columns(2)
 
