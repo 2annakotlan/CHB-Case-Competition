@@ -51,10 +51,11 @@ def get_admin_landing_page():
                     
                     # Construct the group details without specifying the number of people in each group
                     group_details = [f"group {i + 1}" for i, _ in counts_above_threshold]  # Adjust index to start at 1
-                    group_details_text = " and ".join(group_details)  # Combine the group details
+                    # Modify the group details to use '&' for joining groups
+                    group_details_text = " & ".join(group_details)  # Combine the group details
                     
                     # Modify the sentence format as per the new requirement
-                    event_sentence = f"<b style='color: #4A90E2;'>{interest.capitalize()} event:</b> event of {total_count} people connecting {group_details_text}"
+                    event_sentence = f"<b style='color: #4A90E2;'>{interest.capitalize()} event:</b> connecting {total_count} people from {group_details_text}"
                     sentences.append(event_sentence)  # sentence with formatted event name
     
                     all_names = [] # names of people in each component with this interest
@@ -64,6 +65,11 @@ def get_admin_landing_page():
                     # Add the @falcon.bentley.edu to each name
                     all_names_with_domain = [f"{name}@falcon.bentley.edu" for name in all_names]
                     sentences.append(f"  Emails: {', '.join(all_names_with_domain)}")
+                    
+                    # Add the emails to a text area for easy copying
+                    email_list = ", ".join(all_names_with_domain)
+                    st.text_area("Copy the emails below:", email_list, height=150)
+
                     sentences.append("")
 
         return int_count_df, sentences
