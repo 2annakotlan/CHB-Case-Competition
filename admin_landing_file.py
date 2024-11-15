@@ -1,7 +1,7 @@
 import streamlit as st
 from custom_css_file import get_custom_css_page
 from algorithm import network_map
-from population_data_file import population_df
+from population_data_file import population_df, full_population_df
 
 # Function to handle the admin landing page view
 def get_admin_landing_page():
@@ -59,9 +59,7 @@ def get_admin_landing_page():
     # Streamlit UI
     st.title("Common Interests and Connection Suggestions")
     
-    # Assuming `df` is already defined elsewhere in your code
-    # Call Function
-    int_count_df, sentences = get_common_interests_table(df)
+    int_count_df, sentences = get_common_interests_table(full_population_df)
     
     # Display DataFrame in Streamlit
     st.subheader("Interest Count per Group")
