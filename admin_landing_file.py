@@ -65,7 +65,7 @@ def get_admin_landing_page():
             groups = get_groups_above_threshold(row)
             
             if len(groups) > 1:
-                # Add event description
+                # Add event description with capitalized event name
                 event_detail = format_event_details(interest, groups)
                 sentences.append(event_detail)
                 
@@ -79,7 +79,7 @@ def get_admin_landing_page():
                 else:
                     email_text = "<p>No participants found for this event.</p>"
 
-                sentences.append(f"<p><b>Emails for {interest.capitalize()} event:</b></p>{email_text}")
+                sentences.append(f"{email_text}")  # Removed the "Emails for ..." text and just added emails
 
         return int_count_df, sentences
 
