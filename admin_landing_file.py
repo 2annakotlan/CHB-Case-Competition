@@ -39,38 +39,41 @@ def get_admin_landing_page():
         st.write(int_count_df)
 
         # Interpretation
+        def get_groups_above_threshold(row, threshold=2):
+            # Extract counts and filter by threshold
+            counts = [int(count) for count in row.iloc[1:]]
+            return [(i, count) for i, count in enumerate(counts) if count >= threshold]
+        
+        def format_event_details(interest, groups):
+            total_count = sum(count for _, count in groups)
+            group_text = " & ".join(f"group {i + 1}" for i, _ in groups)
+            return f"<b style='color: #4A90E2;'>{interest.capitalize()} Event:</b> connecting {total_count} people from {group_text}"
+        
+        def get_participant_emails(df, interest, groups):
+            emails = []
+            for component, _ in groups:
+                component_emails = df[
+                    (df['component'] == component) & 
+                    (df['interests'].apply(lambda x: interest in x))
+                ]['0_degree'].apply(lambda x: f"{x}@falcon.bentley.edu")
+                emails.extend(component_emails)
+            return ", ".join(emails)
+        
+        # Main processing loop
         sentences = []
-        for _, row in int_count_df.iterrows():  # for each interest...
-            interest = row['interest']  # get the interest
-            counts = [int(row[col]) for col in row.index[1:]]  # count of people per component
-            counts_above_threshold = [(i, count) for i, count in enumerate(counts) if count >= 2] # count of people per component filtered by threshold
-    
-            if len(counts_above_threshold) > 1: # if there is more than 1 group...
-                if counts_above_threshold:  # for groups above the threshold...
-                    total_count = sum(count for _, count in counts_above_threshold) # total count of people
-                    
-                    # Construct the group details without specifying the number of people in each group
-                    group_details = [f"group {i + 1}" for i, _ in counts_above_threshold]  # Adjust index to start at 1
-                    # Modify the group details to use '&' for joining groups
-                    group_details_text = " & ".join(group_details)  # Combine the group details
-                    
-                    # Capitalize the event name by using title() for every word in the name
-                    event_name = f"{interest.title()} Event"  # .title() ensures proper capitalization of each word
-                    event_sentence = f"<b style='color: #4A90E2; text-align: center;'>{event_name}:</b> connecting {total_count} people from {group_details_text}"
-                    sentences.append(event_sentence)  # sentence with formatted event name
-    
-                    all_names = [] # names of people in each component with this interest
-                    for component, _ in counts_above_threshold: # for each component...
-                        names = df[(df['component'] == component) & (df['interests'].apply(lambda x: interest in x))]['0_degree'].tolist() # get names
-                        all_names.extend(names) # append to list
-                    # Add the @falcon.bentley.edu to each name
-                    all_names_with_domain = [f"{name}@falcon.bentley.edu" for name in all_names]
-                    
-                    # Now show the emails under the event description
-                    email_list = ", ".join(all_names_with_domain)
-                    sentences.append(f"<p style='text-align: center;'>Emails: {email_list}</p>")  # Append emails directly after the event description, centered
-
-                    sentences.append("")  # Empty line after each event
+        for _, row in interest_count_df.iterrows():
+            interest = row['interest']
+            groups = get_groups_above_threshold(row)
+            
+            if len(groups) > 1:
+                # Add event description
+                sentences.append(format_event_details(interest, groups))
+                
+                # Display emails
+                email_list = get_participant_emails(df, interest, groups)
+                st.markdown(f"Emails for {interest.capitalize()} event:")
+                st.text_area("", email_list, height=150)
+                sentences.append("")
         
         return int_count_df, sentences
    
