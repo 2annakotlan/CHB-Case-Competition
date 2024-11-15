@@ -4,6 +4,10 @@ from population_data_file import full_population_df
 from activities_recommender_alg_file import get_activities
 import pandas as pd
 
+from custom_css_file import get_custom_css_page
+import streamlit as st
+from activities_recommender_alg_file import get_activities
+
 def get_activities_recommender_page():
     get_custom_css_page(alignment="center", button_span="full")
     activities_df = get_activities(full_population_df, 'stest')
@@ -17,5 +21,12 @@ def get_activities_recommender_page():
     
     for _, row in activities_df.iterrows():
         count = row['count_degree_2']
-        message = f"Join **{row['activities']}** to meet {count} new people that share a mutual friend."
+        
+        # Adjust for singular/plural usage
+        people_word = "person" if count == 1 else "people"
+        
+        # Make activity name stand out with bold and bigger font
+        message = f"Join **<span style='font-size:20px'>{row['activities']}</span>** to meet {count} new {people_word} that share a mutual friend."
+        
+        # Display the message with left-aligned text
         st.markdown(f"<div style='text-align: left;'>{message}</div>", unsafe_allow_html=True)
