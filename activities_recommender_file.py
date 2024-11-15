@@ -16,39 +16,35 @@ def get_activities_recommender_page():
     # Filter out activities with 0 total people
     activities_df = activities_df[activities_df['total_people'] > 0]
     
+    # Filter for only 2nd-degree connections (count_degree_2)
+    degree_activities = activities_df[activities_df['count_degree_2'] > 0]
+
     # Initialize an empty set to keep track of already printed activities
     printed_activities = set()
 
-    # Degree levels to filter and sort by (2-degree, 3-degree, etc.)
-    degree_levels = ['count_degree_2', 'count_degree_3', 'count_degree_4', 'count_degree_5']
+    # If there are no activities with 2nd-degree connections, skip
+    if degree_activities.empty:
+        st.markdown("No activities found with 2nd-degree connections.")
+        return
 
-    for degree in degree_levels:
-        # Filter activities that have non-zero people in the current degree
-        degree_activities = activities_df[activities_df[degree] > 0]
-        
-        # Skip if no activities for this degree level
-        if degree_activities.empty:
+    # Print the header for 2nd-degree connections
+    st.markdown("### 2nd Degree Connections")
+
+    for _, row in degree_activities.iterrows():
+        # Skip activities that have already been printed
+        if row['activities'] in printed_activities:
             continue
 
-        # Print the header for the current degree level
-        st.markdown(f"### {degree.replace('count_degree_', '').replace('_', ' ').title()} Connections")
+        total_people = row['total_people']
 
-        for _, row in degree_activities.iterrows():
-            # Check if the activity was already printed in a previous degree section
-            if row['activities'] in printed_activities:
-                continue
+        # Determine the message based on the number of people
+        if total_people == 1:
+            message = f"Join <span style='font-size: 18px; font-weight: bold; color: #ff5733;'>{row['activities']}</span> to meet 1 new person that shares a mutual friend."
+        else:
+            message = f"Join <span style='font-size: 18px; font-weight: bold; color: #ff5733;'>{row['activities']}</span> to meet {total_people} new people that share a mutual friend."
 
-            total_people = row['total_people']
+        # Use Markdown with HTML for better styling
+        st.markdown(f"<div style='text-align: left;'>{message}</div>", unsafe_allow_html=True)
 
-            # Determine the message based on the number of people
-            if total_people == 1:
-                message = f"Join <span style='font-size: 18px; font-weight: bold; color: #ff5733;'>{row['activities']}</span> to meet 1 new person that shares a mutual friend."
-            else:
-                message = f"Join <span style='font-size: 18px; font-weight: bold; color: #ff5733;'>{row['activities']}</span> to meet {total_people} new people that share a mutual friend."
-
-            # Use Markdown with HTML for better styling
-            st.markdown(f"<div style='text-align: left;'>{message}</div>", unsafe_allow_html=True)
-
-            # Mark this activity as printed
-            printed_activities.add(row['activities'])
-
+        # Mark this activity as printed
+        printed_activities.add(row['activities'])
