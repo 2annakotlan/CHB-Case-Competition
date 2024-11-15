@@ -25,8 +25,11 @@ def get_activities_recommender_page():
         # Adjust for singular/plural usage
         people_word = "person" if count == 1 else "people"
         
-        # Make activity name stand out with bold and bigger font
-        message = f"Join **<span style='font-size:20px'>{row['activities']}</span>** to meet {count} new {people_word} that share a mutual friend."
+        # Make activity name bold and pink using inline HTML and CSS
+        activity_name = f"<span style='font-weight: bold; color: pink;'>{row['activities']}</span>"
+        
+        # Construct the message
+        message = f"Join {activity_name} to meet {count} new {people_word} that share a mutual friend."
         
         # Display the message with left-aligned text
         st.markdown(f"<div style='text-align: left;'>{message}</div>", unsafe_allow_html=True)
