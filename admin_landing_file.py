@@ -48,8 +48,16 @@ def get_admin_landing_page():
             if len(counts_above_threshold) > 1: # if there is more than 1 group...
                 if counts_above_threshold:  # for groups above the threshold...
                     total_count = sum(count for _, count in counts_above_threshold) # total count of people
-                    group_details = ", ".join(f"group {i} ({count} {'people' if count > 1 else 'person'})" for i, count in counts_above_threshold) # count of people per group
-                    sentences.append(f"{interest.capitalize()} event: connects {total_count} people from {group_details}") # sentence
+                    
+                    # Construct the group details
+                    group_details = []
+                    for i, count in counts_above_threshold:
+                        group_details.append(f"{count} people from group {i + 1}")  # Adjust index to start at 1
+                    group_details_text = " and ".join(group_details)  # Combine the group details
+                    
+                    # Modify the sentence format as per the new requirement
+                    event_sentence = f"<b style='color: #4A90E2;'>{interest.capitalize()} event:</b> event of {total_count} people connecting {group_details_text}"
+                    sentences.append(event_sentence)  # sentence with formatted event name
     
                     all_names = [] # names of people in each component with this interest
                     for component, _ in counts_above_threshold: # for each component...
@@ -57,7 +65,7 @@ def get_admin_landing_page():
                         all_names.extend(names) # append to list
                     sentences.append(f"  Emails: {', '.join(all_names)}")
                     sentences.append("")
-    
+
         return int_count_df, sentences
    
 
@@ -66,8 +74,7 @@ def get_admin_landing_page():
     
     # Display Suggestions
     st.markdown("<h3 style='text-align: left; color: #4A90E2;'>Event Recommendations</h3>", unsafe_allow_html=True)
-    st.text("\n".join(sentences))
-
+    st.markdown("<br>".join(sentences), unsafe_allow_html=True)  # Use st.markdown for rendering HTML
     
     # Optionally, add a button to go back to the login/signup page
     if st.button('Log out'):
