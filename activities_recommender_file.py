@@ -9,8 +9,6 @@ def get_activities_recommender_page():
     activities_df = get_activities(full_population_df, 'stest')
     
     # Filter and sort by 2nd-degree connections
-    activities_df['total_people'] = activities_df['count_degree_2']
-    activities_df = activities_df[activities_df['total_people'] > 0]
     activities_df = activities_df.sort_values(by='count_degree_2', ascending=False)
     
     # Display activities with the highest 2nd-degree connections first
