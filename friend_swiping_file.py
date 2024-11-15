@@ -15,10 +15,11 @@ def get_friend_swiping_page():
     # Title of the page
     st.title("Friend Swiping")
 
-    # Initialize a list to hold your matches
-    matches = []
+    # Initialize matches in session state if not already initialized
+    if "matches" not in st.session_state:
+        st.session_state.matches = []
 
-    # Create a session state variable to track the current index of profiles
+    # Initialize a session state variable to track the current index of profiles
     if "current_profile" not in st.session_state:
         st.session_state.current_profile = 0
 
@@ -78,17 +79,17 @@ def get_friend_swiping_page():
         if st.button(f"Swipe Right on {name}", key=f"right_{st.session_state.current_profile}"):
             # Register the right swipe and check if it's a match
             if liked_you:
-                matches.append(name)
+                st.session_state.matches.append(name)
                 st.write(f"**You swiped right on {name}. It's a match!**")
             else:
                 st.write(f"You swiped right on {name}. Waiting for them to like you back.")
             # Move to the next profile
             st.session_state.current_profile += 1
 
-    # Display the list of matches (with email suffix)
+    # Display the accumulated list of matches (with email suffix)
     st.subheader("Your Matches:")
-    if matches:
-        for match in matches:
+    if st.session_state.matches:
+        for match in st.session_state.matches:
             email_match = f"{match}@falcon.bentley.edu"
             st.markdown(f"- {email_match}")
     else:
