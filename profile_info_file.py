@@ -8,12 +8,10 @@ def get_profile_info_page():
     get_custom_css_page(alignment="left", button_span="auto") 
 
     # Format user's email prefix for the profile title
-    email_prefix = st.session_state.user_email.split('@')[0]
-    formatted_prefix = f"{email_prefix[0].upper()}. {email_prefix[1:].capitalize()}"
-    st.title(f"{formatted_prefix}'s Profile") 
+    st.title("Liam's Profile")
     
     # Collect user's 1st-degree connections
-    selected_connections = st.text_input("Enter your friends (e.g., AKotlan, RMiller, SLogan, etc.)", value="e1, e3, e7, e13, e21, e44", disabled=True)
+    selected_connections = st.text_input("Enter your friends", value="Kelley, Noah, Jack", disabled=True)
 
     # Predefined options for interests and activities from imported data files
     interest_options = interests
