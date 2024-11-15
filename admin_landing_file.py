@@ -79,7 +79,8 @@ def get_admin_landing_page():
                 else:
                     email_text = "<p>No participants found for this event.</p>"
 
-                sentences.append(f"{email_text}")  # Removed the "Emails for ..." text and just added emails
+                # Make sure there's no extra indentation by controlling the <p> or <ul> tags
+                sentences.append(f"<div style='text-align: left;'>{email_text}</div>")  # Left-aligned emails
 
         return int_count_df, sentences
 
