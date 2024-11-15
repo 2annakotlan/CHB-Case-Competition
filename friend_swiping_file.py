@@ -18,8 +18,16 @@ def get_friend_swiping_page():
     # Initialize a list to hold your matches
     matches = []
 
-    # Display each profile in population_df
-    for person_index, person in population_df.iterrows():
+    # Create a list of all profiles that need to be swiped through
+    profiles = population_df.iterrows()
+
+    # Create an iterator to go through the profiles
+    profile_iterator = iter(profiles)
+
+    try:
+        # Show the next profile
+        person_index, person = next(profile_iterator)
+
         # Extract person details
         name = person["0_degree"]
         interests = person["interests"]
@@ -75,6 +83,18 @@ def get_friend_swiping_page():
                     st.write(f"**You swiped right on {name}. It's a match!**")
                 else:
                     st.write(f"You swiped right on {name}. Waiting for them to like you back.")
+
+        # Button to go to the next profile
+        if st.button("Next Profile"):
+            # Check if there's a next profile
+            try:
+                person_index, person = next(profile_iterator)
+
+            except StopIteration:
+                st.write("No more profiles to swipe.")
+            
+    except StopIteration:
+        st.write("No more profiles to swipe.")
 
     # Display the list of matches (with email suffix)
     st.subheader("Your Matches:")
