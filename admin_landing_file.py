@@ -15,14 +15,14 @@ def get_admin_landing_page():
     
     st.markdown("<h3 style='text-align: left; color: #4A90E2;'>Connectivity Score</h3>", unsafe_allow_html=True)
     st.markdown(f"""
-    <div style="font-size:12px; color:black;">
+    <div style="font-size:20px; color:black;">
         Isolated Groups: {comp_num}
     </div>
     """, unsafe_allow_html=True)
     
     # Display average_last_degree with small black text
     st.markdown(f"""
-    <div style="font-size:12px; color:black;">
+    <div style="font-size:20px; color:black;">
         Average Degree's Away: {average_last_degree}
     </div>
     """, unsafe_allow_html=True)
