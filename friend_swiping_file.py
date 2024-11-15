@@ -16,12 +16,13 @@ def get_friend_swiping_page():
     # Title of the page
     st.title("Friend Swiping")
 
-    # Initialize session state for swipes if not already done
+    # Initialize session states for swipes if not already done
     if "swiped_right" not in st.session_state:
         st.session_state.swiped_right = []
-
     if "shown_people" not in st.session_state:
         st.session_state.shown_people = []
+    if "liked_you" not in st.session_state:
+        st.session_state.liked_you = []
 
     # Filter out the row where 0_degree is "Liam" and already shown people
     filtered_population_df = population_df[population_df["0_degree"] != "Liam"]
@@ -40,7 +41,7 @@ def get_friend_swiping_page():
         # Display match message if the person has been swiped right
         if name in st.session_state.swiped_right:
             st.write(f"**You swiped right on {name}. It's a match!**")
-
+        
         # Format interests as a comma-separated list and sort for readability
         formatted_interests = ", ".join(sorted(interests))
 
@@ -83,6 +84,11 @@ def get_friend_swiping_page():
                 if name not in st.session_state.swiped_right:
                     st.session_state.swiped_right.append(name)
                     st.write(f"**You swiped right on {name}. It's a match!**")
+                
+                # Simulate that some people might "like" you back by randomly adding to liked_you
+                if random.random() < 0.5:  # 50% chance they "like" you
+                    st.session_state.liked_you.append(name)
+                
                 st.session_state.shown_people.append(person_index)  # Mark as shown
 
         # Display the list of matches (with email suffix)
@@ -90,7 +96,8 @@ def get_friend_swiping_page():
         if st.session_state.swiped_right:
             for match in st.session_state.swiped_right:
                 email_match = f"{match}@falcon.bentley.edu"
-                st.markdown(f"- {email_match}")
+                liked_status = " (Liked you!)" if match in st.session_state.liked_you else ""
+                st.markdown(f"- {email_match}{liked_status}")
         else:
             st.write("No matches yet.")
 
