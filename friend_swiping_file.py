@@ -1,6 +1,6 @@
 # PACKAGES
-import streamlit as st
-import pandas as pd
+#import streamlit as st
+#import pandas as pd
 #from custom_css_file import get_custom_css_page
 #from population_data_file import population_df
 
@@ -13,8 +13,8 @@ def get_friend_swiping_page():
     #get_custom_css_page()
 
     # Title of the page
-    st.title("Friend Swiping")
+    #st.title("Friend Swiping")
     
     # Back to dashboard button
-    if st.button('Back to Dashboard'):
-        st.session_state.page = "student_landing_page"
+    #if st.button('Back to Dashboard'):
+        #st.session_state.page = "student_landing_page"
