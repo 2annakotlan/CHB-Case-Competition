@@ -67,14 +67,14 @@ def get_admin_landing_page():
             if len(groups) > 1:
                 # Add event description with capitalized event name
                 event_detail = format_event_details(interest, groups)
-                sentences.append(event_detail)
+                sentences.append(f"<div style='text-align: left;'>{event_detail}</div>")
                 
                 # Format and display emails with bullets
                 email_list = get_participant_emails(df, interest, groups)
                 if email_list:
                     email_text = "<ul>"  # Start unordered list
                     for email in email_list:
-                        email_text += f"<li>{email}</li>"  # Add email as a list item
+                        email_text += f"<li>{email}</li>"  # Add each email as a list item
                     email_text += "</ul>"  # End unordered list
                 else:
                     email_text = "<p>No participants found for this event.</p>"
