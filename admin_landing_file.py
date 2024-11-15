@@ -67,12 +67,12 @@ def get_admin_landing_page():
             if len(groups) > 1:
                 # Add event description with capitalized event name
                 event_detail = format_event_details(interest, groups)
-                sentences.append(f"<div style='text-align: left;'>{event_detail}</div>")
+                sentences.append(f"<div style='text-align: left; margin: 0;'>{event_detail}</div>")
                 
                 # Format and display emails with bullets
                 email_list = get_participant_emails(df, interest, groups)
                 if email_list:
-                    email_text = "<ul>"  # Start unordered list
+                    email_text = "<ul style='margin: 0; padding-left: 20px;'>"  # Start unordered list with no margin
                     for email in email_list:
                         email_text += f"<li>{email}</li>"  # Add each email as a list item
                     email_text += "</ul>"  # End unordered list
@@ -80,8 +80,8 @@ def get_admin_landing_page():
                     email_text = "<p>No participants found for this event.</p>"
 
                 # Add emails and two empty lines after each event
-                sentences.append(f"<div style='text-align: left;'>{email_text}</div>")  # Left-aligned emails
-                sentences.append("<br><br>")  # Add two empty lines
+                sentences.append(f"<div style='text-align: left; margin: 0;'>{email_text}</div>")  # Left-aligned emails
+                sentences.append("<br><br>")  # Add two empty lines after each event
 
         return int_count_df, sentences
 
