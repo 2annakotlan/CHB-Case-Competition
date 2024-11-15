@@ -9,6 +9,7 @@ def get_admin_landing_page():
     
     st.title("Admin Dashboard")
     st.write("Welcome to the admin panel!")
+    
     network_map(population_df)
 
     import networkx as nx
