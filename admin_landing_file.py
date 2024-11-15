@@ -67,10 +67,10 @@ def get_admin_landing_page():
                     
                     # Now show the emails under the event description
                     email_list = ", ".join(all_names_with_domain)
-                    st.markdown(f"Emails for {interest.capitalize()} event:")
-                    st.text_area("", email_list, height=150)  # Emails only, no title in the text area
-                    sentences.append("")
+                    sentences.append(f"Emails: {email_list}")  # Append emails directly after the event description
 
+                    sentences.append("")  # Empty line after each event
+        
         return int_count_df, sentences
    
 
