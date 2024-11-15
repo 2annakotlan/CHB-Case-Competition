@@ -72,10 +72,9 @@ def get_admin_landing_page():
                 # Format and display emails
                 email_list = get_participant_emails(df, interest, groups)
                 if email_list:
-                    email_text = "<ul>"  # Using an unordered list for emails
+                    email_text = ""  # Clear initial email text
                     for email in email_list:
-                        email_text += f"<li>{email}</li>"
-                    email_text += "</ul>"
+                        email_text += f"{email}<br>"  # Add a line break after each email
                 else:
                     email_text = "<p>No participants found for this event.</p>"
 
