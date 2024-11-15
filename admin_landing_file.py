@@ -63,7 +63,7 @@ def get_admin_landing_page():
 
                 all_names = []  # names of people in each component with this interest
                 for component, _ in counts_above_threshold:  # for each component...
-                    names = df[(df['component'] == component) & (df['interests'].apply(lambda x: interest in x))]['0_degree'].tolist()  # get names
+                    names = full_population_df[(full_population_df['component'] == component) & (full_population_df['interests'].apply(lambda x: interest in x))]['0_degree'].tolist()  # get names
                     all_names.extend(names)  # append to list
                 sentences.append(f"  Emails: {', '.join(all_names)}")
                 sentences.append("")
