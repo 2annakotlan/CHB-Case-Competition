@@ -14,9 +14,6 @@ def get_activities_recommender_page():
     # Subheading with nice text
     st.write("Activities to Meet Mutual Friends")
 
-    # Add some space between the list and the DataFrame
-    st.markdown("<br>", unsafe_allow_html=True)
-
     st.markdown("""
     <style>
         .streamlit-table {
@@ -49,8 +46,8 @@ def get_activities_recommender_page():
         people_word = "person" if count == 1 else "people"
         share_word = "shares" if count == 1 else "share"
         
-        # Make activity name bold, blue, and larger font size
-        activity_name = f"<span style='font-weight: bold; color: #0000FF; font-size: 22px;'>{row['activities']}</span>"
+        # Make activity name bold, the new color (#4A90E2), and larger font size
+        activity_name = f"<span style='font-weight: bold; color: #4A90E2; font-size: 22px;'>{row['activities']}</span>"
         
         # Construct the message
         message = f"Join {activity_name} to meet {count} new {people_word} that {share_word} a mutual friend."
