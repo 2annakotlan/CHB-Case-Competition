@@ -7,8 +7,15 @@ import pandas as pd
 def get_activities_recommender_page():
     get_custom_css_page(alignment="center", button_span="full")
     activities_df = get_activities(full_population_df, 'stest')
-    st.markdown("Activities Recommendation")
-    st.write("Activities to Meet Mutual Friends")
+    
+    # Big title with custom style
+    st.markdown("<h1 style='text-align: center; font-size: 36px; color: #FF1493;'>Activities Recommendation</h1>", unsafe_allow_html=True)
+    
+    # Subheading with nice text
+    st.markdown("<h3 style='text-align: center;'>Activities to Meet Mutual Friends</h3>", unsafe_allow_html=True)
+
+    # Add some space between the list and the DataFrame
+    st.markdown("<br>", unsafe_allow_html=True)
 
     st.markdown("""
     <style>
@@ -35,7 +42,6 @@ def get_activities_recommender_page():
     activities_df = activities_df.sort_values(by='count_degree_2', ascending=False)
     
     # Display activities with the highest 2nd-degree connections first
-    
     for _, row in activities_df.iterrows():
         count = row['count_degree_2']
         
@@ -50,6 +56,9 @@ def get_activities_recommender_page():
         
         # Display the message with left-aligned text
         st.markdown(f"<div style='text-align: left;'>{message}</div>", unsafe_allow_html=True)
+
+    # Add some space before the DataFrame
+    st.markdown("<br>", unsafe_allow_html=True)
 
     # Display DataFrame with styling
     st.dataframe(activities_df.style.set_table_attributes('class="streamlit-table"'))
