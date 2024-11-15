@@ -112,6 +112,7 @@ data = {
 }
 
 population_df = pd.DataFrame(data)
+population_df['match'] = np.random.choice([0, 1], size=len(population_df))
 
 # FULL DATA
 import networkx as nx
