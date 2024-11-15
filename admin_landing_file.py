@@ -1,6 +1,6 @@
 import streamlit as st
 from custom_css_file import get_custom_css_page
-from algorithm import network_map()
+from algorithm import network_map
 
 # Function to handle the admin landing page view
 def get_admin_landing_page():
