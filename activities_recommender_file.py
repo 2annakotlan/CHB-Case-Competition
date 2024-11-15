@@ -26,9 +26,9 @@ def get_activities_recommender_page():
 
         # Determine the message based on the number of people
         if total_people == 1:
-            message = f"Join {row['activities']} to meet 1 person in your social network."
+            message = f"Join **{row['activities']}** to meet 1 new person in your social network."
         else:
-            message = f"Join {row['activities']} to meet {total_people} people in your social network."
+            message = f"Join **{row['activities']}** to meet {total_people} new people in your social network."
 
         # Use Markdown to left-center the message
         st.markdown(f"<div style='text-align: left;'>{message}</div>", unsafe_allow_html=True)
