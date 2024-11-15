@@ -18,15 +18,21 @@ def get_admin_landing_page():
     <div style="font-size:20px; color:black;">
         Isolated Groups: {comp_num}
     </div>
+    <div style="font-size:20px; color:black;">
+        (goal of 1)
+    </div>
     """, unsafe_allow_html=True)
     
-    # Display average_last_degree with small black text
+    # Display average_last_degree with larger black text
     st.markdown(f"""
     <div style="font-size:20px; color:black;">
         Average Degree's Away: {average_last_degree}
     </div>
+    <div style="font-size:20px; color:black;">
+        (goal of 1)
+    </div>
     """, unsafe_allow_html=True)
-
+ 
     st.markdown("<br>", unsafe_allow_html=True)
     
     st.markdown("<h3 style='text-align: left; color: #4A90E2;'>Network Map</h3>", unsafe_allow_html=True)
