@@ -11,8 +11,6 @@ def get_admin_landing_page():
     st.markdown("<h3 style='text-align: center; color: #4A90E2;'>Network Map</h3>", unsafe_allow_html=True)
     network_map(population_df)
 
-    sdfsd
-
     import networkx as nx
     import pandas as pd
     from itertools import combinations
