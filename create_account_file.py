@@ -9,12 +9,12 @@ def get_create_account_page():
     st.write("Enter your student and password to login")
     
     # Disabled email and password fields (no user input allowed)
-    email = st.text_input("Email", value="stest@falcon.bentley.edu", disabled=True)
+    email = st.text_input("Email", value="liam@falcon.bentley.edu", disabled=True)
     password = st.text_input("Password", type="password", value="123", disabled=True)
     
     # Defining Variables
     email_base = email.split('@')[0] 
-    valid_not_existing_email = "stest@falcon.bentley.edu"  # Corrected to a string
+    valid_not_existing_email = "liam@falcon.bentley.edu"  # Corrected to a string
 
     # Initialize checkbox for terms acceptance only for new students
     agree_terms = st.checkbox("I agree to the Terms and Conditions") if valid_not_existing_email else None
