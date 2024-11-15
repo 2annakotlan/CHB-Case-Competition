@@ -64,12 +64,12 @@ def get_admin_landing_page():
                         all_names.extend(names) # append to list
                     # Add the @falcon.bentley.edu to each name
                     all_names_with_domain = [f"{name}@falcon.bentley.edu" for name in all_names]
-                    sentences.append(f"  Emails: {', '.join(all_names_with_domain)}")
                     
-                    # Add the emails to a text area for easy copying
+                    # Add a text area below each event for easy email copying
                     email_list = ", ".join(all_names_with_domain)
-                    st.text_area("Copy the emails below:", email_list, height=150)
-
+                    st.markdown(f"### {interest.capitalize()} event:")
+                    st.markdown(f"Connecting {total_count} people from {group_details_text}.")
+                    st.text_area(f"Copy the emails below for {interest.capitalize()} event:", email_list, height=150)
                     sentences.append("")
 
         return int_count_df, sentences
