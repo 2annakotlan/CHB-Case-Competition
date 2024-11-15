@@ -12,23 +12,12 @@ def get_activities_recommender_page():
     for _, row in activities_df.iterrows():
         degree_columns = [col for col in row.index if col.startswith('count_degree')]
         total_people = row[degree_columns].sum()
-        message = f"{total_people} people in your social circle by joining {row['activities']}: "
-        degree_message_parts = []
-        
-        for degree_col in degree_columns:
-            count = row[degree_col]
-            degree = degree_col.split('_')[-1]  # Extract the degree number
-            
-            if count > 0:
-                if count == 1:
-                    degree_message_parts.append(f"1 person {degree} degree away")
-                else:
-                    degree_message_parts.append(f"{count} people {degree} degrees away")
-        
-        if len(degree_message_parts) > 1:
-            message += ', '.join(degree_message_parts[:-1]) + ', and ' + degree_message_parts[-1]
+
+        # Determine the message based on the number of people
+        if total_people == 1:
+            message = f"Join {row['activities']} to meet 1 person in your social network."
         else:
-            message += degree_message_parts[0]  # If only one part, just add it
-        
-        # Use Markdown for centering the message
+            message = f"Join {row['activities']} to meet {total_people} people in your social network."
+
+        # Use Markdown to center the message
         st.markdown(f"<div style='text-align: center;'>{message}</div>", unsafe_allow_html=True)
