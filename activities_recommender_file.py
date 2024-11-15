@@ -8,7 +8,6 @@ def get_activities_recommender_page():
     get_custom_css_page(alignment="center", button_span="full")
     activities_df = get_activities(full_population_df, 'stest')
     st.dataframe(activities_df)
-    generate_activities_messages(activities_df)
 
     for _, row in activities_df.iterrows():
         degree_columns = [col for col in row.index if col.startswith('count_degree')]
