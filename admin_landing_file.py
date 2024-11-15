@@ -36,42 +36,57 @@ def get_admin_landing_page():
         # Round the values to the nearest whole number
         int_count_df.iloc[:, 1:] = int_count_df.iloc[:, 1:].round(0)
         
-        # Convert the rounded values to integers
-        int_count_df.iloc[:, 1:] = int_count_df.iloc[:, 1:].astype(int)
+        # Display the DataFrame after rounding
+        st.write("After rounding:")
+        st.write(int_count_df)
 
-        return int_count_df
+        # Cast all the numeric columns to integers
+        int_count_df.iloc[:, 1:] = int_count_df.iloc[:, 1:].astype(int)
+        
+        # Display the DataFrame after converting to integers
+        st.write("After converting to integers:")
+        st.write(int_count_df)
+
+        # Ensure all values are indeed integers
+        if not all(int_count_df.iloc[:, 1:].applymap(lambda x: isinstance(x, int)).all()):
+            st.write("Error: Some values are not integers after conversion!")
+        else:
+            st.write("All values are integers!")
+
+        # Interpretation
+        sentences = []
+        for _, row in int_count_df.iterrows():  # for each interest...
+            interest = row['interest']  # get the interest
+            counts = [int(row[col]) for col in row.index[1:]]  # count of people per component
+            counts_above_threshold = [(i, count) for i, count in enumerate(counts) if count >= 2] # count of people per component filtered by threshold
     
-    # Get the common interest table and process it
-    int_count_df = get_common_interests_table(full_population_df)
+            if len(counts_above_threshold) > 1: # if there is more than 1 group...
+                if counts_above_threshold:  # for groups above the threshold...
+                    total_count = sum(count for _, count in counts_above_threshold) # total count of people
+                    group_details = ", ".join(f"group {i} ({count} {'people' if count > 1 else 'person'})" for i, count in counts_above_threshold) # count of people per group
+                    sentences.append(f"{interest.capitalize()} event: connects {total_count} people from {group_details}") # sentence
     
-    # Display the final table
+                    all_names = [] # names of people in each component with this interest
+                    for component, _ in counts_above_threshold: # for each component...
+                        names = df[(df['component'] == component) & (df['interests'].apply(lambda x: interest in x))]['0_degree'].tolist() # get names
+                        all_names.extend(names) # append to list
+                    sentences.append(f"  Emails: {', '.join(all_names)}")
+                    sentences.append("")
+    
+        return int_count_df, sentences
+   
+
+    int_count_df, sentences = get_common_interests_table(full_population_df)
+    
+    # Display DataFrame in Streamlit
     st.markdown("<h3 style='text-align: center; color: #4A90E2;'>Students' Interests per Group</h3>", unsafe_allow_html=True)
     st.table(int_count_df)
     
-    # Event recommendations interpretation
-    sentences = []
-    for _, row in int_count_df.iterrows():  # for each interest...
-        interest = row['interest']  # get the interest
-        counts = [int(row[col]) for col in row.index[1:]]  # count of people per component
-        counts_above_threshold = [(i, count) for i, count in enumerate(counts) if count >= 2] # count of people per component filtered by threshold
-
-        if len(counts_above_threshold) > 1:  # if there is more than 1 group...
-            if counts_above_threshold:  # for groups above the threshold...
-                total_count = sum(count for _, count in counts_above_threshold)  # total count of people
-                group_details = ", ".join(f"group {i} ({count} {'people' if count > 1 else 'person'})" for i, count in counts_above_threshold)  # count of people per group
-                sentences.append(f"{interest.capitalize()} event: connects {total_count} people from {group_details}")  # sentence
-
-                all_names = []  # names of people in each component with this interest
-                for component, _ in counts_above_threshold:  # for each component...
-                    names = full_population_df[(full_population_df['component'] == component) & (full_population_df['interests'].apply(lambda x: interest in x))]['0_degree'].tolist()  # get names
-                    all_names.extend(names)  # append to list
-                sentences.append(f"  Emails: {', '.join(all_names)}")
-                sentences.append("")
-
-    # Display Event Recommendations
+    # Display Suggestions
     st.markdown("<h3 style='text-align: left; color: #4A90E2;'>Event Recommendations</h3>", unsafe_allow_html=True)
     st.text("\n".join(sentences))
 
+    
     # Optionally, add a button to go back to the login/signup page
     if st.button('Log out'):
         st.session_state.page = "login_signup_page"
