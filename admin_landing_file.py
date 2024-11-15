@@ -54,8 +54,9 @@ def get_admin_landing_page():
                     # Modify the group details to use '&' for joining groups
                     group_details_text = " & ".join(group_details)  # Combine the group details
                     
-                    # Format the event description and title
-                    event_sentence = f"<b style='color: #4A90E2;'>{interest.capitalize()} Event:</b> connecting {total_count} people from {group_details_text}"
+                    # Capitalize the event name by using title() for every word in the name
+                    event_name = f"{interest.capitalize()} Event"
+                    event_sentence = f"<b style='color: #4A90E2;'>{event_name}:</b> connecting {total_count} people from {group_details_text}"
                     sentences.append(event_sentence)  # sentence with formatted event name
     
                     all_names = [] # names of people in each component with this interest
