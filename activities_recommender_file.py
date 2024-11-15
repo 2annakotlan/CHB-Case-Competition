@@ -55,6 +55,12 @@ def get_activities_recommender_page():
         # Display the message with left-aligned text
         st.markdown(f"<div style='text-align: left;'>{message}</div>", unsafe_allow_html=True)
 
+    # Add an empty line before the DataFrame
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # Display the title for mutual friends' connections in the new color
+    st.markdown("<h3 style='text-align: left; color: #4A90E2;'>Your Mutual Friends' Connections</h3>", unsafe_allow_html=True)
+
     # Add some space before the DataFrame
     st.markdown("<br>", unsafe_allow_html=True)
 
