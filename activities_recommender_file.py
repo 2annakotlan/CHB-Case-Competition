@@ -63,3 +63,7 @@ def get_activities_recommender_page():
 
     # Display DataFrame with styling
     st.dataframe(activities_df.style.set_table_attributes('class="streamlit-table"'))
+
+    back_clicked = st.button("Back")
+    if back_clicked:
+        st.session_state.page = "login_signup_page"
