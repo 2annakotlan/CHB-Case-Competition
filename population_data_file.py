@@ -113,9 +113,7 @@ data = {
 }
 
 population_df = pd.DataFrame(data)
-population_df['match'] = np.zeros(len(population_df))  # Start with all 0's
-population_df.loc[:19, 'match'] = 1  # Set the first 20 values to 1
-population_df.loc[-10:, 'match'] = 0  # Set the last 10 values to 0
+population_df['match'] = np.ones(len(population_df))
 
 # FULL DATA
 import networkx as nx
