@@ -9,6 +9,7 @@ def get_admin_landing_page():
     
     st.title("Admin Dashboard")
     st.markdown("<h3 style='text-align: center; color: #4A90E2;'>Network Map</h3>", unsafe_allow_html=True)
+    st.write("NO")
     network_map(population_df)
 
     import networkx as nx
