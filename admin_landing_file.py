@@ -11,6 +11,7 @@ def get_admin_landing_page():
     st.write("Welcome to the admin panel!")
     
     network_map(population_df)
+    st.write("NO")
 
     import networkx as nx
     import pandas as pd
