@@ -5,8 +5,8 @@ from population_data_file import population_df
 def get_create_account_page():
     get_custom_css_page(alignment="left", button_span="full")
 
-    st.title("Create Your Account")
-    st.write("Enter your Bentley University email and password to sign up")
+    st.title("Student Login")
+    st.write("Enter your student and password to login")
     
     # Disabled email and password fields (no user input allowed)
     email = st.text_input("Email", value="stest@falcon.bentley.edu", disabled=True)
