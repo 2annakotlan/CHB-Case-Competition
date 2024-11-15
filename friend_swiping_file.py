@@ -82,18 +82,27 @@ def get_friend_swiping_page():
         
         with col2:
             if st.button("Swipe Right", key=f"right_{person_index}"):
-                if name not in st.session_state.swiped_right:
-                    st.session_state.swiped_right.append(name)
-                    st.write(f"**You swiped right on {name}. It's a match!**" if liked_you else f"**You swiped right on {name}.**")
+                # Register the right swipe
+                st.session_state.swiped_right.append(name)
                 st.session_state.shown_people.append(person_index)  # Mark as shown
+
+                # Check if it's a mutual match (if they liked you and you swiped right)
+                if liked_you:
+                    st.write(f"**You swiped right on {name}. It's a mutual match!**")
+                else:
+                    st.write(f"You swiped right on {name}. Waiting for them to like you back.")
 
         # Display the list of matches (with email suffix)
         st.subheader("Your Matches:")
         if st.session_state.swiped_right:
             for match in st.session_state.swiped_right:
                 email_match = f"{match}@falcon.bentley.edu"
-                match_status = " (Liked you!)" if population_df.loc[population_df["0_degree"] == match, "match"].values[0] == 1 else ""
-                st.markdown(f"- {email_match}{match_status}")
+                
+                # Check if it's a mutual match
+                is_mutual = population_df.loc[population_df["0_degree"] == match, "match"].values[0] == 1
+                mutual_text = " (Liked you!)" if is_mutual else ""
+                
+                st.markdown(f"- {email_match}{mutual_text}")
         else:
             st.write("No matches yet.")
 
