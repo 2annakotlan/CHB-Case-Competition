@@ -67,9 +67,8 @@ def get_admin_landing_page():
                     
                     # Add a text area below each event for easy email copying
                     email_list = ", ".join(all_names_with_domain)
-                    st.markdown(f"### {interest.capitalize()} event:")
-                    st.markdown(f"Connecting {total_count} people from {group_details_text}.")
-                    st.text_area(f"Copy the emails below for {interest.capitalize()} event:", email_list, height=150)
+                    st.markdown(f"### Copy the emails below for {interest.capitalize()} event:")
+                    st.text_area(f"Emails for {interest.capitalize()} event:", email_list, height=150)
                     sentences.append("")
 
         return int_count_df, sentences
