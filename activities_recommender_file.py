@@ -8,7 +8,7 @@ def get_activities_recommender_page():
     get_custom_css_page(alignment="center", button_span="full")
     
     # Get the activities DataFrame from the algorithm
-    activities_df = get_activities(full_population_df, 'stest')
+    activities_df = get_activities(full_population_df, 'Liam')
 
     # Debug: Check columns in the activities DataFrame
     st.write(activities_df.columns)  # This will print the column names in the activities_df DataFrame
