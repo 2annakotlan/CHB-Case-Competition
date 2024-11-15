@@ -20,20 +20,20 @@ def get_activities_recommender_page():
     degree_activities = activities_df[activities_df['count_degree_2'] > 0]
 
     # Sort activities by count_degree_2 in descending order
-    degree_activities = degree_activities.sort_values(by='count_degree_2', ascending=False)
+    degree_activities_sorted = degree_activities.sort_values(by='count_degree_2', ascending=False)
 
     # Initialize an empty set to keep track of already printed activities
     printed_activities = set()
 
     # If there are no activities with 2nd-degree connections, skip
-    if degree_activities.empty:
+    if degree_activities_sorted.empty:
         st.markdown("No activities found with 2nd-degree connections.")
         return
 
     # Print the header for 2nd-degree connections
     st.markdown("### 2nd Degree Connections")
 
-    for _, row in degree_activities.iterrows():
+    for _, row in degree_activities_sorted.iterrows():
         # Skip activities that have already been printed
         if row['activities'] in printed_activities:
             continue
