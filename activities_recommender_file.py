@@ -14,6 +14,8 @@ def get_activities_recommender_page():
     # Subheading with nice text
     st.write("Activities to Meet Mutual Friends")
 
+    st.markdown("<h3 style='text-align: left; color: #4A90E2;'>Activities of 2nd Degree Connections</h3>", unsafe_allow_html=True)
+
     st.markdown("""
     <style>
         .streamlit-table {
