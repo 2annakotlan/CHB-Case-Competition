@@ -8,10 +8,8 @@ def get_admin_landing_page():
     get_custom_css_page(alignment="center", button_span="auto")
     
     st.title("Admin Dashboard")
-    st.write("Welcome to the admin panel!")
-    
+    st.markdown("<h1 style='text-align: center; color: blue;'>Network Map</h1>", unsafe_allow_html=True)
     network_map(population_df)
-    st.write("NO")
 
     import networkx as nx
     import pandas as pd
