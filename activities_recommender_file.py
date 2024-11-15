@@ -28,7 +28,6 @@ def get_activities_recommender_page():
     activities_df = activities_df.sort_values(by=['degree_priority', 'total_people'], ascending=[True, False])
 
     st.dataframe(activities_df)
-    generate_activities_messages(activities_df)
 
     for _, row in activities_df.iterrows():
         total_people = row['total_people']
