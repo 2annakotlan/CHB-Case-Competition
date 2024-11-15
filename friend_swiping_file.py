@@ -20,10 +20,13 @@ def get_friend_swiping_page():
     if "swiped_right" not in st.session_state:
         st.session_state.swiped_right = []
 
-    # Get a random person from the population_df
-    if len(population_df) > 0:
-        person_index = random.choice(population_df.index)
-        person = population_df.loc[person_index]
+    # Filter out the row where 0_degree is "Liam"
+    filtered_population_df = population_df[population_df["0_degree"] != "Liam"]
+
+    # Get a random person from the filtered population_df
+    if len(filtered_population_df) > 0:
+        person_index = random.choice(filtered_population_df.index)
+        person = filtered_population_df.loc[person_index]
         
         # Person details
         name = person["0_degree"]
@@ -94,4 +97,3 @@ def get_friend_swiping_page():
     # DONT REMOVE BELOW
     if st.button('Back to Dashboard'):
         st.session_state.page = "student_landing_page"
-
