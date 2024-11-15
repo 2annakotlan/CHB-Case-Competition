@@ -79,15 +79,14 @@ def get_admin_landing_page():
                 else:
                     email_text = "<p>No participants found for this event.</p>"
 
-                # Add emails and two empty lines after each event
-                sentences.append(f"<div style='text-align: left; margin: 0;'>{email_text}</div>")  # Left-aligned emails
-                sentences.append("<br><br>")  # Add two empty lines after each event
+                # Add emails without extra empty lines
+                sentences.append(f"<div style='text-align: left; margin: 0;'>{email_text}</div>")
 
         return int_count_df, sentences
 
     int_count_df, sentences = get_common_interests_table(full_population_df)
 
-    # Display Suggestions with proper formatting
+    # Display Suggestions with proper formatting (no empty lines)
     st.markdown("<h3 style='text-align: left; color: #4A90E2;'>Event Recommendations</h3>", unsafe_allow_html=True)
     for sentence in sentences:
         st.markdown(sentence, unsafe_allow_html=True)  # Render each sentence with HTML formatting
