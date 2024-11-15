@@ -1,6 +1,7 @@
 import streamlit as st
 from custom_css_file import get_custom_css_page
 from algorithm import network_map
+from population_data_file import population_df
 
 # Function to handle the admin landing page view
 def get_admin_landing_page():
@@ -8,7 +9,7 @@ def get_admin_landing_page():
     
     st.title("Admin Dashboard")
     st.write("Welcome to the admin panel!")
-    st.write("Here you can manage users, monitor activity, etc.")
+    network_map(population_df)
     
     # Optionally, add a button to go back to the login/signup page
     if st.button('Log out'):
