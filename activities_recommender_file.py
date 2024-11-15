@@ -25,8 +25,8 @@ def get_activities_recommender_page():
         # Adjust for singular/plural usage
         people_word = "person" if count == 1 else "people"
         
-        # Make activity name bold and pink using inline HTML and CSS
-        activity_name = f"<span style='font-weight: bold; color: pink;'>{row['activities']}</span>"
+        # Make activity name bold, pink, and larger font size
+        activity_name = f"<span style='font-weight: bold; color: #FF1493; font-size: 22px;'>{row['activities']}</span>"
         
         # Construct the message
         message = f"Join {activity_name} to meet {count} new {people_word} that share a mutual friend."
