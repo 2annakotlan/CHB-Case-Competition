@@ -73,7 +73,6 @@ def get_admin_landing_page():
 
         return int_count_df, sentences
    
-
     int_count_df, sentences = get_common_interests_table(full_population_df)
 
     
