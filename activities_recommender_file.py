@@ -13,6 +13,9 @@ def get_activities_recommender_page():
         lambda row: sum(row[col] for col in row.index if col.startswith('count_degree') and col != 'count_degree_1'), axis=1
     )
     
+    # Filter out activities with 0 total people
+    activities_df = activities_df[activities_df['total_people'] > 0]
+    
     # Sort activities by total_people in descending order
     activities_df = activities_df.sort_values(by='total_people', ascending=False)
     
@@ -27,5 +30,5 @@ def get_activities_recommender_page():
         else:
             message = f"Join {row['activities']} to meet {total_people} people in your social network."
 
-        # Use Markdown to center the message
-        st.markdown(f"<div style='text-align: center;'>{message}</div>", unsafe_allow_html=True)
+        # Use Markdown to left-center the message
+        st.markdown(f"<div style='text-align: left;'>{message}</div>", unsafe_allow_html=True)
