@@ -36,7 +36,7 @@ def get_friend_swiping_page():
         # Format interests nicely as a comma-separated list
         formatted_interests = ", ".join(sorted(interests))  # Sort for better readability
 
-        # Add CSS for centering the image
+        # Add CSS for centering the image and the profile name
         st.markdown("""
             <style>
                 .profile-image {
@@ -45,14 +45,23 @@ def get_friend_swiping_page():
                     margin-right: auto;
                     width: 300px;
                 }
+                .profile-name {
+                    display: block;
+                    text-align: center;
+                    font-size: 24px;
+                    font-weight: bold;
+                    margin-top: 10px;
+                }
             </style>
         """, unsafe_allow_html=True)
 
-        # Display the profile info and image (using the CSS class to center the image)
+        # Display the profile image
         st.markdown(f'<img src="{image_url}" class="profile-image">', unsafe_allow_html=True)
-        
-        # Now display the name and interests after the image
-        st.subheader(f"{name}'s Profile")
+
+        # Display the profile name centered
+        st.markdown(f'<div class="profile-name">{name}\'s Profile</div>', unsafe_allow_html=True)
+
+        # Display the interests
         st.write(f"**Interests:** {formatted_interests}")
 
         # Swipe buttons
@@ -69,11 +78,13 @@ def get_friend_swiping_page():
                     st.session_state.swiped_right.append(name)  # Add to list of people you've swiped right on
                     st.write(f"**You swiped right on {name}. It's a match!**")
 
-        # Display the list of people you've swiped right on as bullet points
+        # Display the list of people you've swiped right on as bullet points with the email ending
         st.subheader("Your Matches:")
         if st.session_state.swiped_right:
             for match in st.session_state.swiped_right:
-                st.markdown(f"- {match}")
+                # Append the email domain to the match name
+                email_match = f"{match}@falcon.bentley.edu"
+                st.markdown(f"- {email_match}")
         else:
             st.write("No matches yet.")
 
@@ -83,5 +94,4 @@ def get_friend_swiping_page():
     # DONT REMOVE BELOW
     if st.button('Back to Dashboard'):
         st.session_state.page = "student_landing_page"
-
 
