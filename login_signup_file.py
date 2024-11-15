@@ -13,9 +13,9 @@ def get_login_signup_page():
     col1, col2 = st.columns(2)
     
     with col1:
-        if st.button('Create Account', use_container_width=True):
+        if st.button('Student Login', use_container_width=True):
             st.session_state.page = "create_account_page"
     
     with col2:
-        if st.button('Sign In', use_container_width=True):
+        if st.button('Admin Login', use_container_width=True):
             st.session_state.page = "sign_in_page"
