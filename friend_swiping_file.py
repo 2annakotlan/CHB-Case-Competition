@@ -47,7 +47,7 @@ def get_friend_swiping_page():
         formatted_interests = ", ".join(sorted(interests))  # Sort for better readability
 
         # Display the profile info and image (image is centered)
-        col1, col2, col3 = st.columns([1, 4, 1])  # Create centered column for image
+        col1, col2, col3 = st.columns([1, 5, 1])  # Adjust column widths to push image more to the center
         with col2:
             st.image(image_url, caption=f"{name}'s Profile", width=300)
         
