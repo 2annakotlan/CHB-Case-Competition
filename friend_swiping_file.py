@@ -16,84 +16,54 @@ def get_friend_swiping_page():
     # Title of the page
     st.title("Friend Swiping")
 
-    # Store the list of names you've swiped right on in the session state
-    if "swiped_right" not in st.session_state:
-        st.session_state.swiped_right = []
+    # List to track the people swiped right
+    swiped_right = []
 
     # Filter out the row where 0_degree is "Liam"
     filtered_population_df = population_df[population_df["0_degree"] != "Liam"]
 
-    # Get a random person from the filtered population_df
-    if len(filtered_population_df) > 0:
-        person_index = random.choice(filtered_population_df.index)
-        person = filtered_population_df.loc[person_index]
-        
-        # Person details
+    # Iterate over the rows in population_df
+    for index, person in filtered_population_df.iterrows():
         name = person["0_degree"]
         interests = person["interests"]
 
-        # If the person is swiped right, show the match message first
-        if name in st.session_state.swiped_right:
-            st.write(f"**You swiped right on {name}. It's a match!**")
-
-        # Format interests nicely as a comma-separated list
-        formatted_interests = ", ".join(sorted(interests))  # Sort for better readability
-
-        # Add CSS for centering the image and the profile name
-        st.markdown("""
-            <style>
-                .profile-image {
-                    display: block;
-                    margin-left: auto;
-                    margin-right: auto;
-                    width: 300px;
-                }
-                .profile-name {
-                    display: block;
-                    text-align: center;
-                    font-size: 24px;
-                    font-weight: bold;
-                    margin-top: 10px;
-                }
-            </style>
-        """, unsafe_allow_html=True)
-
-        # Display the profile image
+        # Display the profile image and name centered
         st.markdown(f'<img src="{image_url}" class="profile-image">', unsafe_allow_html=True)
-
-        # Display the profile name centered
         st.markdown(f'<div class="profile-name">{name}\'s Profile</div>', unsafe_allow_html=True)
 
-        # Display the interests
+        # Format and display the person's interests
+        formatted_interests = ", ".join(sorted(interests))
         st.write(f"**Interests:** {formatted_interests}")
 
-        # Swipe buttons
+        # Create swipe buttons
         col1, col2 = st.columns(2)
 
         with col1:
-            if st.button("Swipe Left", key=f"left_{person_index}"):
+            if st.button("Swipe Left", key=f"left_{index}"):
                 st.write(f"You swiped left on {name}.")
         
         with col2:
-            if st.button("Swipe Right", key=f"right_{person_index}"):
-                # Add to the list of people you swiped right on
-                if name not in st.session_state.swiped_right:
-                    st.session_state.swiped_right.append(name)  # Add to list of people you've swiped right on
+            if st.button("Swipe Right", key=f"right_{index}"):
+                if name not in swiped_right:
+                    swiped_right.append(name)  # Add to the swiped_right list
                     st.write(f"**You swiped right on {name}. It's a match!**")
 
-        # Display the list of people you've swiped right on as bullet points with the email ending
-        st.subheader("Your Matches:")
-        if st.session_state.swiped_right:
-            for match in st.session_state.swiped_right:
-                # Append the email domain to the match name
-                email_match = f"{match}@falcon.bentley.edu"
-                st.markdown(f"- {email_match}")
-        else:
-            st.write("No matches yet.")
+        # After one swipe interaction, break out to let the user decide when to move to the next person
+        break
 
+    # Check if there are no profiles left
+    if len(filtered_population_df) == 0:
+        st.write("Done! You've swiped on all available profiles.")
+
+    # Display the list of matches (with email suffix)
+    st.subheader("Your Matches:")
+    if swiped_right:
+        for match in swiped_right:
+            email_match = f"{match}@falcon.bentley.edu"
+            st.markdown(f"- {email_match}")
     else:
-        st.write("No profiles available to swipe.")
+        st.write("No matches yet.")
 
-    # DONT REMOVE BELOW
+    # Return to the dashboard when the button is clicked
     if st.button('Back to Dashboard'):
         st.session_state.page = "student_landing_page"
