@@ -23,9 +23,9 @@ def get_friend_swiping_page():
     # Title of the page
     st.title("Tinder - Swipe Profiles")
 
-    # Store matches in the session state
-    if "matched_people" not in st.session_state:
-        st.session_state.matched_people = []
+    # Store the list of names you've swiped right on in the session state
+    if "swiped_right" not in st.session_state:
+        st.session_state.swiped_right = []
 
     # Get a random person from the population_df
     if len(population_df) > 0:
@@ -35,7 +35,6 @@ def get_friend_swiping_page():
         # Person details
         name = person["0_degree"]
         interests = person["interests"]
-        match_status = person["match"]
 
         # Random image for the person
         image_url = random.choice(random_images)
@@ -44,12 +43,6 @@ def get_friend_swiping_page():
         st.image(image_url, caption=f"{name}'s Profile", width=300)
         st.write(f"**Name:** {name}")
         st.write(f"**Interests:** {interests}")
-
-        # Show match status (whether this person has matched with you)
-        if match_status == 1:
-            st.write(f"**Match Status:** This person has swiped right on you. It's a match!")
-        else:
-            st.write(f"**Match Status:** This person has not swiped right on you.")
 
         # Swipe buttons
         col1, col2 = st.columns(2)
@@ -60,16 +53,15 @@ def get_friend_swiping_page():
         
         with col2:
             if st.button("Swipe Right", key=f"right_{person_index}"):
-                # Update match status if you swipe right
-                if match_status == 0:  # If they don’t already like you (match == 0)
-                    population_df.at[person_index, "match"] = 1  # Update match status
-                    st.session_state.matched_people.append(name)  # Add to matched list
+                # Add to the list of people you swiped right on
+                if name not in st.session_state.swiped_right:
+                    st.session_state.swiped_right.append(name)  # Add to list of people you've swiped right on
                     st.write(f"You swiped right on {name}. It's a match!")
 
-        # Display the matches below the current profile
+        # Display the list of people you've swiped right on
         st.subheader("Your Matches:")
-        if st.session_state.matched_people:
-            for match in st.session_state.matched_people:
+        if st.session_state.swiped_right:
+            for match in st.session_state.swiped_right:
                 st.write(match)
         else:
             st.write("No matches yet.")
