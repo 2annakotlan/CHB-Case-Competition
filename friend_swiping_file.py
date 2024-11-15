@@ -1,4 +1,4 @@
-PACKAGES
+# PACKAGES
 import streamlit as st
 import pandas as pd
 import random
@@ -66,4 +66,4 @@ def get_friend_swiping_page():
 
     # Return to the dashboard when the button is clicked
     if st.button('Back to Dashboard'):
-        st.session_state.page = "student_landing_page". keeping formatting and fuctionality the smae, change it so it runs faster
+        st.session_state.page = "student_landing_page"
