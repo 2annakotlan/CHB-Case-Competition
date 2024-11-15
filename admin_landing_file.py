@@ -54,8 +54,8 @@ def get_admin_landing_page():
                     # Modify the group details to use '&' for joining groups
                     group_details_text = " & ".join(group_details)  # Combine the group details
                     
-                    # Modify the sentence format as per the new requirement
-                    event_sentence = f"<b style='color: #4A90E2;'>{interest.capitalize()} event:</b> connecting {total_count} people from {group_details_text}"
+                    # Format the event description and title
+                    event_sentence = f"<b style='color: #4A90E2;'>{interest.capitalize()} Event:</b> connecting {total_count} people from {group_details_text}"
                     sentences.append(event_sentence)  # sentence with formatted event name
     
                     all_names = [] # names of people in each component with this interest
@@ -65,9 +65,9 @@ def get_admin_landing_page():
                     # Add the @falcon.bentley.edu to each name
                     all_names_with_domain = [f"{name}@falcon.bentley.edu" for name in all_names]
                     
-                    # Add a text area below each event for easy email copying
+                    # Now show the emails under the event description
                     email_list = ", ".join(all_names_with_domain)
-                    st.markdown(f"Copy the emails below for the {interest.capitalize()} event:")
+                    st.markdown(f"Emails for {interest.capitalize()} event:")
                     st.text_area("", email_list, height=150)  # Emails only, no title in the text area
                     sentences.append("")
 
