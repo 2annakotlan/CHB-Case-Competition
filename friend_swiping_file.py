@@ -12,9 +12,11 @@ def get_friend_swiping_page():
     # Title of the page
     st.title("Tinder - Swipe Profiles")
 
-    # Initialize variables to keep track of the profile index and matches
+    # Initialize a local variable for profile index (starting from 0)
     if 'profile_index' not in st.session_state:
         st.session_state.profile_index = 0
+
+    # Initialize matches list (to keep track of matches)
     matches = []
 
     # Load the profile data (assuming 'population_df' contains the profiles)
@@ -33,7 +35,7 @@ def get_friend_swiping_page():
     
     with col1:
         if st.button('Swipe Left'):
-            # Just move to the next profile without changing the match list
+            # Move to the next profile without changing the match list
             st.session_state.profile_index += 1
             if st.session_state.profile_index >= len(population_df):
                 st.session_state.profile_index = 0  # Reset to the start if end of profiles
@@ -41,12 +43,12 @@ def get_friend_swiping_page():
 
     with col2:
         if st.button('Swipe Right'):
-            # Move to the next profile, and check for a match
-            if profile['match'] == 1:  # They swiped right on me
-                # If they swiped right on me too, it's a match
+            # Check for a match after swiping right
+            if profile['match'] == 1:  # If the person swiped right on you
+                # If both swiped right on each other, it's a match
                 matches.append(profile['0_degree'])  # Add their name to matches
 
-            # Go to next profile after swiping right
+            # Move to the next profile after swiping right
             st.session_state.profile_index += 1
             if st.session_state.profile_index >= len(population_df):
                 st.session_state.profile_index = 0  # Reset to the start if end of profiles
