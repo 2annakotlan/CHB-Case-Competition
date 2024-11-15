@@ -8,7 +8,6 @@ def get_admin_landing_page():
     get_custom_css_page(alignment="center", button_span="auto")
     
     st.title("Admin Dashboard")
-    st.write("NO")
     st.markdown("<h3 style='text-align: center; color: #4A90E2;'>Network Map</h3>", unsafe_allow_html=True)
     network_map(population_df)
 
@@ -34,8 +33,11 @@ def get_admin_landing_page():
     
         int_count_df.columns = ['interest'] + [f'Group {i}' for i in range(len(int_count_df.columns) - 1)]
     
-        # Round the values to the nearest whole number and convert to integers
-        int_count_df.iloc[:, 1:] = int_count_df.iloc[:, 1:].round(0).astype(int)
+        # Round the values to the nearest whole number
+        int_count_df.iloc[:, 1:] = int_count_df.iloc[:, 1:].round(0)
+        
+        # Cast all the numeric columns to integers
+        int_count_df.iloc[:, 1:] = int_count_df.iloc[:, 1:].astype(int)
     
         # Interpretation
         sentences = []
