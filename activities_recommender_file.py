@@ -16,10 +16,19 @@ def get_activities_recommender_page():
     # Filter out activities with 0 total people
     activities_df = activities_df[activities_df['total_people'] > 0]
     
-    # Sort activities by total_people in descending order
-    activities_df = activities_df.sort_values(by='total_people', ascending=False)
+    # Sort by degree of connection first (1-degree, 2-degree, etc.), then by total_people within each degree group
+    degree_columns = [col for col in activities_df.columns if col.startswith('count_degree')]
+    degree_columns_sorted = sorted(degree_columns, key=lambda x: int(x.split('_')[-1]))  # Sorting by degree number
     
+    # Create a column to sort by degree first, then total_people
+    activities_df['degree_priority'] = activities_df.apply(
+        lambda row: [row[col] for col in degree_columns_sorted], axis=1
+    )
+    
+    activities_df = activities_df.sort_values(by=['degree_priority', 'total_people'], ascending=[True, False])
+
     st.dataframe(activities_df)
+    generate_activities_messages(activities_df)
 
     for _, row in activities_df.iterrows():
         total_people = row['total_people']
