@@ -45,6 +45,12 @@ def get_friend_swiping_page():
         st.write(f"**Name:** {name}")
         st.write(f"**Interests:** {interests}")
 
+        # Show match status (whether this person has matched with you)
+        if match_status == 1:
+            st.write(f"**Match Status:** This person has swiped right on you. It's a match!")
+        else:
+            st.write(f"**Match Status:** This person has not swiped right on you.")
+
         # Swipe buttons
         col1, col2 = st.columns(2)
 
@@ -74,5 +80,4 @@ def get_friend_swiping_page():
     # DONT REMOVE BELOW
     if st.button('Back to Dashboard'):
         st.session_state.page = "student_landing_page"
-
 
