@@ -6,7 +6,7 @@ import streamlit as st
 def get_sign_in_page():
     get_custom_css_page(alignment="left", button_span="full")
 
-    st.title("Sign In")
+    st.title("Admin Login")
     st.write("Enter admin email and password to sign in")
     
     email = st.text_input("Email", value="admin@falcon.bentley.edu", disabled=True)
