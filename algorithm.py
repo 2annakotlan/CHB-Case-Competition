@@ -69,6 +69,11 @@ import numpy as np
 import plotly.graph_objects as go
 import streamlit as st
 
+import matplotlib.pyplot as plt
+import networkx as nx
+import numpy as np
+import streamlit as st
+
 def network_map(df):
     # CREATE THE NETWORK MAP
     G = nx.Graph()  # initialize an empty undirected graph
@@ -103,7 +108,7 @@ def network_map(df):
         pos.update(component_pos) # update positions with the component's offset positions
 
     # Display the graph with components labeled
-    plt.figure(figsize=(20, 10))  # Increase the figure size for more space
+    plt.figure(figsize=(20, 10), facecolor='none')  # Set the figure background to transparent (none)
     nx.draw(G, pos=pos, with_labels=True, node_color='lightblue', node_size=400, font_size=9, font_weight='bold', edge_color='gray', width=1)
 
     # Adding component labels
@@ -116,12 +121,7 @@ def network_map(df):
         plt.text(center_x, center_y, i, fontsize=8, ha='center', va='center', fontweight='bold', color='black')
 
     plt.axis('equal')  # components are perfect circles
+    plt.gca().set_facecolor('none')  # Ensure the background of the axes is transparent as well
 
     # Use Streamlit's st.pyplot() to display the graph
     st.pyplot(plt)
-
-
-
-
-
-
