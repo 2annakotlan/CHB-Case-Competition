@@ -38,11 +38,11 @@ def get_activities_recommender_page():
     """, unsafe_allow_html=True)
     
     # Filter and sort by 2nd-degree connections
-    activities_df = activities_df[activities_df['count_degree_2'] > 0]
-    activities_df = activities_df.sort_values(by='count_degree_2', ascending=False)
+    activities_df_new = activities_df[activities_df['count_degree_2'] > 0]
+    activities_df_new = activities_df_new.sort_values(by='count_degree_2', ascending=False)
     
     # Display activities with the highest 2nd-degree connections first
-    for _, row in activities_df.iterrows():
+    for _, row in activities_df_new.iterrows():
         count = row['count_degree_2']
         
         # Adjust for singular/plural usage
