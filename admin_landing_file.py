@@ -11,7 +11,6 @@ def get_admin_landing_page():
     st.write("Welcome to the admin panel!")
     network_map(population_df)
 
-    import streamlit as st
     import networkx as nx
     import pandas as pd
     from itertools import combinations
@@ -73,4 +72,3 @@ def get_admin_landing_page():
     # Optionally, add a button to go back to the login/signup page
     if st.button('Log out'):
         st.session_state.page = "login_signup_page"
-
