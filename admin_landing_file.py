@@ -9,10 +9,10 @@ import numpy as np
 
 # Function to handle the admin landing page view
 def get_admin_landing_page():
-    get_custom_css_page(alignment="center", button_span="auto")
+    get_custom_css_page(alignment="center", button_span="full")
     
     st.title("Admin Dashboard")
-    st.markdown("<h3 style='text-align: center; color: #4A90E2;'>Network Map</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: left; color: #4A90E2;'>Network Map</h3>", unsafe_allow_html=True)
     network_map(population_df)
 
     # Function to find common interests and interpret connections
@@ -34,7 +34,7 @@ def get_admin_landing_page():
     
         # Round the values to the nearest whole number
         int_count_df.iloc[:, 1:] = int_count_df.iloc[:, 1:].round(0)
-        st.markdown("<h3 style='text-align: center; color: #4A90E2;'>Students' Interests per Group</h3>", unsafe_allow_html=True)
+        st.markdown("<h3 style='text-align: left; color: #4A90E2;'>Students' Interests per Group</h3>", unsafe_allow_html=True)
         st.write(int_count_df)
 
         # Interpretation
