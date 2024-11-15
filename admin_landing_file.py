@@ -12,8 +12,21 @@ def get_admin_landing_page():
     get_custom_css_page(alignment="center", button_span="full")
     
     st.title("Admin Dashboard")
-    st.write(comp_num)
-    st.write(average_last_degree)
+    
+    st.markdown("<h3 style='text-align: left; color: #4A90E2;'>Connectivity Score</h3>", unsafe_allow_html=True)
+    st.markdown(f"""
+    <div style="font-size:12px; color:black;">
+        Isolated Groups: {comp_num}
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Display average_last_degree with small black text
+    st.markdown(f"""
+    <div style="font-size:12px; color:black;">
+        Average Degree's Away: {average_last_degree}
+    </div>
+    """, unsafe_allow_html=True)
+    
     st.markdown("<h3 style='text-align: left; color: #4A90E2;'>Network Map</h3>", unsafe_allow_html=True)
     network_map(population_df)
 
