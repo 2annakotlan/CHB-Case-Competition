@@ -1,8 +1,4 @@
-# ORIGIONAL DATA
 import pandas as pd
-
-import pandas as pd
-
 data = {
     '0_degree': [
         'Alice', 'Bob', 'Charlie', 'Diana',
@@ -64,7 +60,7 @@ data = {
         {'Finance & Investment', 'Community Engagement & Leadership'},
         {'Finance & Investment', 'Finance & Investment'},
         {'Entrepreneurship & Business Strategy', 'Social Impact & Community Development'},
-        {'Entrepreneurship & Business Strategy', 'dance'},
+        {'Entrepreneurship & Business Strategy', 'Games'},
         {'Games', 'Sports & Fitness', 'Finance & Investment'},
         {'Political, Legal, & Public Affairs', 'Sports & Fitness'},
         {'Finance & Investment', 'Finance & Investment'},
@@ -104,8 +100,8 @@ data = {
         {'Esports', 'International Student Association'},
         {'Hillel', 'Cheer'},
         {'Sigma Gamma Delta', 'Hillel'},
-        {'sport', 'South Asian Student Association'},
-        {'acapella', 'Bentley Active Minds'},
+        {'Hillel', 'South Asian Student Association'},
+        {'Cheer', 'Bentley Active Minds'},
         {'South Asian Student Association', 'Bentley Active Minds'},
         {'Hillel', 'Bentley Active Minds'},
         set(),
