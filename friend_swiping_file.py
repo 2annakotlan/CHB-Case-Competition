@@ -14,7 +14,7 @@ def get_friend_swiping_page():
     get_custom_css_page()
 
     # Title of the page
-    st.title("Tinder - Swipe Profiles")
+    st.title("Friend Swiping")
 
     # Store the list of names you've swiped right on in the session state
     if "swiped_right" not in st.session_state:
