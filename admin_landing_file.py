@@ -6,7 +6,6 @@ from population_data_file import population_df, full_population_df
 # Function to handle the admin landing page view
 def get_admin_landing_page():
     get_custom_css_page(alignment="center", button_span="auto")
-    st.write("NO")
     
     st.title("Admin Dashboard")
     st.markdown("<h3 style='text-align: center; color: #4A90E2;'>Network Map</h3>", unsafe_allow_html=True)
