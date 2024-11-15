@@ -6,18 +6,8 @@ import pandas as pd
 
 def get_activities_recommender_page():
     get_custom_css_page(alignment="center", button_span="full")
-    
-    # Get the activities DataFrame from the algorithm
     activities_df = get_activities(full_population_df, 'Liam')
-
-    # Debug: Check columns in the activities DataFrame
-    st.write(activities_df.columns)  # This will print the column names in the activities_df DataFrame
     
-    # Check if 'count_degree_2' column exists
-    if 'count_degree_2' not in activities_df.columns:
-        st.error("'count_degree_2' column not found in the DataFrame.")
-        return  # Exit the function if the column doesn't exist
-
     # Big title with custom style
     st.title("Activities Recommendation")
     
@@ -74,7 +64,6 @@ def get_activities_recommender_page():
     # Display DataFrame with styling
     st.dataframe(activities_df.style.set_table_attributes('class="streamlit-table"'))
 
-    # Back button to navigate to the previous page
     back_clicked = st.button("Back")
     if back_clicked:
         st.session_state.page = "student_landing_page"
