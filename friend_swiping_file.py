@@ -5,15 +5,8 @@ import random
 from custom_css_file import get_custom_css_page
 from population_data_file import population_df
 
-# Sample list of random images (replace with your own image URLs or file paths)
-random_images = [
-    "https://randomuser.me/api/portraits/men/1.jpg",
-    "https://randomuser.me/api/portraits/women/1.jpg",
-    "https://randomuser.me/api/portraits/men/2.jpg",
-    "https://randomuser.me/api/portraits/women/2.jpg",
-    "https://randomuser.me/api/portraits/men/3.jpg",
-    "https://randomuser.me/api/portraits/women/3.jpg"
-]
+# Use the provided image URL for every profile
+image_url = "https://github.com/2annakotlan/CHB-Case-Competition/blob/main/phone-book.png?raw=true"  # The "?raw=true" is required for GitHub image links
 
 # GET TINDER-LIKE SWIPING VISUAL FUNCTION
 def get_friend_swiping_page():
@@ -35,9 +28,6 @@ def get_friend_swiping_page():
         # Person details
         name = person["0_degree"]
         interests = person["interests"]
-
-        # Random image for the person
-        image_url = random.choice(random_images)
 
         # If the person is swiped right, show the match message first
         if name in st.session_state.swiped_right:
