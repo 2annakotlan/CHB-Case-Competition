@@ -1,7 +1,6 @@
 # PACKAGES
 import streamlit as st
 import pandas as pd
-import random
 from custom_css_file import get_custom_css_page
 from population_data_file import population_df
 
@@ -16,22 +15,11 @@ def get_friend_swiping_page():
     # Title of the page
     st.title("Friend Swiping")
 
-    # Initialize session states for swipes if not already done
-    if "swiped_right" not in st.session_state:
-        st.session_state.swiped_right = []
-    if "shown_people" not in st.session_state:
-        st.session_state.shown_people = []
+    # Initialize a list to hold your matches
+    matches = []
 
-    # Filter out the row where 0_degree is "Liam" and already shown people
-    filtered_population_df = population_df[population_df["0_degree"] != "Liam"]
-    remaining_population_df = filtered_population_df[~filtered_population_df.index.isin(st.session_state.shown_people)]
-
-    # Ensure there are people left to swipe
-    if len(remaining_population_df) > 0:
-        # Select a random person from the remaining profiles
-        person_index = random.choice(remaining_population_df.index)
-        person = remaining_population_df.loc[person_index]
-        
+    # Display each profile in population_df
+    for person_index, person in population_df.iterrows():
         # Extract person details
         name = person["0_degree"]
         interests = person["interests"]
@@ -76,40 +64,26 @@ def get_friend_swiping_page():
         col1, col2 = st.columns(2)
 
         with col1:
-            if st.button("Swipe Left", key=f"left_{person_index}"):
+            if st.button(f"Swipe Left on {name}", key=f"left_{person_index}"):
                 st.write(f"You swiped left on {name}.")
-                st.session_state.shown_people.append(person_index)  # Mark as shown
         
         with col2:
-            if st.button("Swipe Right", key=f"right_{person_index}"):
-                # Register the right swipe
-                st.session_state.swiped_right.append(name)
-                st.session_state.shown_people.append(person_index)  # Mark as shown
-
-                # Check if it's a mutual match (if match == 1 for them)
+            if st.button(f"Swipe Right on {name}", key=f"right_{person_index}"):
+                # Register the right swipe and check if it's a match
                 if liked_you:
+                    matches.append(name)
                     st.write(f"**You swiped right on {name}. It's a match!**")
                 else:
                     st.write(f"You swiped right on {name}. Waiting for them to like you back.")
 
-        # Display the list of matches (with email suffix)
-        st.subheader("Your Matches:")
-        if st.session_state.swiped_right:
-            for match in st.session_state.swiped_right:
-                email_match = f"{match}@falcon.bentley.edu"
-                
-                # Check if this person has a match == 1 (liked you back)
-                person_data = population_df.loc[population_df["0_degree"] == match]
-                is_mutual = person_data["match"].values[0] == 1  # Check if their match value is 1 (liked you)
-
-                mutual_text = " (Liked you!)" if is_mutual else ""
-                
-                st.markdown(f"- {email_match}{mutual_text}")
-        else:
-            st.write("No matches yet.")
-
+    # Display the list of matches (with email suffix)
+    st.subheader("Your Matches:")
+    if matches:
+        for match in matches:
+            email_match = f"{match}@falcon.bentley.edu"
+            st.markdown(f"- {email_match}")
     else:
-        st.write("No profiles available to swipe.")
+        st.write("No matches yet.")
 
     # Return to the dashboard when the button is clicked
     if st.button('Back to Dashboard'):
