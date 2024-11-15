@@ -49,14 +49,14 @@ def get_admin_landing_page():
             return f"<b style='color: #4A90E2;'>{interest.capitalize()} Event:</b> connecting {total_count} people from {group_text}"
         
         def get_participant_emails(df, interest, groups):
-            emails = []
+            emails = set()  # Use set to avoid duplicate emails
             for component, _ in groups:
                 component_emails = df[(
                     df['component'] == component) & 
                     (df['interests'].apply(lambda x: interest in x))
                 ]['0_degree'].apply(lambda x: f"{x}@falcon.bentley.edu")
-                emails.extend(component_emails)
-            return ", ".join(emails)
+                emails.update(component_emails)  # Adding to set to ensure uniqueness
+            return emails
         
         # Main processing loop
         sentences = []
@@ -66,21 +66,29 @@ def get_admin_landing_page():
             
             if len(groups) > 1:
                 # Add event description
-                sentences.append(format_event_details(interest, groups))
+                event_detail = format_event_details(interest, groups)
+                sentences.append(event_detail)
                 
-                # Display emails
+                # Format and display emails
                 email_list = get_participant_emails(df, interest, groups)
-                st.markdown(f"Emails for {interest.capitalize()} event:")
-                st.text_area("", email_list, height=150)
-                sentences.append("")
+                if email_list:
+                    email_text = "<ul>"  # Using an unordered list for emails
+                    for email in email_list:
+                        email_text += f"<li>{email}</li>"
+                    email_text += "</ul>"
+                else:
+                    email_text = "<p>No participants found for this event.</p>"
+
+                sentences.append(f"<p><b>Emails for {interest.capitalize()} event:</b></p>{email_text}")
 
         return int_count_df, sentences
 
     int_count_df, sentences = get_common_interests_table(full_population_df)
 
-    # Display Suggestions
+    # Display Suggestions with proper formatting
     st.markdown("<h3 style='text-align: left; color: #4A90E2;'>Event Recommendations</h3>", unsafe_allow_html=True)
-    st.markdown("<br>".join(sentences), unsafe_allow_html=True)  # Use st.markdown for rendering HTML
+    for sentence in sentences:
+        st.markdown(sentence, unsafe_allow_html=True)  # Render each sentence with HTML formatting
     
     # Optionally, add a button to go back to the login/signup page
     if st.button('Log out'):
