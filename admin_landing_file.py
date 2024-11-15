@@ -35,9 +35,17 @@ def get_admin_landing_page():
     
         # Round the values to the nearest whole number
         int_count_df.iloc[:, 1:] = int_count_df.iloc[:, 1:].round(0)
+        
+        # Check if rounding was applied correctly by printing part of the table
+        st.write("After rounding:")
+        st.write(int_count_df)
 
-        # Cast all the numeric columns to integers
+        # Ensure the values are whole numbers by casting them to integers
         int_count_df.iloc[:, 1:] = int_count_df.iloc[:, 1:].astype(int)
+        
+        # Check if conversion to integers is successful
+        st.write("After converting to integers:")
+        st.write(int_count_df)
 
         # Interpretation
         sentences = []
