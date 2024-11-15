@@ -1,7 +1,7 @@
 import streamlit as st
 from custom_css_file import get_custom_css_page
 from algorithm import network_map
-from population_data_file import population_df, full_population_df
+from population_data_file import population_df, full_population_df, comp_num, average_last_degree 
 import networkx as nx
 import pandas as pd
 from itertools import combinations
@@ -12,6 +12,8 @@ def get_admin_landing_page():
     get_custom_css_page(alignment="center", button_span="full")
     
     st.title("Admin Dashboard")
+    st.write(comp_num)
+    st.write(average_last_degree)
     st.markdown("<h3 style='text-align: left; color: #4A90E2;'>Network Map</h3>", unsafe_allow_html=True)
     network_map(population_df)
 
