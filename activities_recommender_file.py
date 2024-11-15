@@ -1,7 +1,7 @@
 from custom_css_file import get_custom_css_page
 import streamlit as st
 from population_data_file import full_population_df
-from algorithm.py import get_activities
+from algorithm import get_activities
 import pandas as pd
 
 def get_activities_recommender_page():
