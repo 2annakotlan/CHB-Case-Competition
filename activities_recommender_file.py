@@ -7,6 +7,8 @@ import pandas as pd
 def get_activities_recommender_page():
     get_custom_css_page(alignment="center", button_span="full")
     activities_df = get_activities(full_population_df, 'stest')
+    st.markdown("Activities Recommendation")
+    st.write("Activities to Meet Mutual Friends")
 
     st.markdown("""
     <style>
@@ -27,16 +29,12 @@ def get_activities_recommender_page():
         }
     </style>
     """, unsafe_allow_html=True)
-
-    # Display DataFrame with styling
-    st.dataframe(activities_df.style.set_table_attributes('class="streamlit-table"'))
     
     # Filter and sort by 2nd-degree connections
     activities_df = activities_df[activities_df['count_degree_2'] > 0]
     activities_df = activities_df.sort_values(by='count_degree_2', ascending=False)
     
     # Display activities with the highest 2nd-degree connections first
-    st.markdown("### 2nd Degree Connections")
     
     for _, row in activities_df.iterrows():
         count = row['count_degree_2']
@@ -52,3 +50,6 @@ def get_activities_recommender_page():
         
         # Display the message with left-aligned text
         st.markdown(f"<div style='text-align: left;'>{message}</div>", unsafe_allow_html=True)
+
+    # Display DataFrame with styling
+    st.dataframe(activities_df.style.set_table_attributes('class="streamlit-table"'))
