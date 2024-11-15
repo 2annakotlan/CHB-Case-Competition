@@ -2,6 +2,9 @@
 import pandas as pd
 from collections import Counter
 
+import pandas as pd
+from collections import Counter
+
 def get_activities(df, name):
     # Determine the number of degree columns (excluding the first degree column '0_degree')
     n = sum('_degree' in col for col in df.columns) - 1  # Assuming '0_degree' is the first degree column
@@ -19,6 +22,10 @@ def get_activities(df, name):
     # Get the second-degree, third-degree, etc., connections for the specified name
     for i in range(1, n + 1):
         degree_column = f'{i}_degree'
+        
+        # Check if the degree column exists before trying to access it
+        if degree_column not in df.columns:
+            continue  # Skip if the degree column does not exist
         
         # Get the nth-degree individuals for the specified name
         degree_connections = df[df['0_degree'] == name][degree_column].tolist()
@@ -62,6 +69,7 @@ def get_activities(df, name):
 
     # Return the DataFrame with activities and counts
     return activities_df
+
 
 
 # NETWORK MAP ALGORITHM
