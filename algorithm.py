@@ -84,7 +84,6 @@ def network_map(df):
             G.add_edge(row['0_degree'], connection)  # add an edge between the person and each connection
 
     # FORMAT THE NETWORK MAP
-    # Connected Components
     components = list(nx.connected_components(G))  # get all connected components
     component_sizes = {i: len(component) for i, component in enumerate(components)}  # store the size of each component
 
@@ -108,7 +107,7 @@ def network_map(df):
         pos.update(component_pos) # update positions with the component's offset positions
 
     # Display the graph with components labeled
-    plt.figure(figsize=(20, 10), facecolor='none')  # Set the figure background to transparent (none)
+    plt.figure(figsize=(10, 5), dpi=80, facecolor='none')  # Smaller figsize and reduced DPI for better performance
     nx.draw(G, pos=pos, with_labels=True, node_color='lightblue', node_size=400, font_size=9, font_weight='bold', edge_color='gray', width=1)
 
     # Adding component labels
@@ -125,3 +124,5 @@ def network_map(df):
 
     # Use Streamlit's st.pyplot() to display the graph
     st.pyplot(plt)
+
+
