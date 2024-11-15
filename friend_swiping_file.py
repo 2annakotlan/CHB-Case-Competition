@@ -39,10 +39,19 @@ def get_friend_swiping_page():
         # Random image for the person
         image_url = random.choice(random_images)
 
-        # Display the profile info and image
-        st.image(image_url, caption=f"{name}'s Profile", width=300)
-        st.write(f"**Name:** {name}")
-        st.write(f"**Interests:** {interests}")
+        # If the person is swiped right, show the match message first
+        if name in st.session_state.swiped_right:
+            st.write(f"**You swiped right on {name}. It's a match!**")
+
+        # Format interests nicely as a comma-separated list
+        formatted_interests = ", ".join(sorted(interests))  # Sort for better readability
+
+        # Display the profile info and image (image is centered)
+        col1, col2, col3 = st.columns([1, 4, 1])  # Create centered column for image
+        with col2:
+            st.image(image_url, caption=f"{name}'s Profile", width=300)
+        
+        st.write(f"**Interests:** {formatted_interests}")
 
         # Swipe buttons
         col1, col2 = st.columns(2)
@@ -56,13 +65,13 @@ def get_friend_swiping_page():
                 # Add to the list of people you swiped right on
                 if name not in st.session_state.swiped_right:
                     st.session_state.swiped_right.append(name)  # Add to list of people you've swiped right on
-                    st.write(f"You swiped right on {name}. It's a match!")
+                    st.write(f"**You swiped right on {name}. It's a match!**")
 
-        # Display the list of people you've swiped right on
+        # Display the list of people you've swiped right on as bullet points
         st.subheader("Your Matches:")
         if st.session_state.swiped_right:
             for match in st.session_state.swiped_right:
-                st.write(match)
+                st.markdown(f"- {match}")
         else:
             st.write("No matches yet.")
 
@@ -73,3 +82,6 @@ def get_friend_swiping_page():
     if st.button('Back to Dashboard'):
         st.session_state.page = "student_landing_page"
 
+# Assuming you have a Streamlit app setup
+if __name__ == "__main__":
+    get_friend_swiping_page()
