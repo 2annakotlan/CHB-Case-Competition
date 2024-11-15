@@ -1,3 +1,4 @@
+# ACTIVITIES ALGORITHM
 import pandas as pd
 from collections import Counter
 
@@ -63,15 +64,11 @@ def get_activities(df, name):
     return activities_df
 
 
+# NETWORK MAP ALGORITHM
 import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
 import plotly.graph_objects as go
-import streamlit as st
-
-import matplotlib.pyplot as plt
-import networkx as nx
-import numpy as np
 import streamlit as st
 
 def network_map(df):
@@ -120,17 +117,6 @@ def network_map(df):
         plt.text(center_x, center_y, i, fontsize=8, ha='center', va='center', fontweight='bold', color='black')
 
     plt.axis('equal')  # components are perfect circles
-
-    # Add a border around the plot
-    ax = plt.gca()
-    ax.spines['top'].set_linewidth(2)  # Set the border thickness
-    ax.spines['top'].set_color('black')  # Set the border color
-    ax.spines['bottom'].set_linewidth(2)
-    ax.spines['bottom'].set_color('black')
-    ax.spines['left'].set_linewidth(2)
-    ax.spines['left'].set_color('black')
-    ax.spines['right'].set_linewidth(2)
-    ax.spines['right'].set_color('black')
 
     # Use Streamlit's st.pyplot() to display the graph with a white background and border
     st.pyplot(plt, bbox_inches='tight')
