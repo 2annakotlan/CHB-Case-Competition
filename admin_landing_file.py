@@ -55,8 +55,8 @@ def get_admin_landing_page():
                     group_details_text = " & ".join(group_details)  # Combine the group details
                     
                     # Capitalize the event name by using title() for every word in the name
-                    event_name = f"{interest.capitalize()} Event"
-                    event_sentence = f"<b style='color: #4A90E2;'>{event_name}:</b> connecting {total_count} people from {group_details_text}"
+                    event_name = f"{interest.title()} Event"  # .title() ensures proper capitalization of each word
+                    event_sentence = f"<b style='color: #4A90E2; text-align: center;'>{event_name}:</b> connecting {total_count} people from {group_details_text}"
                     sentences.append(event_sentence)  # sentence with formatted event name
     
                     all_names = [] # names of people in each component with this interest
@@ -68,7 +68,7 @@ def get_admin_landing_page():
                     
                     # Now show the emails under the event description
                     email_list = ", ".join(all_names_with_domain)
-                    sentences.append(f"Emails: {email_list}")  # Append emails directly after the event description
+                    sentences.append(f"<p style='text-align: center;'>Emails: {email_list}</p>")  # Append emails directly after the event description, centered
 
                     sentences.append("")  # Empty line after each event
         
