@@ -35,23 +35,9 @@ def get_admin_landing_page():
     
         # Round the values to the nearest whole number
         int_count_df.iloc[:, 1:] = int_count_df.iloc[:, 1:].round(0)
-        
-        # Display the DataFrame after rounding
-        st.write("After rounding:")
-        st.write(int_count_df)
 
         # Cast all the numeric columns to integers
         int_count_df.iloc[:, 1:] = int_count_df.iloc[:, 1:].astype(int)
-        
-        # Display the DataFrame after converting to integers
-        st.write("After converting to integers:")
-        st.write(int_count_df)
-
-        # Ensure all values are indeed integers
-        if not all(int_count_df.iloc[:, 1:].applymap(lambda x: isinstance(x, int)).all()):
-            st.write("Error: Some values are not integers after conversion!")
-        else:
-            st.write("All values are integers!")
 
         # Interpretation
         sentences = []
