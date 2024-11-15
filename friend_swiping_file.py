@@ -59,8 +59,7 @@ def get_friend_swiping_page():
         """, unsafe_allow_html=True)
 
         # Display the profile info and image (using the CSS class to center the image)
-        st.image(image_url, caption=f"{name}'s Profile", use_column_width=False, class_="profile-image")
-
+        st.markdown(f'<img src="{image_url}" class="profile-image">', unsafe_allow_html=True)
         st.write(f"**Interests:** {formatted_interests}")
 
         # Swipe buttons
@@ -92,4 +91,6 @@ def get_friend_swiping_page():
     if st.button('Back to Dashboard'):
         st.session_state.page = "student_landing_page"
 
-
+# Assuming you have a Streamlit app setup
+if __name__ == "__main__":
+    get_friend_swiping_page()
