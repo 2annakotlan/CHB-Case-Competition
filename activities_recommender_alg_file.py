@@ -63,6 +63,63 @@ def get_activities(df, name):
     return activities_df
 
 
+import networkx as nx
+import matplotlib.pyplot as plt
+import numpy as np
+import plotly.graph_objects as go
+
+def network_map(df):
+    # CREATE THE NETWORK MAP
+    G = nx.Graph()  # initialize an empty undirected graph
+
+    for _, row in df.iterrows():  # for each row in the dataframe...
+        G.add_node(row['0_degree'])  # add a node for the person
+        for connection in row['1_degree']:  # for each of their known connections...
+            G.add_edge(row['0_degree'], connection)  # add an edge between the person and each connection
+
+    # FORMAT THE NETWORK MAP
+    # Connected Components
+    components = list(nx.connected_components(G))  # get all connected components
+    component_sizes = {i: len(component) for i, component in enumerate(components)}  # store the size of each component
+
+    pos = {}  # initialize the position dictionary for all nodes
+    offset_x = 0  # initialize the offset variable
+
+    # Creating circular shape for components
+    for i, component in enumerate(components):  # for each component...
+        radius = component_sizes[i]  # set radius based on component size
+        angles = np.linspace(0, 2 * np.pi, len(component), endpoint=False)  # angles for circular positioning
+
+        component_pos = {
+            node: (radius * np.cos(angle), radius * np.sin(angle))  # calculate (x, y) based on angle and radius
+            for node, angle in zip(component, angles)} # assign a unique angle to each node in the component
+
+        # Apply an offset to shift components to the right
+        if i > 0:
+            prev_max_x = max(pos[node][0] for node in components[i - 1]) # find the maximum x-coordinate from the previous component
+            offset_x = prev_max_x + radius + 10 # sum of maximum x-coordinate from the previous component + radius
+            component_pos = {node: (x + offset_x, y) for node, (x, y) in component_pos.items()} # shift the current component by the offset
+        pos.update(component_pos) # update positions with the component's offset positions
+
+    # Display the graph with components labeled
+    plt.figure(figsize=(10, 10))
+    nx.draw(G, pos=pos, with_labels=True, node_color='lightblue', node_size=400, font_size=9, font_weight='bold', edge_color='gray', width=1)
+
+    # Adding component labels
+    for i, component in enumerate(components):
+        # Find the average position of the component for the label placement
+        center_x = np.mean([pos[node][0] for node in component])
+        center_y = np.mean([pos[node][1] for node in component])
+
+        # Label the component with its index
+        plt.text(center_x, center_y, i, fontsize=8, ha='center', va='center', fontweight='bold', color='black')
+
+    plt.axis('equal')  # components are perfect circles
+    plt.show()
+
+# Calling Function
+network_map(df)
+
 
 
 
