@@ -66,4 +66,4 @@ def get_activities_recommender_page():
 
     back_clicked = st.button("Back")
     if back_clicked:
-        st.session_state.page = "login_signup_page"
+        st.session_state.page = "student_landing_page"
