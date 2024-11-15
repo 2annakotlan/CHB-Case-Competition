@@ -69,6 +69,11 @@ import numpy as np
 import plotly.graph_objects as go
 import streamlit as st
 
+import matplotlib.pyplot as plt
+import networkx as nx
+import numpy as np
+import streamlit as st
+
 def network_map(df):
     # CREATE THE NETWORK MAP
     G = nx.Graph()  # initialize an empty undirected graph
@@ -102,7 +107,7 @@ def network_map(df):
         pos.update(component_pos) # update positions with the component's offset positions
 
     # Display the graph with components labeled
-    plt.figure(figsize=(10, 5), dpi=80, facecolor='none')  # Smaller figsize and reduced DPI for better performance
+    plt.figure(figsize=(10, 5), dpi=80, facecolor='white')  # Use white background instead of transparent
     nx.draw(G, pos=pos, with_labels=True, node_color='lightblue', node_size=400, font_size=9, font_weight='bold', edge_color='gray', width=1)
 
     # Adding component labels
@@ -115,8 +120,20 @@ def network_map(df):
         plt.text(center_x, center_y, i, fontsize=8, ha='center', va='center', fontweight='bold', color='black')
 
     plt.axis('equal')  # components are perfect circles
-    plt.gca().set_facecolor('none')  # Ensure the background of the axes is transparent
 
-    # Save the figure with transparent background and tight bounding box
-    st.pyplot(plt, bbox_inches='tight', transparent=True)  # Ensure transparency when rendered in Streamlit
+    # Add a border around the plot
+    ax = plt.gca()
+    ax.spines['top'].set_linewidth(2)  # Set the border thickness
+    ax.spines['top'].set_color('black')  # Set the border color
+    ax.spines['bottom'].set_linewidth(2)
+    ax.spines['bottom'].set_color('black')
+    ax.spines['left'].set_linewidth(2)
+    ax.spines['left'].set_color('black')
+    ax.spines['right'].set_linewidth(2)
+    ax.spines['right'].set_color('black')
+
+    # Use Streamlit's st.pyplot() to display the graph with a white background and border
+    st.pyplot(plt, bbox_inches='tight')
+
+
 
