@@ -73,6 +73,11 @@ import networkx as nx
 import numpy as np
 import matplotlib.pyplot as plt
 
+import streamlit as st
+import networkx as nx
+import numpy as np
+import matplotlib.pyplot as plt
+
 def network_map(df):
     # CREATE THE NETWORK MAP
     G = nx.Graph()  # initialize an empty undirected graph
@@ -102,12 +107,12 @@ def network_map(df):
         # Apply an offset to shift components to the right
         if i > 0:
             prev_max_x = max(pos[node][0] for node in components[i - 1]) # find the maximum x-coordinate from the previous component
-            offset_x = prev_max_x + radius + 10 # sum of maximum x-coordinate from the previous component + radius
+            offset_x = prev_max_x + radius + 20  # increase the offset for extra space
             component_pos = {node: (x + offset_x, y) for node, (x, y) in component_pos.items()} # shift the current component by the offset
         pos.update(component_pos) # update positions with the component's offset positions
 
     # Display the graph with components labeled
-    plt.figure(figsize=(10, 10))
+    plt.figure(figsize=(12, 12))  # Increase the figure size for more space
     nx.draw(G, pos=pos, with_labels=True, node_color='lightblue', node_size=400, font_size=9, font_weight='bold', edge_color='gray', width=1)
 
     # Adding component labels
@@ -123,7 +128,6 @@ def network_map(df):
 
     # Use Streamlit's st.pyplot() to display the graph
     st.pyplot(plt)
-
 
 
 
