@@ -182,3 +182,20 @@ def get_full_df(df):
 
 full_population_df = get_full_df(population_df)
 
+comp_num = full_population_df['component'].nunique()
+
+degree_columns = [col for col in full_population_df.columns if '_degree' in col]
+
+# Step 2: Find the last non-empty column for each row
+def find_last_non_empty(row):
+    for col in reversed(degree_columns):  # Iterate over degree columns in reverse
+        if row[col] != set():  # Check if the column value is not an empty set
+            return int(col.split('_')[0])  # Extract the degree number (e.g., "1" from "1_degree")
+    return 0  # Return 0 if all are empty
+
+# Apply the function to each row
+full_population_df['last_non_empty_degree'] = full_population_df.apply(find_last_non_empty, axis=1)
+
+# Step 3: Calculate the average of the last non-empty degree
+average_last_degree = full_population_df['last_non_empty_degree'].mean()
+
