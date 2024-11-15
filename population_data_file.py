@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 data = {
     '0_degree': [
         'Alice', 'Bob', 'Charlie', 'Diana',
