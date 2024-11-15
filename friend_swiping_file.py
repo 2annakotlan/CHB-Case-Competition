@@ -35,7 +35,7 @@ def get_friend_swiping_page():
         # Extract person details
         name = person["0_degree"]
         interests = person["interests"]
-        liked_you = person["match"] == 1  # Check if they liked you
+        liked_you = person["match"] == 1  # Check if they liked you (match == 1)
 
         # Format interests as a comma-separated list and sort for readability
         formatted_interests = ", ".join(sorted(interests))
@@ -86,7 +86,7 @@ def get_friend_swiping_page():
                 st.session_state.swiped_right.append(name)
                 st.session_state.shown_people.append(person_index)  # Mark as shown
 
-                # Check if it's a mutual match (if they liked you and you swiped right)
+                # Check if it's a mutual match
                 if liked_you:
                     st.write(f"**You swiped right on {name}. It's a mutual match!**")
                 else:
@@ -98,8 +98,10 @@ def get_friend_swiping_page():
             for match in st.session_state.swiped_right:
                 email_match = f"{match}@falcon.bentley.edu"
                 
-                # Check if it's a mutual match
-                is_mutual = population_df.loc[population_df["0_degree"] == match, "match"].values[0] == 1
+                # Check if it's a mutual match (they liked you back)
+                person_data = population_df.loc[population_df["0_degree"] == match]
+                is_mutual = person_data["match"].values[0] == 1  # Check if they liked you back
+
                 mutual_text = " (Liked you!)" if is_mutual else ""
                 
                 st.markdown(f"- {email_match}{mutual_text}")
