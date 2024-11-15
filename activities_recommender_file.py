@@ -49,7 +49,7 @@ def get_activities_recommender_page():
         # Make activity name bold, the new color (#4A90E2), and larger font size
         activity_name = f"<span style='font-weight: bold; color: #4A90E2; font-size: 22px;'>{row['activities']}</span>"
         
-        # Construct the message
+        # Construct the message with activity name in the new color
         message = f"Join {activity_name} to meet {count} new {people_word} that {share_word} a mutual friend."
         
         # Display the message with left-aligned text
