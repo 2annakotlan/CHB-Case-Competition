@@ -55,17 +55,15 @@ def get_admin_landing_page():
     
         return int_count_df, sentences
     
-    # Streamlit UI
-    st.title("Common Interests and Connection Suggestions")
-    
+
     int_count_df, sentences = get_common_interests_table(full_population_df)
     
     # Display DataFrame in Streamlit
-    st.subheader("Interest Count per Group")
+    st.markdown("<h3 style='text-align: center; color: #4A90E2;'>Students' Interests per Group</h3>", unsafe_allow_html=True)
     st.table(int_count_df)
     
     # Display Suggestions
-    st.subheader("Suggestions")
+    st.markdown("<h3 style='text-align: left; color: #4A90E2;'>Event Recommendations</h3>", unsafe_allow_html=True)
     st.text("\n".join(sentences))
 
     
