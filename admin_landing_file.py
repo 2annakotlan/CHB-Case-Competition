@@ -33,6 +33,9 @@ def get_admin_landing_page():
     
         int_count_df.columns = ['interest'] + [f'Group {i}' for i in range(len(int_count_df.columns) - 1)]
     
+        # Round the values to the nearest whole number
+        int_count_df = int_count_df.round(0)
+    
         # Interpretation
         sentences = []
         for _, row in int_count_df.iterrows():  # for each interest...
@@ -54,7 +57,7 @@ def get_admin_landing_page():
                     sentences.append("")
     
         return int_count_df, sentences
-    
+   
 
     int_count_df, sentences = get_common_interests_table(full_population_df)
     
