@@ -49,10 +49,8 @@ def get_admin_landing_page():
                 if counts_above_threshold:  # for groups above the threshold...
                     total_count = sum(count for _, count in counts_above_threshold) # total count of people
                     
-                    # Construct the group details
-                    group_details = []
-                    for i, count in counts_above_threshold:
-                        group_details.append(f"{count} people from group {i + 1}")  # Adjust index to start at 1
+                    # Construct the group details without specifying the number of people in each group
+                    group_details = [f"group {i + 1}" for i, _ in counts_above_threshold]  # Adjust index to start at 1
                     group_details_text = " and ".join(group_details)  # Combine the group details
                     
                     # Modify the sentence format as per the new requirement
@@ -63,7 +61,9 @@ def get_admin_landing_page():
                     for component, _ in counts_above_threshold: # for each component...
                         names = df[(df['component'] == component) & (df['interests'].apply(lambda x: interest in x))]['0_degree'].tolist() # get names
                         all_names.extend(names) # append to list
-                    sentences.append(f"  Emails: {', '.join(all_names)}")
+                    # Add the @falcon.bentley.edu to each name
+                    all_names_with_domain = [f"{name}@falcon.bentley.edu" for name in all_names]
+                    sentences.append(f"  Emails: {', '.join(all_names_with_domain)}")
                     sentences.append("")
 
         return int_count_df, sentences
