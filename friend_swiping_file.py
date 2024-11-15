@@ -5,7 +5,7 @@ from custom_css_file import get_custom_css_page
 from population_data_file import population_df
 
 # GET TINDER-LIKE SWIPING VISUAL FUNCTION
-def get_tinder_swiping_page():
+def get_friend_swiping_page():
     # Apply custom CSS
     get_custom_css_page()
 
