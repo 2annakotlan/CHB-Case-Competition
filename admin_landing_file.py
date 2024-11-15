@@ -26,6 +26,8 @@ def get_admin_landing_page():
         Average Degree's Away: {average_last_degree}
     </div>
     """, unsafe_allow_html=True)
+
+    st.markdown("<br>", unsafe_allow_html=True)
     
     st.markdown("<h3 style='text-align: left; color: #4A90E2;'>Network Map</h3>", unsafe_allow_html=True)
     network_map(population_df)
