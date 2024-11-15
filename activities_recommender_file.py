@@ -19,6 +19,9 @@ def get_activities_recommender_page():
     # Filter for only 2nd-degree connections (count_degree_2)
     degree_activities = activities_df[activities_df['count_degree_2'] > 0]
 
+    # Sort activities by count_degree_2 in descending order
+    degree_activities = degree_activities.sort_values(by='count_degree_2', ascending=False)
+
     # Initialize an empty set to keep track of already printed activities
     printed_activities = set()
 
