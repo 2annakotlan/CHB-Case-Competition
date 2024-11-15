@@ -46,11 +46,21 @@ def get_friend_swiping_page():
         # Format interests nicely as a comma-separated list
         formatted_interests = ", ".join(sorted(interests))  # Sort for better readability
 
-        # Display the profile info and image (image is centered)
-        col1, col2, col3 = st.columns([1, 5, 1])  # Adjust column widths to push image more to the center
-        with col2:
-            st.image(image_url, caption=f"{name}'s Profile", width=300)
-        
+        # Add CSS for centering the image
+        st.markdown("""
+            <style>
+                .profile-image {
+                    display: block;
+                    margin-left: auto;
+                    margin-right: auto;
+                    width: 300px;
+                }
+            </style>
+        """, unsafe_allow_html=True)
+
+        # Display the profile info and image (using the CSS class to center the image)
+        st.image(image_url, caption=f"{name}'s Profile", use_column_width=False, class_="profile-image")
+
         st.write(f"**Interests:** {formatted_interests}")
 
         # Swipe buttons
@@ -82,6 +92,4 @@ def get_friend_swiping_page():
     if st.button('Back to Dashboard'):
         st.session_state.page = "student_landing_page"
 
-# Assuming you have a Streamlit app setup
-if __name__ == "__main__":
-    get_friend_swiping_page()
+
