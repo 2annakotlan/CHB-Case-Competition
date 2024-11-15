@@ -7,11 +7,19 @@ import pandas as pd
 def get_activities_recommender_page():
     get_custom_css_page(alignment="center", button_span="full")
     activities_df = get_activities(full_population_df, 'stest')
+    
+    # Exclude '1_degree' columns from total_people calculation
+    activities_df['total_people'] = activities_df.apply(
+        lambda row: sum(row[col] for col in row.index if col.startswith('count_degree') and col != 'count_degree_1'), axis=1
+    )
+    
+    # Sort activities by total_people in descending order
+    activities_df = activities_df.sort_values(by='total_people', ascending=False)
+    
     st.dataframe(activities_df)
 
     for _, row in activities_df.iterrows():
-        degree_columns = [col for col in row.index if col.startswith('count_degree')]
-        total_people = row[degree_columns].sum()
+        total_people = row['total_people']
 
         # Determine the message based on the number of people
         if total_people == 1:
